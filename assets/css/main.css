@@ -1484,10 +1484,10 @@ input, select, textarea {
 		}
 
 	.button {
-		background-image: -moz-linear-gradient(top, #008dad, #007b9d);
-		background-image: -webkit-linear-gradient(top, #008dad, #007b9d);
-		background-image: -ms-linear-gradient(top, #008dad, #007b9d);
-		background-image: linear-gradient(top, #008dad, #007b9d);
+		background-image: -moz-linear-gradient(top, #00462a, #002b13);
+		background-image: -webkit-linear-gradient(top, #00462a, #002b13);
+		background-image: -ms-linear-gradient(top, #00462a, #002b13);
+		background-image: linear-gradient(top, #00462a, #002b13);
 		display: inline-block;
 		padding: 15px 25px 15px 25px;
 		background-color: #007b9d;
@@ -1502,11 +1502,18 @@ input, select, textarea {
 	}
 
 		.button:hover {
+
 			background-image: -moz-linear-gradient(top, #1b9fbe, #118eb1);
 			background-image: -webkit-linear-gradient(top, #1b9fbe, #118eb1);
 			background-image: -ms-linear-gradient(top, #1b9fbe, #118eb1);
 			background-image: linear-gradient(top, #1b9fbe, #118eb1);
 			background-color: #118eb1;
+			/*background-image: -moz-linear-gradient(top, #003127, #002E25);
+			background-image: -webkit-linear-gradient(top, #003127, #002E25);
+			background-image: -ms-linear-gradient(top, #003127, #002E25);
+			background-image: linear-gradient(top, #003127, #002E25);
+			background-color: #002E25;*/
+
 			box-shadow: inset 0px 0px 0px 1px #3ecceb;
 		}
 
@@ -1747,16 +1754,11 @@ input, select, textarea {
 		/* Header */
 
 			#header-wrapper {
-				/*background-image: -moz-linear-gradient(top, #008dab, #007294);
+				background-image: -moz-linear-gradient(top, #008dab, #007294);
 				background-image: -webkit-linear-gradient(top, #008dab, #007294);
 				background-image: -ms-linear-gradient(top, #008dab, #007294);
 				background-image: linear-gradient(top, #008dab, #007294);
-				background-color: #007294;*/
-				background-image: -moz-linear-gradient(top, #00462a, #002b13);
-				background-image: -webkit-linear-gradient(top, #00462a, #002b13);
-				background-image: -ms-linear-gradient(top, #00462a, #002b13);
-				background-image: linear-gradient(top, #00462a, #002b13);
-				background-color: #002b13;
+				background-color: #007294;
 			}
 
 			#header {
@@ -1878,7 +1880,9 @@ input, select, textarea {
 				top: 0;
 				width: 275px;
 				z-index: 10002;
-				background: #00536F;
+				//MK: Changed Color (Menu Color for small window)
+				//background: #00536F;
+				background: #003127;
 				color: #fff;
 				box-shadow: inset -10px 0px 40px 0px rgba(0, 0, 0, 0.5);
 			}
