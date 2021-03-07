@@ -32,7 +32,24 @@ body {
 	line-height: 1;
 }
 
-ol, ul {
+ol{
+	list-style: item;
+	margin-left: 1em;
+}
+
+li.margin{
+				margin-bottom:10px;
+}
+
+span.title{
+				font-style:bold;
+				color:#00462a;
+}
+span.confname{
+				font-style:italic;
+}
+
+ul {
 	list-style: none;
 }
 
