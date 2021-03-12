@@ -39,9 +39,8 @@
 								<section>
 									<h2>Intelligence System and Parallel Computer Architecture Lab.</h2>
 									<p><img src="images/main/ewhaMark.png" class="left" width="120" height="120" />
-									Intelligence system and Parallel Computer Architecture (IP-CAL) Lab. is founded in March, 2021. Our lab is located in Ewha Womans University. </p>
-									<p>Technological advancements in various fields such as computer architecture, big data, data analysis, and many more have led to the active performance of artificial neural network research. Among the various field, we are interested in the computer architecture field.</p>
-									<p>Detailed research topics are as follows!</p>
+									Intelligence system and Parallel Computer Architecture (IP-CAL) Lab. is founded in March 2021. Our lab is located in Ewha Womans University. Our research interests are Graphics Processing Units (GPU), machine learning accelerators, parallel programming, and computer architecture. Detailed research topics are described below. If you are interested in the topics, you are always welcome to visit our lab. 
+									</p>
 
 								</section>
 								<hr>
@@ -52,7 +51,7 @@
 									GPUs were first developed to accelerate graphics applications. Games are one major application that relies on the performance of GPUs. When the game application is launched, GPUs start to create 60~120 images every second using a massive number of GPU processors. This massive number of processors recently has begun to be used for general purpose applications such as machine learning algorithms, simulations, and many other applications instead of graphics applications. This paradigm is known as General-Purpose Computing on Graphics Processing Unit (GPGPU).
 								</p>
 								<p>
-									Our goal is to maximize the performance of GPUs when general-purpose applications such as machine learning algorithms, simulations, and many more are executed on the GPU hardware. We first identify the bottleneck points on the GPU architecture and propose a new modified architecture that can remove the bottleneck points. To verify our ideas, C/C++/Python based cycle-accurate simulations are used. If you are interested in this topic, you are always welcome to visit our lab.
+									Our goal is to maximize the performance of GPUs when general-purpose applications such as machine learning algorithms, simulations, and many more are executed on the GPU hardware. We first identify the bottleneck points on the GPU architecture and propose a new modified architecture that can remove the bottleneck points. To verify our ideas, C/C++/Python based cycle-accurate simulations are used.
 								</p>
 
 								</section>
@@ -61,15 +60,22 @@
 								<h2>Machine Learning Accelerator</h2>
 								<p>
 									<img src="images/main/systolicArray.png" class="left" width="250" />
-									Systolic Array
-									</p>
+Machine learning algorithms have been applied in various areas such as image recognition, voice speech recognition, translation, text classification, and more. These algorithms are traditionally operated on Central Processing Units (CPUs) and Graphics Processing Units (GPUs). Especially, GPUs are widely used for the execution of applications. However, CPUs and GPUs are not designed for machine learning algorithms, there have been several issues in terms of performance and power consumption. To resolve the problem, various machine learning accelerator designs have been proposed by researchers. One famous design is using a systolic array that has many small processing units which are only designed to perform multiply and accumulate (MAC) operations. These small processing units are connected only to their neighbor so that the data can be transfer from one processing unit to the other processing unit.</p>
+
+								<p>Our goal is to analyze the newly proposed machine learning accelerators. By doing this, we can find the performance bottleneck points or can detect the unnecessary processing execution cycles. Based on our analysis, we can propose advanced hardware accelerators for machine learning applications.</p>
 								</section>
 								<hr>
 								<section>
 								<h2>Parallel Programming</h2>
 								<p>
 									<img src="images/main/vectorExecution.png" class="left" width="350" />
-									CUDA / AVX
+									Single Instruction Multiple Data (SIMD) and Single Instruction Multiple Threads (SIMT) are execution models used in parallel computing. In these execution models, multiple threads (data) are executed in lock-step. These models are widely used for supercomputers because of their efficiency. 
+								</p>
+								<p>
+								Intel and AMD CPUs have vector processors (SIMD) that can be used by Advanced Vector Extension (AVX) instructions. In the case of NVIDIA GPUs, Compute Unified Device Architecture (CUDA) allows software developers to use GPUs for general purpose applications. 
+								</p>
+								<p>	
+								Software developers need to use AVX and CUDA properly. The developers must have a decent knowledge of the vector processing units in order to create efficient applications. Our goal is to provide efficient knowledge to software developers.  
 								</p>
 								</section>
 								<hr>
