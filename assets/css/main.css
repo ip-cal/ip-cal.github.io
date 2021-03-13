@@ -1845,6 +1845,7 @@ input, select, textarea {
 
 				#titleBar .title {
 					line-height: 44px;
+					color:white;
 				}
 
 				#titleBar .toggle {
