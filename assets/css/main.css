@@ -37,6 +37,18 @@ ol{
 	margin-left: 1em;
 }
 
+/*MK: Table*/
+th{
+				background-color: #dddddd;
+				padding: 8px;
+				border: 1px solid;
+}
+td{
+				padding: 8px;
+				border: 1px solid;
+				text-align: center;
+}
+
 li.margin{
 				margin-bottom:10px;
 }
