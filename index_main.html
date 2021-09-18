@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link href="images/main/ewhaMark.png" rel="shortcut icon" type="image/x-icon">
+		<link href="Lab/images/main/ewhaMark.png" rel="shortcut icon" type="image/x-icon">
 		<title>IP-CAL</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="Lab/assets/css/main.css" />
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -18,11 +18,11 @@
 									<h1><a href="index.html" id="logo">IP-CAL</a></h1>
 									<nav id="nav">
 										<a href="index.html" class="current-page-item">HOME</a>
-										<a href="member.html">MEMBER</a>
-										<a href="publication.html">PUBLICATION</a>
-										<a href="project.html">PROJECT</a>
-										<a href="class.html">CLASS</a>
-										<a href="contact.html">CONTACT</a>
+										<a href="Lab/member.html">MEMBER</a>
+										<a href="Lab/publication.html">PUBLICATION</a>
+										<a href="Lab/project.html">PROJECT</a>
+										<a href="Lab/class.html">CLASS</a>
+										<a href="Lab/contact.html">CONTACT</a>
 									</nav>
 								</header>
 
@@ -39,7 +39,7 @@
 
 								<section>
 									<h2>Intelligence System and Parallel Computer Architecture Lab</h2>
-									<p><img src="images/main/ewhaMark.png" class="left" width="120" height="120" />
+									<p><img src="Lab/images/main/ewhaMark.png" class="left" width="120" height="120" />
 									Intelligence system and Parallel Computer Architecture (IP-CAL) Lab was founded in March 2021. Our lab is located in Ewha Womans University. Our research interests are Graphics Processing Units (GPU), machine learning accelerators, parallel programming, and computer architecture. Detailed research topics are described below. If you are interested in the topics, you are always welcome to visit our lab. 
 									</p>
 
@@ -48,7 +48,7 @@
 								<section>
 								<h2>Graphics Processing Unit (GPU) Micro-Architecture</h2>
 								<p>
-									<img src="images/main/gpuArchitecture.png" class="left" width="250" />
+									<img src="Lab/images/main/gpuArchitecture.png" class="left" width="250" />
 									GPUs were first developed to accelerate graphics applications. Games are one major application that relies on the performance of GPUs. When the game application is launched, GPUs start to create 60~120 images every second using a massive number of GPU processors. This massive number of processors recently has begun to be used for general purpose applications such as machine learning algorithms, simulations, and many other applications instead of graphics applications. This paradigm is known as General-Purpose Computing on Graphics Processing Unit (GPGPU).
 								</p>
 								<p>
@@ -60,16 +60,15 @@
 								<section>
 								<h2>Machine Learning Accelerator</h2>
 								<p>
-									<img src="images/main/systolicArray.png" class="left" width="250" />
+									<img src="Lab/images/main/systolicArray.png" class="left" width="250" />
 Machine learning algorithms have been applied in various areas such as image recognition, voice speech recognition, translation, text classification, and more. These algorithms are traditionally operated on Central Processing Units (CPUs) and Graphics Processing Units (GPUs). Especially, GPUs are widely used for the execution of applications. However, CPUs and GPUs are not designed for machine learning algorithms, there have been several issues in terms of performance and power consumption. To resolve the problems, various machine learning accelerator designs have been proposed by researchers. One famous design is using a systolic array that has many small processing units which are only designed to perform Multiply-And-Accumulate (MAC) operations. These small processing units are connected only to their neighbor so that the data can be transferred from one processing unit to the other processing unit.</p>
-
 								<p>Our goal is to analyze the newly proposed machine learning accelerators. By doing this, we can find the performance bottleneck points or can detect the unnecessary processing execution cycles. Based on our analysis, we can propose advanced hardware accelerators for machine learning applications.</p>
 								</section>
 								<hr>
 								<section>
 								<h2>Parallel Programming</h2>
 								<p>
-									<img src="images/main/vectorExecution.png" class="left" width="350" />
+									<img src="Lab/images/main/vectorExecution.png" class="left" width="350" />
 									Single Instruction Multiple Data (SIMD) and Single Instruction Multiple Threads (SIMT) are execution models used in parallel computing. In these models, multiple threads (data) are executed in lock-step. These models are widely used for supercomputers because of their efficiency.
 								</p>
 								<p>
@@ -91,8 +90,10 @@ Machine learning algorithms have been applied in various areas such as image rec
 									<h2>IP-CAL News!</h2>
 									<ul class="small-image-list">
 										<li>
-											<h4>Recruiting</h4>
-											<p>I am recruiting undergraduate and graduate students who are interested in parallel programming (CUDA, AVX2, and AVX512) and computer architecture. Please contact me if you are interested.</p>
+											<h4><span style="font-weight:bold;color:black;">[2021. 07.] Welcome</span></h4>
+											<p>Minyoung Lee, Jane Rhee, and Myeong Ji Kim have joined our group as undergraduate interns.</p>
+											<h4><span style="font-weight:bold;color:black;">[2021. 07.] Recruiting</span></h4>
+											<p>I am recruiting graduate students who are interested in parallel programming (CUDA, AVX2, and AVX512), GPUs, and computer architecture. Please contact me if you are interested.</p>
 										</li>
 									</ul>
 								</section>
@@ -107,7 +108,7 @@ Machine learning algorithms have been applied in various areas such as image rec
 						<div class="row">
 							<div class="col-12">
 								<div id="copyright">
-									&copy; IP-CAL. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+									&copy; <a href="https://ip-cal.ewha.ac.kr/mediawiki">IP-CAL.</a> All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
 								</div>
 							</div>
 						</div>
@@ -117,11 +118,11 @@ Machine learning algorithms have been applied in various areas such as image rec
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="Lab/assets/js/jquery.min.js"></script>
+			<script src="Lab/assets/js/browser.min.js"></script>
+			<script src="Lab/assets/js/breakpoints.min.js"></script>
+			<script src="Lab/assets/js/util.js"></script>
+			<script src="Lab/assets/js/main.js"></script>
 
 	</body>
 </html>
