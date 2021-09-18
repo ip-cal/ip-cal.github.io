@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link href="images/main/ewhaMainIco.png" rel="shortcut icon" type="image/x-icon">
+		<link href="images/main/ewhaMark.png" rel="shortcut icon" type="image/x-icon">
 		<title>IP-CAL</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -61,8 +61,7 @@
 								<h2>Machine Learning Accelerator</h2>
 								<p>
 									<img src="images/main/systolicArray.png" class="left" width="250" />
-Machine learning algorithms have been applied in various areas such as image recognition, voice speech recognition, translation, text classification, and more. These algorithms are traditionally operated on Central Processing Units (CPUs) and Graphics Processing Units (GPUs). Especially, GPUs are widely used for the execution of applications. However, CPUs and GPUs are not designed for machine learning algorithms, there have been several issues in terms of performance and power consumption. To resolve the problems, various machine learning accelerator designs have been proposed by researchers. One famous design is using a systolic array that has many small processing units which are only designed to perform Multiply-And-Accumulate (MAC) operations. These small processing units are connected only to their neighbor so that the data can be transferred from one processing unit to the other processing unit.</p>
-
+									Machine learning algorithms have been applied in various areas such as image recognition, voice speech recognition, translation, text classification, and more. These algorithms are traditionally operated on Central Processing Units (CPUs) and Graphics Processing Units (GPUs). Especially, GPUs are widely used for the execution of applications. However, CPUs and GPUs are not designed for machine learning algorithms, there have been several issues in terms of performance and power consumption. To resolve the problems, various machine learning accelerator designs have been proposed by researchers. One famous design is using a systolic array that has many small processing units which are only designed to perform Multiply-And-Accumulate (MAC) operations. These small processing units are connected only to their neighbor so that the data can be transferred from one processing unit to the other processing unit.</p>
 								<p>Our goal is to analyze the newly proposed machine learning accelerators. By doing this, we can find the performance bottleneck points or can detect the unnecessary processing execution cycles. Based on our analysis, we can propose advanced hardware accelerators for machine learning applications.</p>
 								</section>
 								<hr>
@@ -73,14 +72,14 @@ Machine learning algorithms have been applied in various areas such as image rec
 									Single Instruction Multiple Data (SIMD) and Single Instruction Multiple Threads (SIMT) are execution models used in parallel computing. In these models, multiple threads (data) are executed in lock-step. These models are widely used for supercomputers because of their efficiency.
 								</p>
 								<p>
-								Intel and AMD CPUs have vector processors (SIMD) that can be used by Advanced Vector Extension (AVX) instructions. In the case of NVIDIA GPUs, Compute Unified Device Architecture (CUDA) allows software developers to use massively parallel SIMT processors for general purpose applications. The developers must have a decent knowledge of the vector processing units in order to create efficient applications. Our goal is to provide proper knowledge to software developers so that the developers can create efficient programs.
+									Intel and AMD CPUs have vector processors (SIMD) that can be used by Advanced Vector Extension (AVX) instructions. In the case of NVIDIA GPUs, Compute Unified Device Architecture (CUDA) allows software developers to use massively parallel SIMT processors for general purpose applications. The developers must have a decent knowledge of the vector processing units in order to create efficient applications. Our goal is to provide proper knowledge to software developers so that the developers can create efficient programs.
 								</p>
 								</section>
 								<hr>
 								<section>
 								<h2>Computer Architecture</h2>
 								<p>
-								Computer Architecture is a set of rules which state how hardware is connected together in order to compute complicated applications. Researchers have proposed many different techniques such as branch predictions, speculative execution, out-of-order execution, memory pre-fetching, and more. We use C/C++/Python based cycle-accurate simulations to study the previously proposed techniques.
+									Computer Architecture is a set of rules which state how hardware is connected together in order to compute complicated applications. Researchers have proposed many different techniques such as branch predictions, speculative execution, out-of-order execution, memory pre-fetching, and more. We use C/C++/Python based cycle-accurate simulations to study the previously proposed techniques.
 								</p>
 								</section>
 
