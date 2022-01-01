@@ -7,6 +7,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
+	<script type="text/javascript">
+	function selectDisplay(){
+		if($('#selectedDiv').is(":hidden")){
+			$('#allDiv').hide()	
+			$('#selectedDiv').show()
+		}
+	}
+	function allDisplay(){
+		if($('#allDiv').is(":hidden")){
+			$('#selectedDiv').hide()	
+			$('#allDiv').show()
+		}
+	}
+	</script>
 	<body>
 		<div id="page-wrapper">
 			<!-- Header -->
@@ -34,20 +48,108 @@
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
-							<div class="col-12">
-								<a href='#' onclick="publist('publist_content', 'publist_selected');" class="button">Show Selected&#x1F50E;</a>
-								<a href='#' onclick="publist('publist_content', 'publist_selected');" class="button">Show All&#x1F50E;</a>
+							<div class="col-12 but_center">
+								<a href='#' onclick="selectDisplay()" class="button">Show Selected&#x1F50E;</a>
+								<a href='#' onclick="allDisplay()" class="button">Show All&#x1F50E;</a>
 							</div>
 
-							<div class="col-12">
-								<!--<h3><a href='#' onclick="publist('publist_content', 'publist_selected');" class="button icon fa-search fit small">Show Selected Papers</a></h3>--!>
+							<div class="col-12" id="selectedDiv">
 								<section>
 									<hr>
-									<!--<h2 style="text-align: center";> ALL Papers</h2>--!>
+									<h2>Selected Papers</h2>
+									<hr>
+									<h3>Conference Papers</h3>
+									<ol start="1">
+													<li class="margin">
+																	<span class="title">"FineReg: Fine-Grained Register File Management for Augmenting GPU Throughput"</br></span>
+																	Yunho Oh, Myung Kuk Yoon, William J. Song, and Won Woo Ro</br>
+																	<span class="confname">The 51st IEEE/ACM International Symposium on Microarchitecture (MICRO 2018), Fukuoka, Japan, Oct. 20 - 24, 2018</span>
+													</li>
+													<li class="margin">
+																	<span class="title">"Virtual Thread: Maximizing Thread-Level Parallelism beyond GPU Scheduling Limit"</br></span>
+																	Myung Kuk Yoon, Keunsoo Kim, Sangpil Lee, Won Woo Ro, and Murali Annavaram </br>
+																	<span class="confname">The 43rd ACM/IEEE International Symposium on Computer Architecture (ISCA 2016), Seoul, Korea, Jun. 18 - 22, 2016</span>
+													</li>
+													<li class="margin">
+																	<span class="title">"APRES: Improving Cache Efficiency by Exploiting Load Characteristics on GPUs"</br></span>
+																	Yunho Oh, Keunsoo Kim, Myung Kuk Yoon, Jong Hyun Park, Yongjun Park, Won Woo Ro, and Murali Annavaram </br>
+																	<span class="confname">The 43rd ACM/IEEE International Symposium on Computer Architecture (ISCA 2016), Seoul, Korea, Jun. 18 - 22, 2016</span>
+													</li>
+													<li class="margin">
+																	<span class="title">"Warped-Preexecution: A GPU Pre-execution Approach for Improving Latency Hiding"</br></span>
+																	Keunsoo Kim, Sangpil Lee, Myung Kuk Yoon, Gunjae Koo, Won Woo Ro, and Murali Annavaram</br>
+																	<span class="confname">The 22nd International IEEE Symposium on High Performance Computer Architecture (HPCA 2016), Barcelona, Spain, Mar. 12 - 16, 2016</span>
+													</li>
+													<li class="margin">
+																	<span class="title">"DRAW: Investigating Benefits of Adaptive Fetch Group Size on GPU"</br></span>
+																	Myung Kuk Yoon, Yunho Oh, Sangpil Lee, Seung Hun Kim, Deokho Kim, and Won Woo Ro </br>
+																	<span class="confname">The 2015 IEEE International Symposium on Performance Analysis of Systems and Software (ISPASS 2015), Philadelphia, PA, USA, Mar. 29 - 31, 2015</span>
+									</ol>
+									<hr>
+									<h3>Journal Papers</h3>
+									<ol start="1">
+													<li class="margin">
+																	<span class="title">"REACT: Scalable and High-Performance Regular Expression Pattern Matching Accelerator for In-Storage Processing"</span></br>
+																	Won Seob Jeong, Changmin Lee, Keunsoo Kim, Myung Kuk Yoon, Won Jeon, Myoungsoo Jung, and Won Woo Ro</br>
+																	<span style="font-style:italic">IEEE Transactions on Parallel and Distributed Systems (TPDS), Vol. 31, Issue 5, pp. 1137-1151, May 2020</span>
+													</li>
+													<li class="margin">
+																	<span class="title">"Adaptive Cooperation of Prefetching and Warp Scheduling on GPUs"</br></span> 
+																	Yunho Oh, Keunsoo Kim, Myung Kuk Yoon, Jong Hyun Park, Yongjun Park, Murali Annavaram, and Won Woo Ro</br>
+																	<span class="confname">IEEE Transactions on Computers (TC), Vol. 68, No. 4, pp. 609-616, Apr. 2019</span>
+													</li>
+													<li class="margin">
+																	<span class="title">"WASP: Selective Data Prefetching with Monitoring Runtime Warp Progress on GPUs"</br></span>
+																	Yunho Oh, Myung Kuk Yoon, Jong Hyun Park, Yongjun Park, and Won Woo Ro</br>
+																	<span class="confname">IEEE Transactions on Computers (TC), Vol. 67, No. 9, pp. 1366-1373, Sep. 2018</span>
+													</li>
+													<li class="margin">
+																	<span class="title">"Dynamic Resizing on Active Warps Scheduler to Hide Operation Stalls on GPUs"</br></span>
+																	Myung Kuk Yoon, Yunho Oh, Sangpil Lee, Seung Hun Kim, Deokho Kim, and Won Woo Ro</br>
+																	<span class="confname">IEEE Transactions on Parallel and Distributed Systems (TPDS), Vol. 28, No. 11, pp. 3142-3156, Nov. 2017</span>
+													</li>
+													<li class="margin">
+																	<span class="title">"A Distributed Signature Detection Method for Detecting Intrusions in Sensor Systems"</br></span>
+																	Ilkyu Kim, Doohwan Oh, Myung Kuk Yoon, Kyueun Yi, and Won Woo Ro </br>
+																	<span class="confname">Sensors, Vol. 13, No. 4, pp. 3998-4016, Mar. 2013</span>
+													</li>
+									</ol>
+									<hr>
+									<h3>Patents</h3>
+										<ol start="1">
+											<li class="margin">
+																<span class="title">"Storage System And Operating Method Thereof"</br></span>
+																KR-10-2276912-0000</br>
+											</li>
+											<li class="margin">
+																<span class="title">"Method and Apparatus for Analyzing Radio Wave Environment in A Wireless Communication System"</br></span>
+																KR-10-2019-0083497</br>
+											</li>
+
+										</ol>
+								</section>
+							</div>
+							<div class="col-12" id="allDiv" style="display:none">
+								<section>
+									<hr>
 									<h2> ALL Papers</h2>
 									<hr>
-									<h2>Conference Papers</h2>
+									<h3>Conference Papers</h3>
 									<ol start="1">
+													<li class="margin">
+																	<span class="title">"Compiler-Assisted GPU Register File Power Management Technique"</br></span>
+																	Myung Kuk Yoon</br>
+																	<span class="confname">
+																	2022 International Conference on Electronics, Information, and Communication (ICEIC 2022), Jeju, Korea, Feb. 06 - 09, 2022 
+																	</span>
+													</li>
+													<li class="margin">
+																	<span class="title">"Analyzing Characteristics of Memory Side-Channels in GPU"</br></span>
+																	Seungho Jung, Myung Kuk Yoon, Gunjae Koo</br>
+																	<span class="confname">
+																	2021 Korea Software Congress (KSC 2021), Pyeongchang, Korea, Dec. 20 - 22, 2021 
+																	</span>
+													</li>
 													<li class="margin">
 																	<span class="title">"FineReg: Fine-Grained Register File Management for Augmenting GPU Throughput"</br></span>
 																	Yunho Oh, Myung Kuk Yoon, William J. Song, and Won Woo Ro</br>
@@ -85,28 +187,28 @@
 													</li>
 									</ol>
 									<hr>
-									<h2>Journal Papers</h2>
+									<h3>Journal Papers</h3>
 									<ol start="1">
 													<li class="margin">
 																	<span class="title">"REACT: Scalable and High-Performance Regular Expression Pattern Matching Accelerator for In-Storage Processing"</span></br>
 																	Won Seob Jeong, Changmin Lee, Keunsoo Kim, Myung Kuk Yoon, Won Jeon, Myoungsoo Jung, and Won Woo Ro</br>
-																	<span style="font-style:italic">IEEE Transactions on Parallel and Distributed Systems, Vol. 31, Issue 5, pp. 1137-1151, May 2020</span>
+																	<span style="font-style:italic">IEEE Transactions on Parallel and Distributed Systems (TPDS), Vol. 31, Issue 5, pp. 1137-1151, May 2020</span>
 													</li>
 													<li class="margin">
 																	<span class="title">"Adaptive Cooperation of Prefetching and Warp Scheduling on GPUs"</br></span> 
 																	Yunho Oh, Keunsoo Kim, Myung Kuk Yoon, Jong Hyun Park, Yongjun Park, Murali Annavaram, and Won Woo Ro</br>
-																	<span class="confname">IEEE Transactions on Computers, Vol. 68, No. 4, pp. 609-616, Apr. 2019</span>
+																	<span class="confname">IEEE Transactions on Computers (TC), Vol. 68, No. 4, pp. 609-616, Apr. 2019</span>
 													</li>
 
 													<li class="margin">
 																	<span class="title">"WASP: Selective Data Prefetching with Monitoring Runtime Warp Progress on GPUs"</br></span>
 																	Yunho Oh, Myung Kuk Yoon, Jong Hyun Park, Yongjun Park, and Won Woo Ro</br>
-																	<span class="confname">IEEE Transactions on Computers, Vol. 67, No. 9, pp. 1366-1373, Sep. 2018</span>
+																	<span class="confname">IEEE Transactions on Computers (TC), Vol. 67, No. 9, pp. 1366-1373, Sep. 2018</span>
 													</li>
 													<li class="margin">
 																	<span class="title">"Dynamic Resizing on Active Warps Scheduler to Hide Operation Stalls on GPUs"</br></span>
 																	Myung Kuk Yoon, Yunho Oh, Sangpil Lee, Seung Hun Kim, Deokho Kim, and Won Woo Ro</br>
-																	<span class="confname">IEEE Transactions on Parallel and Distributed Systems, Vol. 28, No. 11, pp. 3142-3156, Nov. 2017</span>
+																	<span class="confname">IEEE Transactions on Parallel and Distributed Systems (TPDS), Vol. 28, No. 11, pp. 3142-3156, Nov. 2017</span>
 													</li>
 													<li class="margin">
 																	<span class="title">"Introduction to Researches on Performance Bottlenecks of Many-Core GPU Architectures"</br></span>
@@ -120,7 +222,7 @@
 													</li>
 									</ol>
 									<hr>
-									<h2>Patents</h2>
+									<h3>Patents</h3>
 										<ol start="1">
 											<li class="margin">
 																<span class="title">"Storage System And Operating Method Thereof"</br></span>
