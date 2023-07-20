@@ -175,6 +175,13 @@ input, select, textarea {
 		margin: 2px 1.25em 0 0;
 	}
 
+	img.tripVer {
+		height:306px;
+	}
+	img.tripHor {
+		height:306px;
+	}
+
 	img.top {
 		margin: 4px 0 2.25em 0;
 	}
