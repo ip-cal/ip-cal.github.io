@@ -7,6 +7,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
+	<script type="text/javascript">
+		function toggleFun(divName) {
+		  	var x = document.getElementById(divName);
+		  	if (x.style.display === "none") {
+		  		x.style.display = "block";
+			} else {
+		 		x.style.display = "none";
+			}
+		}
+	</script>
 	<body>
 		<div id="page-wrapper">
 			<!-- Header -->
@@ -38,6 +48,18 @@
 						<div class="row main-row">
 							<div class="col-12">
 								<section>
+								<h2>Capstone Design Research Track</h2>	
+								<ol start="1">
+									<li class="margin">
+										<span class="title">[2023.09 ~ 2024.06] Transformer (On Going) (Jae Eun, Eunbi, and Ikyoung) 
+									</li>
+									<li class="margin">
+										<span class="title">[2022.09 ~ 2023.06] Ray Tracing (Yeonhee and Eun Soo)</span>
+									</li>
+								</ol>
+								</section>
+								<hr>
+								<section>
 								<h2>(2024) Spring Semester</h2>
 								<ol start="1">
 									<li class="margin">
@@ -56,110 +78,128 @@
 								</section>
 								<hr>
 								<section>
-								<h2>(2023) Fall Semester</h2>
-								<ol start="1">
-									<li class="margin">
-										<span class="title">Computer Architecture (39145-01/20493-05)<!--[<a href="class/2023_fall/computerArchitecture.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Embedded Systems and Labs (37271-02)<!-- [<a href="class/2023_fall/embeddedSystemAndLab.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Capstone Design Project (36506-01)</br></span>
-									</li>
-								</ol>
+								<h2>(2023) Fall Semester </h2>
+								<button onclick="toggleFun('2023Fall')"> Show/Hide</button>
+								<div id="2023Fall" style="display: none;">
+									<ol start="1">
+										<li class="margin">
+											<span class="title">Computer Architecture (39145-01/20493-05)<!--[<a href="class/2023_fall/computerArchitecture.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Embedded Systems and Labs (37271-02)<!-- [<a href="class/2023_fall/embeddedSystemAndLab.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Capstone Design Project (36506-01)</br></span>
+										</li>
+									</ol>
+								</div>
 								</section>
 								<hr>
 								<section>
 								<h2>(2023) Spring Semester</h2>
-								<ol start="1">
-									<li class="margin">
-										<span class="title">Digital Logic Design (01)<!--[<a href="class/2023_spring/digitalLogicDesign_01.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Digital Logic Design (02) <!--[<a href="class/2023_spring/digitalLogicDesign_02.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Digital Logic Design Laboratory (01) <!--[<a href="class/2023_spring/digitalLogicLab_01.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Digital Logic Design Laboratory (02) <!--[<a href="class/2023_spring/digitalLogicLab_02.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">HOKMA Seminar (19) <!--[<a href="class/2023_spring/hokmaSeminar.html" target="_blank">Syllabus</a>]--> </br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Capstone Design Project (01) </br></span>
-									</li>
-								</ol>
+								<button onclick="toggleFun('2023Spring')"> Show/Hide</button>
+								<div id="2023Spring" style="display: none;">
+									<ol start="1">
+										<li class="margin">
+											<span class="title">Digital Logic Design (01)<!--[<a href="class/2023_spring/digitalLogicDesign_01.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Digital Logic Design (02) <!--[<a href="class/2023_spring/digitalLogicDesign_02.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Digital Logic Design Laboratory (01) <!--[<a href="class/2023_spring/digitalLogicLab_01.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Digital Logic Design Laboratory (02) <!--[<a href="class/2023_spring/digitalLogicLab_02.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">HOKMA Seminar (19) <!--[<a href="class/2023_spring/hokmaSeminar.html" target="_blank">Syllabus</a>]--> </br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Capstone Design Project (01) </br></span>
+										</li>
+									</ol>
+								</div>
 								</section>
 								<hr>
 								<section>
 								<h2>(2022) Fall Semester</h2>
-								<ol start="1">
-									<li class="margin">
-										<span class="title">Computer Architecture <!--[<a href="class/2022_fall/computerArchitecture.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Embedded Systems and Labs <!--[<a href="class/2022_fall/embeddedSystemAndLab.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Capstone Design Project</br></span>
-									</li>
-								</ol>
+								<button onclick="toggleFun('2022Fall')"> Show/Hide</button>
+								<div id="2022Fall" style="display: none;">
+									<ol start="1">
+										<li class="margin">
+											<span class="title">Computer Architecture <!--[<a href="class/2022_fall/computerArchitecture.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Embedded Systems and Labs <!--[<a href="class/2022_fall/embeddedSystemAndLab.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Capstone Design Project</br></span>
+										</li>
+									</ol>
+								</div>
 								</section>
 								<hr>
 								<section>
 								<h2>(2022) Spring Semester</h2>
-								<ol start="1">
-									<li class="margin">
-										<span class="title">Digital Logic Design <!--[<a href="class/2022_spring/digitalLogicDesign.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										
-										<span class="title">Digital Logic Design Laboratory <!--[<a href="class/2022_spring/digitalLogicLab.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Software-based Convergence System Design <!--[<a href="class/2022_spring/SoftwareConvergenceSystemDesign.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Capstone Design Project</br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Computer Architecture (Graduate-Education) <!--[<a href="class/2022_spring/computerArchitecture.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-								</ol>
+								<button onclick="toggleFun('2022Spring')"> Show/Hide</button>
+								<div id="2022Spring" style="display: none;">
+									<ol start="1">
+										<li class="margin">
+											<span class="title">Digital Logic Design <!--[<a href="class/2022_spring/digitalLogicDesign.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											
+											<span class="title">Digital Logic Design Laboratory <!--[<a href="class/2022_spring/digitalLogicLab.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Software-based Convergence System Design <!--[<a href="class/2022_spring/SoftwareConvergenceSystemDesign.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Capstone Design Project</br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Computer Architecture (Graduate-Education) <!--[<a href="class/2022_spring/computerArchitecture.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+									</ol>
+								</div>
 								</section>
 								<hr>
 								<section>
 								<h2>(2021) Fall Semester</h2>
-								<ol start="1">
-									<li class="margin">
-										<span class="title">Computer Architecture <!--[<a href="class/2021_fall/computerArchitecture.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">System Software and Labs <!--[<a href="class/2021_fall/systemSoftwareAndLabs.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Capstone Design Project</br></span>
-									</li>
-								</ol>
+								<button onclick="toggleFun('2021Fall')"> Show/Hide</button>
+								<div id="2021Fall" style="display: none;">
+									<ol start="1">
+										<li class="margin">
+											<span class="title">Computer Architecture <!--[<a href="class/2021_fall/computerArchitecture.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">System Software and Labs <!--[<a href="class/2021_fall/systemSoftwareAndLabs.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Capstone Design Project</br></span>
+										</li>
+									</ol>
+								</div>
 								</section>
 								<hr>
 								<section>
 								<h2>(2021) Spring Semester</h2>
-								<ol start="1">
-									<li class="margin">
-										<span class="title">Digital Logic Design <!--[<a href="class/2021_spring/digitalLogicDesign.html" target="_blank">Syllabus</a>]--></br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Digital Logic Design Laboratory</br></span>
-									</li>
-									<li class="margin">
-										<span class="title">Capstone Design Project</br></span>
-									</li>
+								<button onclick="toggleFun('2021Spring')"> Show/Hide</button>
+								<div id="2021Spring" style="display: none;">
+									<ol start="1">
+										<li class="margin">
+											<span class="title">Digital Logic Design <!--[<a href="class/2021_spring/digitalLogicDesign.html" target="_blank">Syllabus</a>]--></br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Digital Logic Design Laboratory</br></span>
+										</li>
+										<li class="margin">
+											<span class="title">Capstone Design Project</br></span>
+										</li>
 
-								</ol>
+									</ol>
+								</div>
 								</section>
 								<hr>
 							</div>
