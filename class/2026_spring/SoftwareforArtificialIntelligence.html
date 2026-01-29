@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<link href="../../images/main/ewhaMark.png" rel="shortcut icon" type="image/x-icon">
-		<title>IP-CAL: [2026-Spring] Advanced Computer Architecture</title>
+		<title>IP-CAL: [2026-Spring] Software for Artificial Intelligence</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../assets/css/main.css" />
@@ -55,7 +55,7 @@
 											<th>Professor</th>
 											<td>Yoon, Myung Kuk </td>
 											<th>Office</th>
-											<td>Jinseonmi-Gwan, 213</td>
+											<td>Asan Engineering Building, 105-3</td>
 										</tr>
 										<tr>
 											<th>Telephone</th>
@@ -80,13 +80,7 @@
 									</table>
 									<hr>
 									<h2>Course Description</h2>
-										<ul class="big-image-list">
-											<li>
-												<p>In this course, we will focus primarily on out-of-order processor cores, exploring their design, implementation, and performance optimization. Key topics include instruction scheduling, register renaming, branch prediction, memory hierarchies, and techniques for handling data, control, and structural hazards. By the end of the course, students will gain a deep understanding of out-of-order execution and its role in modern high-performance computer architectures.</br>
-												* <span style="color:blue">The primary syllabus used for this course is from the website rather than the traditional school system. Consequently, any significant updates or changes will be made exclusively to the web syllabus.</span></br></p>
-											</li>
-										</ul>
-									
+										<p>The unprecedented advancement of Artificial Intelligence (AI) in recent years is deeply rooted in the evolution of parallel programming. As hardware performance growth slows, the ability to harness massive computational power through parallelization has become the definitive factor in AI scalability, with GPU acceleration via CUDA serving as the backbone for modern deep learning breakthroughs. This course provides a comprehensive exploration of parallel computing architectures and programming models, allowing students to move beyond sequential logic to explore industry-standard paradigms such as shared memory programming with Pthreads and OpenMP, distributed memory programming using MPI, hardware acceleration with NVIDIA CUDA, and data-level parallelism through AVX-512 SIMD instructions. Through this course, students will gain practical experience with these essential tools and develop a fundamental understanding of how to enhance software performance for modern AI applications.</p>
 									<hr>
 									<h2>Prerequisites</h2>
 									<p>Computer Architecture</p>
@@ -112,28 +106,27 @@
 									<h2>Course Objectives</h2>
 									<p>In this class, students will be introduced to:</p>
 									<ol>
-										<li>In-order processor cores</li>
-										<li>Out-of-order processor cores</li>
-										<li>Cache</li>
-										<li>More if time permits</li>
+										<li>Shared Memory Programming: Utilizing Pthreads and OpenMP for multi-core CPU optimization.</li>
+										<li>Distributed Memory Programming: Leveraging MPI (Message Passing Interface) for large-scale cluster computing.</li>
+										<li>Hardware Acceleration: Implementing high-performance kernels with NVIDIA CUDA for GPUs.</li>
+										<li>Data-Level Parallelism: Exploiting AVX-512 SIMD instructions to maximize CPU throughput.</li>
 									</ol>
 									<hr>
 									<h2>AI Use Principles and Guidelines</h2>
-
-        <h3>Use of Generative AI in Assignments</h3>
-        <p>Students are <span style="color:blue">ENCOURAGED</span> to utilize Generative AI tools (e.g., ChatGPT, Claude, GitHub Copilot) to assist in their learning process and coursework. However, the following conditions apply:</p>
-        <ol>
-            <li><strong>Verification of Accuracy:</strong> AI-generated content is not always correct. It is your responsibility to critically evaluate and verify the technical accuracy of any AI-provided output.</li>
-            <li><strong>Originality & Identical Submissions:</strong> While you may use AI as a resource, the final submission must be your own individual work. Please be advised that if multiple students submit identical or near-identical code—even if generated independently by an AI and not shared between peers—it will be treated as a violation of academic integrity.</li>
-            <li><strong>Consequences:</strong> Any instance of identical work will result in an automatic grade of F. The student bears full responsibility for the risks and consequences of using AI tools.</li>
-        </ol>
-		</br>
-        <h3>Strict Prohibition During Exams</h3>
-        <p>The use of AI is strictly prohibited during all examinations:</p>
-        <ol>
-            <li><strong>No Electronic Devices:</strong> All electronic devices are forbidden during exam sessions.</li>
-            <li><strong>Individual Assessment:</strong> Exams are intended to evaluate your personal understanding of the course material. Any attempt to access AI or external assistance during an exam will be handled according to the university’s strictest disciplinary policies.</li>
-        </ol>
+        							<h3>Use of Generative AI in Assignments</h3>
+        							<p>Students are <span style="color:blue">ENCOURAGED</span> to utilize Generative AI tools (e.g., ChatGPT, Claude, GitHub Copilot) to assist in their learning process and coursework. However, the following conditions apply:</p>
+        							<ol>
+										<li><strong>Verification of Accuracy:</strong> AI-generated content is not always correct. It is your responsibility to critically evaluate and verify the technical accuracy of any AI-provided output.</li>
+										<li><strong>Originality & Identical Submissions:</strong> While you may use AI as a resource, the final submission must be your own individual work. Please be advised that if multiple students submit identical or near-identical code—even if generated independently by an AI and not shared between peers—it will be treated as a violation of academic integrity.</li>
+										<li><strong>Consequences:</strong> Any instance of identical work will result in an automatic grade of F. The student bears full responsibility for the risks and consequences of using AI tools.</li>
+									</ol>
+									</br>
+									<h3>Strict Prohibition During Exams</h3>
+									<p>The use of AI is strictly prohibited during all examinations:</p>
+									<ol>
+										<li><strong>No Electronic Devices:</strong> All electronic devices are forbidden during exam sessions.</li>
+										<li><strong>Individual Assessment:</strong> Exams are intended to evaluate your personal understanding of the course material. Any attempt to access AI or external assistance during an exam will be handled according to the university’s strictest disciplinary policies.</li>
+									</ol>
 									<hr>
 									<h2>Evaluation System</h2>
 									<p>
@@ -163,7 +156,7 @@
 									</p>
 									<p>
 										*Evaluation of group projects may include peer evaluations.</br></br>
-										Explain of evaluation system
+										Explain of evaluation system:
 										<ol>
 											<li>About 80% of students: A</li>
 											<li>About 20% of students: B and below</li>
@@ -184,20 +177,12 @@
 									<h2>Supplementary Materials</h2>
 										<ul class="big-image-list">
 											<li>
-												<img src="processor_microarchitecture.jpg" class="left" />
-												<h3>Processor Microarchitecture: An Implementation Perspective</h3>
-												<p> Antonio Gonzalez, Fernando Latorre, Grigorios Magklis
-												</br>Edition: First (1E)
-												</br>ISBN-13: 978-3031006012
-												</br>ISBN-10: 3031006011</p>
-											</li>
-											<li>
-												<img src="computer_arch_quantitative.jpg" class="left" />
-												<h3>Computer Architecture: A Quantitative Approach</h3>
-												<p>John L. Hennessy, and David A. Patterson
-												</br>Edition: Sixth (6E)
-												</br>ISBN-13: 978-0128119051
-												</br>ISBN-10: 0128119055</p>
+												<img src="parallel_programming.jpg" class="left" />
+												<h3>An Introduction to Parallel Programming</h3>
+												<p> Peter Pacheco and Matthew Malensek
+												</br>Edition: Second (2nd)
+												</br>ISBN-13: 978-0128046050
+												</br>ISBN-10: 0128046058</p>
 											</li>
 										</ul>
 									<hr>
@@ -216,54 +201,54 @@
 											<th style="vertical-align: middle">Week #01</th>
 											<td>2026-03-03 (Tue)</td>
 											<td style="vertical-align: middle">Lecture #01: Class introduction</td>
-											<td style="background-color:#ffc52f;">Recoreded Lecture</td>
+											<td></td>
 										</tr>
 										<tr>
 											<th  style="vertical-align: middle">Week #02</th>
 											<td>2026-03-10 (Tue)</td>
-											<td  style="vertical-align: middle">Lecture #02: Computer Architecture Review</td>
+											<td  style="vertical-align: middle">Lecture #02: [CH#01] Why Parallel Computing</td>
 											<td ></td>
 										<tr>
 											<th  style="vertical-align: middle">Week #03</th>
 											<td>2026-03-17 (Tue)</td>
-											<td  style="vertical-align: middle">Lecture #03: Cache I</td>
+											<td  style="vertical-align: middle">Lecture #03: [CH#02] Parallel Hardware and Parallel Software</td>
 											<td></td>
 										</tr>
 										<tr>
 											<th  style="vertical-align: middle">Week #04</th>
 											<td>2026-03-24 (Tue)</td>
-											<td  style="vertical-align: middle">Lecture #04: Cache II</td>
+											<td  style="vertical-align: middle">Lecture #04: [CH#02] Parallel Hardware and Parallel Software</td>
 											<td ></td>
 										</tr>
 										<tr>
 											<th  style="vertical-align: middle">Week #05</th>
 											<td>2026-03-31 (Tue)</td>
-											<td  style="vertical-align: middle">Lecture #05: Cache III</td>
+											<td  style="vertical-align: middle">Lecture #05: [CH#03] Distributed Memory Programming with MPI</td>
 											<td ></td>
 										</tr>
 										<tr>
 											<th  style="vertical-align: middle">Week #06</th>
 											<td>2026-04-07 (Tue)</td>
-											<td  style="vertical-align: middle">Lecture #06: Instruction Fetch Unit</td>
+											<td  style="vertical-align: middle">Lecture #06: [CH#03] Distributed Memory Programming with MPI</td>
 											<td ></td>
 										</tr>
 										<tr>
 											<th  style="vertical-align: middle">Week #07</th>
 											<td>2026-04-14 (Tue)</td>
-											<td  style="vertical-align: middle">Lecture #07: Instruction Decode Unit</td>
+											<td  style="vertical-align: middle">Lecture #07: [CH#04] Shared-Memory Programming with Pthreads</td>
 											<td ></td>
 										</tr>
 										<tr>
 											<th  style="vertical-align: middle">Week #08</th>
 											<td>2026-04-21 (Tue)</td>
-											<td  style="vertical-align: middle">Lecture #08: Allocation</td>
+											<td  style="vertical-align: middle">Lecture #08: [CH#04] Shared-Memory Programming with Pthreads</td>
 											<td ></td>
 										</tr>
 										<tr>
 											<th  style="vertical-align: middle">Week #09</th>
 											<td>2026-04-28 (Tue)</td>
-											<td style="background-color:#ffc52f;">NO CLASS</td>
-											<td style="background-color:#ffc52f;">LABOR DAY</td>
+											<td>Lecture #09: [CH#04] Shared-Memory Programming with OpenMP</td>
+											<td></td>
 										</tr>
 										<tr>
 											<th  style="vertical-align: middle">Week #10</th>
@@ -274,19 +259,19 @@
 										<tr>
 											<th  style="vertical-align: middle">Week #11</th>
 											<td>2026-05-12 (Tue)</td>
-											<td style="background-color:#ffc52f;">NO CLASS</td>
-											<td ></td>
+											<td>Lecture #10: [CH#04] Shared-Memory Programming with OpenMP</td>
+											<td></td>
 										</tr>
 										<tr>
 											<th  style="vertical-align: middle">Week #12</th>
 											<td>2026-05-19 (Tue)</td>
-											<td  style="vertical-align: middle">Lecture #11: Execute</td>
+											<td  style="vertical-align: middle">Lecture #11: [CH#05] GPU Programming with CUDA</td>
 											<td ></td>
 										</tr>
 										<tr>
 											<th rowspan="2" style="vertical-align: middle">Week #13</th>
 											<td>2026-05-26 (Tue)</td>
-											<td  style="vertical-align: middle">Lecture #12: Commit</td>
+											<td  style="vertical-align: middle">Lecture #12: [CH#05] GPU Programming with CUDA</td>
 											<td ></td>
 										</tr>
 										<tr>
@@ -297,7 +282,7 @@
 										<tr>
 											<th  style="vertical-align: middle">Week #14</th>
 											<td>2026-06-02 (Tue)</td>
-											<td rowspan="2">Lecture #14~15: Final Presentation</td>
+											<td rowspan="2">Lecture #14~15: Final Project Presentation</td>
 											<td ></td>
 										</tr>
 										<tr>
