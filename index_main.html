@@ -114,6 +114,7 @@
 											<p>Jane has been selected as the best performer in the AI Convergence Project.</p>
 											<h4><span style="font-weight:bold;color:black;">[2025. 08.] Congratulation</span></h4>
 											<p>The papers titled “Understanding Distributed Training of Large Language Models with Unified Virtual Memory” (Jane, Eunbi) and “HALO: Hybrid Systolic Arrays via Logical Partitioning for Acceleration of Complex-Valued Neural Networks” (Ji Yeong, Eunbi, SungHee, Jane) have both been accepted to IISWC 2025.</p>
+								<div id="news-more" style="display:none">
 											<h4><span style="font-weight:bold;color:black;">[2025. 05.] Welcome</span></h4>
 											<p>SeJin Park has joined our group as undergraduate interns.</p>
 											<h4><span style="font-weight:bold;color:black;">[2025. 04.] Congratulation</span></h4>
@@ -148,6 +149,8 @@
 											<p>Eun Soo Jung, Yeonhee Jung, and Eun Seong Park have joined our group as undergraduate interns.</p>
 											<h4><span style="font-weight:bold;color:black;">[2021. 07.] Welcome</span></h4>
 											<p>Minyoung Lee, Jane Rhee, and Myeong Ji Kim have joined our group as undergraduate interns.</p>
+										</div>
+										<a href="#" id="news-toggle" onclick="toggleNews(); return false;" class="button" style="margin-top:0.5em;">Show All</a>
 										</li>
 									</ul>
 								</section>
@@ -178,5 +181,19 @@
 			<script src="Lab/assets/js/util.js"></script>
 			<script src="Lab/assets/js/main.js"></script>
 
+		<script>
+		function toggleNews() {
+			var more = document.getElementById('news-more');
+			var btn = document.getElementById('news-toggle');
+			if (more.style.display === 'none') {
+				more.style.display = 'block';
+				btn.textContent = 'Show Less';
+			} else {
+				more.style.display = 'none';
+				btn.textContent = 'Show All';
+			}
+		}
+		</script>
+	
 	</body>
 </html>
