@@ -1550,7 +1550,7 @@ input, select, textarea {
 		letter-spacing: -1px;
 		border: solid 1px #006e8b;
 		/*box-shadow: inset 0px 0px 0px 1px #18a8c8;*/
-		width: 49.5%;
+		width: auto;
 		text-align:center;
 	}
 
@@ -1570,11 +1570,6 @@ input, select, textarea {
 			box-shadow: inset 0px 0px 0px 1px #3ecceb;
 		}
 
-	.button_picture{
-		font-size: 0.75em;
-		width: 20%;
-    	padding: 10px 10px 10px 10px;
-	}
 
 /* Header */
 
@@ -2044,9 +2039,6 @@ input, select, textarea {
 				font-size: 1em;
 			}
 
-			.button_picture{
-				font-size: 0.75em;
-			}
 
 			.blog-post-image {
 				width: 100%;
