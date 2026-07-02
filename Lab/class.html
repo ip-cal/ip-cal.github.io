@@ -7,14 +7,19 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+		section { margin-bottom: 10px !important; }
+		</style>
 	</head>
 	<script type="text/javascript">
-		function toggleFun(divName) {
-		  	var x = document.getElementById(divName);
-		  	if (x.style.display === "none") {
-		  		x.style.display = "block";
+		function toggleFun(divName, btn) {
+			var x = document.getElementById(divName);
+			if (x.style.display === "none") {
+				x.style.display = "block";
+				btn.textContent = "Hide";
 			} else {
-		 		x.style.display = "none";
+				x.style.display = "none";
+				btn.textContent = "Show";
 			}
 		}
 	</script>
@@ -62,7 +67,7 @@
 								<hr>
 								<section>
 								<h2>[2026] Spring Semester</h2>
-								<button class="button button_picture" onclick="toggleFun('2026Spring')"> Show/Hide</button>
+								<button class="button button_picture" onclick="toggleFun('2026Spring', this)">Hide</button>
 								<div id="2026Spring" style="display: block;">
 									<ol start="1">
 										<li class="margin">
@@ -80,7 +85,7 @@
 								<hr>
 								<section>
 								<h2>[2025] Fall Semester</h2>
-								<button class="button button_picture" onclick="toggleFun('2025Fall')"> Show/Hide</button>
+								<button class="button button_picture" onclick="toggleFun('2025Fall', this)">Show</button>
 								<div id="2025Fall" style="display: none;">
 									<ol start="1">
 										<li class="margin">
@@ -95,7 +100,7 @@
 								<hr>
 								<section>
 								<h2>[2025] Spring Semester</h2>
-								<button class="button button_picture" onclick="toggleFun('2025Spring')"> Show/Hide</button>
+								<button class="button button_picture" onclick="toggleFun('2025Spring', this)">Show</button>
 								<div id="2025Spring" style="display: none;">
 									<ol start="1">
 										<li class="margin">
@@ -116,7 +121,7 @@
 								<hr>
 								<section>
 								<h2>[2024] Fall Semester</h2>
-								<button class="button button_picture" onclick="toggleFun('2024Fall')"> Show/Hide</button>
+								<button class="button button_picture" onclick="toggleFun('2024Fall', this)">Show</button>
 								<div id="2024Fall" style="display: none;">
 									<ol start="1">
 										<li class="margin">
@@ -131,7 +136,7 @@
 								<hr>
 								<section>
 								<h2>[2024] Spring Semester</h2>
-								<button class="button button_picture" onclick="toggleFun('2024Spring')"> Show/Hide</button>
+								<button class="button button_picture" onclick="toggleFun('2024Spring', this)">Show</button>
 								<div id="2024Spring" style="display: none;">
 								<ol start="1">
 									<li class="margin">
@@ -152,7 +157,7 @@
 								<hr>
 								<section>
 								<h2>[2023] Fall Semester </h2>
-								<button class="button button_picture" onclick="toggleFun('2023Fall')"> Show/Hide</button>
+								<button class="button button_picture" onclick="toggleFun('2023Fall', this)">Show</button>
 								<div id="2023Fall" style="display: none;">
 									<ol start="1">
 										<li class="margin">
@@ -170,7 +175,7 @@
 								<hr>
 								<section>
 								<h2>[2023] Spring Semester</h2>
-								<button class="button button_picture" onclick="toggleFun('2023Spring')"> Show/Hide</button>
+								<button class="button button_picture" onclick="toggleFun('2023Spring', this)">Show</button>
 								<div id="2023Spring" style="display: none;">
 									<ol start="1">
 										<li class="margin">
@@ -197,7 +202,7 @@
 								<hr>
 								<section>
 								<h2>[2022] Fall Semester</h2>
-								<button class="button button_picture"  onclick="toggleFun('2022Fall')"> Show/Hide</button>
+								<button class="button button_picture"  onclick="toggleFun('2022Fall', this)">Show</button>
 								<div id="2022Fall" style="display: none;">
 									<ol start="1">
 										<li class="margin">
@@ -215,7 +220,7 @@
 								<hr>
 								<section>
 								<h2>[2022] Spring Semester</h2>
-								<button class="button button_picture" onclick="toggleFun('2022Spring')"> Show/Hide</button>
+								<button class="button button_picture" onclick="toggleFun('2022Spring', this)">Show</button>
 								<div id="2022Spring" style="display: none;">
 									<ol start="1">
 										<li class="margin">
@@ -240,7 +245,7 @@
 								<hr>
 								<section>
 								<h2>[2021] Fall Semester</h2>
-								<button class="button button_picture" onclick="toggleFun('2021Fall')"> Show/Hide</button>
+								<button class="button button_picture" onclick="toggleFun('2021Fall', this)">Show</button>
 								<div id="2021Fall" style="display: none;">
 									<ol start="1">
 										<li class="margin">
@@ -258,7 +263,7 @@
 								<hr>
 								<section>
 								<h2>[2021] Spring Semester</h2>
-								<button class="button button_picture" onclick="toggleFun('2021Spring')"> Show/Hide</button>
+								<button class="button button_picture" onclick="toggleFun('2021Spring', this)">Show</button>
 								<div id="2021Spring" style="display: none;">
 									<ol start="1">
 										<li class="margin">
