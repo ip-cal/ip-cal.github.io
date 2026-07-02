@@ -46,57 +46,11 @@
 			"Yeonhee Jung": ["Yeonhee Jung"]
 		};
 
-		var MONTH_NUMBERS = {
-			january:1, jan:1, february:2, feb:2, march:3, mar:3, april:4, apr:4,
-			may:5, june:6, jun:6, july:7, jul:7, august:8, aug:8,
-			september:9, sep:9, sept:9, october:10, oct:10, november:11, nov:11, december:12, dec:12
-		};
-		var MONTH_PATTERN = new RegExp('\\b(' + Object.keys(MONTH_NUMBERS).sort(function(a,b){return b.length-a.length;}).join('|') + ')\\.?\\b', 'gi');
-		var YEAR_PATTERN = /\b(20\d{2})\b/g;
-
-		function computeSortKey(venue) {
-			var years = venue.match(YEAR_PATTERN);
-			var months = venue.match(MONTH_PATTERN);
-			var year = years ? parseInt(years[years.length - 1], 10) : 0;
-			var month = months ? MONTH_NUMBERS[months[months.length - 1].replace('.', '').toLowerCase()] : 0;
-			return year * 100 + (month || 0);
-		}
-
-		var PUBLICATION_ENTRY_CACHE = null;
-
 		function fetchPublicationEntries(callback) {
-			if (PUBLICATION_ENTRY_CACHE) { callback(PUBLICATION_ENTRY_CACHE); return; }
-			// Try a live fetch first, so new papers show up automatically with zero maintenance
-			// (works on the deployed site and when served over http(s)). fetch() of a local file
-			// is blocked by the browser when this page is opened directly (file://), so in that
-			// case we fall back to the static snapshot in assets/js/publications-data.js.
-			fetch('publication.html').then(function(res) { return res.text(); }).then(function(html) {
-				var doc = new DOMParser().parseFromString(html, 'text/html');
-				var entries = [];
-				['conf-list', 'journal-list'].forEach(function(listId) {
-					var list = doc.getElementById(listId);
-					if (!list) return;
-					var items = list.querySelectorAll('li.margin');
-					items.forEach(function(li) {
-						var titleEl = li.querySelector('.title');
-						if (!titleEl) return;
-						var title = titleEl.textContent.replace(/\s*\[\s*LINK\s*\]\s*/i, '').replace(/\s+/g, ' ').trim();
-						var venueEl = li.querySelector('.confname, span[style*="italic"]');
-						var venue = venueEl ? venueEl.textContent.replace(/\s+/g, ' ').trim() : '';
-						var clone = li.cloneNode(true);
-						var t = clone.querySelector('.title'); if (t) t.parentNode.removeChild(t);
-						var v = clone.querySelector('.confname, span[style*="italic"]'); if (v) v.parentNode.removeChild(v);
-						var authorsText = clone.textContent.replace(/\s+/g, ' ').trim();
-						entries.push({ title: title, venue: venue, authorsText: authorsText, sortKey: computeSortKey(venue) });
-					});
-				});
-				PUBLICATION_ENTRY_CACHE = entries;
-				callback(entries);
-			}).catch(function() {
-				var fallback = (typeof PUBLICATION_ENTRIES !== 'undefined') ? PUBLICATION_ENTRIES : [];
-				PUBLICATION_ENTRY_CACHE = fallback;
-				callback(fallback);
-			});
+			// PUBLICATION_ENTRIES comes from assets/js/publications-data.js, a static snapshot
+			// generated from publication.html. Regenerate that file whenever papers are
+			// added/edited/removed there.
+			callback(typeof PUBLICATION_ENTRIES !== 'undefined' ? PUBLICATION_ENTRIES : []);
 		}
 
 		function loadMemberPublications(containerEl) {
