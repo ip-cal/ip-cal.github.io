@@ -6,25 +6,51 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<style>
-		#allDiv li:not(.selective) { display: none; }
-		#allDiv.show-all li { display: list-item; }
-		</style>
 	</head>
 	<script type="text/javascript">
-	function selectDisplay(){
-		$('#allDiv').removeClass('show-all');
-		renumberVisible();
+	var isSelectiveMode = true;
+	var isExpanded = false;
+	var LIMIT = 10;
+	function updateDisplay() {
+		var allItems = $('#allDiv li.margin');
+		allItems.each(function() {
+			$(this).data('eligible', !isSelectiveMode || $(this).hasClass('selective'));
+		});
+		var eligibleCount = 0;
+		allItems.each(function() { if ($(this).data('eligible')) eligibleCount++; });
+		var visibleCount = 0;
+		allItems.each(function() {
+			if ($(this).data('eligible')) {
+				visibleCount++;
+				if (!isExpanded && visibleCount > LIMIT) { $(this).hide(); }
+				else { $(this).show(); }
+			} else {
+				$(this).hide();
+			}
+		});
+		$('#allDiv ol').each(function() {
+			var hasVisible = $(this).children('li:visible').length > 0;
+			$(this).prev('h3').toggle(hasVisible);
+		});
+		var filterBtn = $('#filter-btn');
+		if (isSelectiveMode) { filterBtn.text('Show All').removeClass('button-hide'); }
+		else { filterBtn.text('Show Selected').addClass('button-hide'); }
+		var expandBtn = $('#expand-btn');
+		if (eligibleCount > LIMIT) {
+			expandBtn.css('display', 'inline-block');
+			if (isExpanded) { expandBtn.text('Show Less').addClass('button-hide'); }
+			else { expandBtn.text('Show All').removeClass('button-hide'); }
+		} else {
+			expandBtn.hide();
+		}
+		if (isSelectiveMode) { renumberShown(); }
+		else { $('#allDiv li').removeAttr('value'); }
 	}
-	function allDisplay(){
-		$('#allDiv').addClass('show-all');
-		$('#allDiv li').removeAttr('value');
-	}
-	function renumberVisible() {
+	function renumberShown() {
 		$('#allDiv ol').each(function() {
 			var count = 0;
 			$(this).children('li').each(function() {
-				if ($(this).hasClass('selective')) {
+				if ($(this).hasClass('selective') && $(this).is(':visible')) {
 					count++;
 					$(this).attr('value', count);
 				} else {
@@ -32,6 +58,14 @@
 				}
 			});
 		});
+	}
+	function toggleFilter() {
+		isSelectiveMode = !isSelectiveMode;
+		updateDisplay();
+	}
+	function toggleExpand() {
+		isExpanded = !isExpanded;
+		updateDisplay();
 	}
 	</script>
 	<body>
@@ -63,8 +97,8 @@
 					<div class="container">
 						<div class="row main-row">
 							<div class="col-12">
-								<a href='#' onclick="selectDisplay()" class="button">Show Selected&#x1F50E;</a>
-								<a href='#' onclick="allDisplay()" class="button">Show All&#x1F50E;</a>
+								<a href='#' id="filter-btn" onclick="toggleFilter(); return false;" class="button">Show All</a>
+								<a href='#' id="expand-btn" onclick="toggleExpand(); return false;" class="button" style="display:none;">Show All</a>
 							</div>
 							<div class="col-12" id="allDiv">
 								<section>
@@ -449,8 +483,7 @@ Best Paper Nominee) [<a href="https://ieeexplore.ieee.org/document/11096382" tar
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script>
-			// Initialize in selective mode on page load
-			renumberVisible();
+			updateDisplay();
 			</script>
 
 	</body>

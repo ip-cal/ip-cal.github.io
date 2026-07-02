@@ -1538,9 +1538,9 @@ input, select, textarea {
 		background-image: -moz-linear-gradient(top, #00462a, #002b13);
 		background-image: -webkit-linear-gradient(top, #00462a, #002b13);
 		background-image: -ms-linear-gradient(top, #00462a, #002b13);
-		background-image: linear-gradient(top, #00462a, #002b13);
+		background-image: linear-gradient(to bottom, #00462a, #002b13);
 		display: inline-block;
-		padding: 15px 25px 15px 25px;
+		padding: 11px 25px 11px 25px;
 		background-color: #007b9d;
 		border-radius: 10px;
 		text-transform: uppercase;
@@ -1568,6 +1568,25 @@ input, select, textarea {
 			background-color: #002E25;*/
 
 			box-shadow: inset 0px 0px 0px 1px #3ecceb;
+		}
+
+		.button-hide {
+			background-image: -moz-linear-gradient(top, #c06000, #8a4000);
+			background-image: -webkit-linear-gradient(top, #c06000, #8a4000);
+			background-image: -ms-linear-gradient(top, #c06000, #8a4000);
+			background-image: linear-gradient(to bottom, #c06000, #8a4000);
+			background-color: #a05000;
+			border-color: #7a3800;
+		}
+
+		.button-hide:hover {
+			background-image: -moz-linear-gradient(top, #d07000, #a05000);
+			background-image: -webkit-linear-gradient(top, #d07000, #a05000);
+			background-image: -ms-linear-gradient(top, #d07000, #a05000);
+			background-image: linear-gradient(to bottom, #d07000, #a05000);
+			background-color: #b05500;
+			border-color: #8a4000;
+			box-shadow: inset 0px 0px 0px 1px #e08000;
 		}
 
 

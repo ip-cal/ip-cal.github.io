@@ -17,9 +17,11 @@
 			if (x.style.display === "none") {
 				x.style.display = "block";
 				btn.textContent = "Hide";
+				btn.classList.add("button-hide");
 			} else {
 				x.style.display = "none";
 				btn.textContent = "Show";
+				btn.classList.remove("button-hide");
 			}
 		}
 	</script>
@@ -67,7 +69,7 @@
 								<hr>
 								<section>
 								<h2>[2026] Spring Semester</h2>
-								<a href="#" class="button" onclick="toggleFun('2026Spring', this); return false;">Hide</a>
+								<a href="#" class="button button-hide" onclick="toggleFun('2026Spring', this); return false;">Hide</a>
 								<div id="2026Spring" style="display: block;">
 									<ol start="1">
 										<li class="margin">

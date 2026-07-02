@@ -200,9 +200,11 @@
 			if (more.style.display === 'none') {
 				more.style.display = 'block';
 				btn.textContent = 'Show Less';
+				btn.classList.add('button-hide');
 			} else {
 				more.style.display = 'none';
 				btn.textContent = 'Show All';
+				btn.classList.remove('button-hide');
 			}
 		}
 		</script>
