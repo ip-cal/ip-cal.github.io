@@ -8,6 +8,121 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
+	<script type="text/javascript">
+		function toggleDetails(id, btn) {
+			var el = document.getElementById(id);
+			if (el.style.display === 'block') {
+				el.style.display = 'none';
+				btn.textContent = 'View Details';
+				btn.classList.remove('button-hide');
+			} else {
+				el.style.display = 'block';
+				btn.textContent = 'Hide';
+				btn.classList.add('button-hide');
+				var pubList = el.querySelector('.member-pub-list');
+				if (pubList) { loadMemberPublications(pubList); }
+			}
+		}
+
+		// Same spelling variants used to highlight lab members on the Publication page.
+		var PUBLICATION_NAME_ALIASES = {
+			"Eunbi Jeong": ["Eunbi Jeong"],
+			"Jane Rhee": ["Jane Rhee"],
+			"Jiyeong Yi": ["Ji Yeong Yi", "Jiyeong Yi"],
+			"Sunwoo Kim": ["Sunwoo Kim", "Seonwoo Kim"],
+			"SeJin Park": ["SeJin Park", "Sejin Park"],
+			"Minkyoung Lee": ["Minkyoung Lee"],
+			"Siyeon Kang": ["Siyeon Kang"],
+			"Youngseo Hwang": ["Youngseo Hwang"],
+			"Thu Trang Tran": ["Thu Trang Tran"],
+			"Eun Soo Jung": ["Eun Soo Jung", "Eunsoo Jung"],
+			"Ikyoung Choi": ["Ikyoung Choi"],
+			"Ga In Jeong": ["Ga In Jeong"],
+			"SungHee Yum": ["SungHee Yum"],
+			"Jae Eun Hwang": ["Jae Eun Hwang", "Jaeeun Hwang"],
+			"Minyoung Lee": ["Minyoung Lee"],
+			"Myeong Ji Kim": ["Myeong Ji Kim"],
+			"Eun Seong Park": ["Eun Seong Park"],
+			"Yeonhee Jung": ["Yeonhee Jung"]
+		};
+
+		var MONTH_NUMBERS = {
+			january:1, jan:1, february:2, feb:2, march:3, mar:3, april:4, apr:4,
+			may:5, june:6, jun:6, july:7, jul:7, august:8, aug:8,
+			september:9, sep:9, sept:9, october:10, oct:10, november:11, nov:11, december:12, dec:12
+		};
+		var MONTH_PATTERN = new RegExp('\\b(' + Object.keys(MONTH_NUMBERS).sort(function(a,b){return b.length-a.length;}).join('|') + ')\\.?\\b', 'gi');
+		var YEAR_PATTERN = /\b(20\d{2})\b/g;
+
+		function computeSortKey(venue) {
+			var years = venue.match(YEAR_PATTERN);
+			var months = venue.match(MONTH_PATTERN);
+			var year = years ? parseInt(years[years.length - 1], 10) : 0;
+			var month = months ? MONTH_NUMBERS[months[months.length - 1].replace('.', '').toLowerCase()] : 0;
+			return year * 100 + (month || 0);
+		}
+
+		var PUBLICATION_ENTRY_CACHE = null;
+
+		function fetchPublicationEntries(callback) {
+			if (PUBLICATION_ENTRY_CACHE) { callback(PUBLICATION_ENTRY_CACHE); return; }
+			// Try a live fetch first, so new papers show up automatically with zero maintenance
+			// (works on the deployed site and when served over http(s)). fetch() of a local file
+			// is blocked by the browser when this page is opened directly (file://), so in that
+			// case we fall back to the static snapshot in assets/js/publications-data.js.
+			fetch('publication.html').then(function(res) { return res.text(); }).then(function(html) {
+				var doc = new DOMParser().parseFromString(html, 'text/html');
+				var entries = [];
+				['conf-list', 'journal-list'].forEach(function(listId) {
+					var list = doc.getElementById(listId);
+					if (!list) return;
+					var items = list.querySelectorAll('li.margin');
+					items.forEach(function(li) {
+						var titleEl = li.querySelector('.title');
+						if (!titleEl) return;
+						var title = titleEl.textContent.replace(/\s*\[\s*LINK\s*\]\s*/i, '').replace(/\s+/g, ' ').trim();
+						var venueEl = li.querySelector('.confname, span[style*="italic"]');
+						var venue = venueEl ? venueEl.textContent.replace(/\s+/g, ' ').trim() : '';
+						var clone = li.cloneNode(true);
+						var t = clone.querySelector('.title'); if (t) t.parentNode.removeChild(t);
+						var v = clone.querySelector('.confname, span[style*="italic"]'); if (v) v.parentNode.removeChild(v);
+						var authorsText = clone.textContent.replace(/\s+/g, ' ').trim();
+						entries.push({ title: title, venue: venue, authorsText: authorsText, sortKey: computeSortKey(venue) });
+					});
+				});
+				PUBLICATION_ENTRY_CACHE = entries;
+				callback(entries);
+			}).catch(function() {
+				var fallback = (typeof PUBLICATION_ENTRIES !== 'undefined') ? PUBLICATION_ENTRIES : [];
+				PUBLICATION_ENTRY_CACHE = fallback;
+				callback(fallback);
+			});
+		}
+
+		function loadMemberPublications(containerEl) {
+			if (containerEl.getAttribute('data-loaded') === '1') return;
+			var name = containerEl.getAttribute('data-member');
+			var aliases = PUBLICATION_NAME_ALIASES[name] || [name];
+			containerEl.innerHTML = '<div class="member-pub-empty">Loading publications...</div>';
+			fetchPublicationEntries(function(entries) {
+				var matches = entries.filter(function(e) {
+					return aliases.some(function(a) { return e.authorsText.indexOf(a) !== -1; });
+				});
+				matches.sort(function(a, b) { return (b.sortKey || 0) - (a.sortKey || 0); });
+				containerEl.setAttribute('data-loaded', '1');
+				if (matches.length === 0) {
+					containerEl.innerHTML = '<div class="member-pub-caption">Publications</div><div class="member-pub-empty">No publications found.</div>';
+					return;
+				}
+				var html = '<div class="member-pub-caption">Publications (' + matches.length + ')</div><ul class="member-pub-items">';
+				matches.forEach(function(m) {
+					html += '<li><span class="member-pub-title">' + m.title + '</span>' + (m.venue ? '<span class="member-pub-venue">' + m.venue + '</span>' : '') + '</li>';
+				});
+				html += '</ul>';
+				containerEl.innerHTML = html;
+			});
+		}
+	</script>
 	<body>
 		<div id="page-wrapper">
 			<!-- Header -->
@@ -33,179 +148,214 @@
 					</div>
 				</div>
 
+			<div id="recruit-banner"></div>
+
 			<!-- Main -->
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
 							<div class="col-12">
 								<section>
-									<h2>Professor</h2>
-									<ul class="big-image-list">
-										<li>
-											<img src="images/memPicture/myungkukyoon_2022.jpg" class="left" />
-											<h3><span style="font-weight:bold;color:black;">Yoon, Myung Kuk</span></h3>
-											<p>He received his BS degree in Computer Engineering and Computational Mathematics from Washington State University (WSU), Pullman, Washington, USA, in 2011, and his Ph.D. degree in Electrical and Electronic Engineering from Yonsei University, Seoul, Korea, in 2018. He is currently working as an associate professor with the Department of Computer Science and Engineering, Ewha Womans University. Prior to joining Ewha Womans University, he worked as a software developer at Samsung Inc. His research interests include GPU micro-architecture, machine learning accelerators, and parallel programming.</p>
-											<p><span style="font-weight:bold;color:black;">E-MAIL:</span> myungkuk.yoon at ewha.ac.kr</br>
-											<span style="font-weight:bold;color:black;">HOMEPAGE:</span> <a href="https://myungkuk.com">https://myungkuk.com</a></p>
-										</li>
-									</ul>
-									<hr>
-									<h2>Ph.D. Students (Including the combined program)</h2>
-									<ul class="big-image-list">
-										<li>
-											<img src="images/memPicture/JeongEunbi.jpg" class="left" />
-											<h3><span style="font-weight:bold;color:black;">Jeong, Eunbi</span></h3>
-											<p>
-												<span style="font-weight:bold;color:black;">ADMISSION:</span> 2024.09.</br>
-												<span style="font-weight:bold;color:black;">JOINED:</span> 2023. 01.</br>
-												<span style="font-weight:bold;color:black;">RESEARCH INTERESTS:</span> GPU Microarchitecture</br>
-												<span style="font-weight:bold;color:black;">E-MAIL:</span> eb0313 at ewha.ac.kr</br>
-											</p>
-										</li>
-										<li>
-											<img src="images/memPicture/JaneRhee.jpeg" class="left" />
-											<h3><span style="font-weight:bold;color:black;">Rhee, Jane (Student Representative)</span></h3>
-											<p></p>
-											<p>
-												<span style="font-weight:bold;color:black;">ADMISSION:</span> 2024.09.</br>
-												<span style="font-weight:bold;color:black;">JOINED:</span> 2021. 07.</br>
-												<span style="font-weight:bold;color:black;">RESEARCH INTERESTS: </span> Unified Virtual Memory</br>
-												<span style="font-weight:bold;color:black;">E-MAIL:</span> jrhee1122 at gmail.com</br>
-											</p>
-										</li>
-										<li>
-											<li>
-											<img src="images/memPicture/JiyeongYi.jpeg" class="left" />
-											<h3><span style="font-weight:bold;color:black;">Yi, Jiyeong</span></h3>
-											<p>
-												<span style="font-weight:bold;color:black;">ADMISSION:</span> 2026.03.</br>
-												<span style="font-weight:bold;color:black;">JOINED:</span> 2024. 01.</br>
-												<span style="font-weight:bold;color:black;">RESEARCH INTERESTS:</span> DNN Accelerator </br>
-												<span style="font-weight:bold;color:black;">E-MAIL:</span> dlwldud1151 at ewhain.net</br>
-											</p>
-										</li>
-									</ul>
-									<hr>
-									<h2>M.S. Students</h2>
-									<ul class="big-image-list">
-										<li>
-											<img src="images/memPicture/SeonwooKim.png" class="left" />
-											<h3><span style="font-weight:bold;color:black;">Kim, Sunwoo</span></h3>
-											<p>
-												<span style="font-weight:bold;color:black;">ADMISSION:</span> 2024.09.</br>
-												<span style="font-weight:bold;color:black;">JOINED:</span> 2023. 04.</br>
-												<span style="font-weight:bold;color:black;">RESEARCH INTERESTS:</span> DNN Accelerator, CPU Microarchitecture</br>
-												<span style="font-weight:bold;color:black;">E-MAIL:</span> sw.kim at ewha.ac.kr</br>
-											</p>
-										</li>
-									</ul>
-									<hr>
-									<h2>Undergraduate Students</h2>
-									<ul class="big-image-list">
-										<li>
-											<img src="images/memPicture/SeJinPark.jpeg" class="left" />
-											<h3><span style="font-weight:bold;color:black;">Park, SeJin</span></h3>
-											<p>
-												<span style="font-weight:bold;color:black;">JOINED:</span> 2025. 05.</br>
-												<span style="font-weight:bold;color:black;">RESEARCH INTERESTS:</span> Unified Virtual Memory</br>
-												<span style="font-weight:bold;color:black;">E-MAIL:</span> stronger at ewhain.net</br>
-											</p>
-										</li>
-										<li>
-											<img src="images/memPicture/MinkyoungLee.JPG" class="left" />
-											<h3><span style="font-weight:bold;color:black;">Lee, Minkyoung</span></h3>
-											<p>
-												<span style="font-weight:bold;color:black;">JOINED:</span> 2026. 01.</br>
-												<span style="font-weight:bold;color:black;">RESEARCH INTERESTS:</span> - </br>
-												<span style="font-weight:bold;color:black;">E-MAIL:</span> minkyoungemilylee at ewha.ac.kr</br>
-											</p>
-										</li>
-										<li>
-											<img src="images/memPicture/SiyeonKang.JPG" class="left" />
-											<h3><span style="font-weight:bold;color:black;">Kang, Siyeon</span></h3>
-											<p>
-												<span style="font-weight:bold;color:black;">JOINED:</span> 2026. 01.</br>
-												<span style="font-weight:bold;color:black;">RESEARCH INTERESTS:</span> DNN Accelerator</br>
-												<span style="font-weight:bold;color:black;">E-MAIL:</span> kstar1029 at ewhain.net</br>
-											</p>
-										</li>
-										<li>
-											<img src="images/memPicture/YoungseoHwang.jpeg" class="left" />
-											<h3><span style="font-weight:bold;color:black;">Hwang, Youngseo</span></h3>
-											<p>
-												<span style="font-weight:bold;color:black;">JOINED:</span> 2026. 02.</br>
-												<span style="font-weight:bold;color:black;">RESEARCH INTERESTS:</span> - </br>
-												<span style="font-weight:bold;color:black;">E-MAIL:</span> oasbunoh at gmail.com</br>
-											</p>
-										</li>
-									</ul>
+									<h2>Members</h2>
+									<p class="member-legend"><sup>*</sup>Student Representative</p>
+									<div class="member-grid">
+
+										<div class="member-card">
+											<img src="images/memPicture/myungkukyoon_2022.jpg" />
+											<h3>Myung Kuk Yoon</h3>
+											<p class="member-role">Professor</p>
+											<a href="#" class="button" onclick="toggleDetails('details-myungkukyoon', this); return false;">View Details</a>
+											<div class="member-details" id="details-myungkukyoon">
+												<p>He received his BS degree in Computer Engineering and Computational Mathematics from Washington State University (WSU), Pullman, Washington, USA, in 2011, and his Ph.D. degree in Electrical and Electronic Engineering from Yonsei University, Seoul, Korea, in 2018. He is currently working as an associate professor with the Department of Computer Science and Engineering, Ewha Womans University. Prior to joining Ewha Womans University, he worked as a software developer at Samsung Inc. His research interests include GPU micro-architecture, machine learning accelerators, and parallel programming.</p>
+												<hr class="thin-hr">
+												<table class="detail-table">
+													<tr><th>E-MAIL</th><td>myungkuk.yoon at ewha.ac.kr</td></tr>
+													<tr><th>HOMEPAGE</th><td><a href="https://myungkuk.com">https://myungkuk.com</a></td></tr>
+												</table>
+											</div>
+										</div>
+
+										<div class="member-card">
+											<img src="images/memPicture/JeongEunbi.jpg" />
+											<h3>Eunbi Jeong</h3>
+											<p class="member-role">Ph.D. Student</p>
+											<a href="#" class="button" onclick="toggleDetails('details-eunbijeong', this); return false;">View Details</a>
+											<div class="member-details" id="details-eunbijeong">
+												<table class="detail-table">
+													<tr><th>ADMISSION</th><td>2024 September</td></tr>
+													<tr><th>JOINED</th><td>2023 January</td></tr>
+													<tr><th>RESEARCH<br>INTERESTS</th><td>GPU Microarchitecture</td></tr>
+													<tr><th>E-MAIL</th><td>eb0313 at ewha.ac.kr</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="Eunbi Jeong"></div>
+											</div>
+										</div>
+
+										<div class="member-card">
+											<img src="images/memPicture/JaneRhee.jpeg" />
+											<h3>Jane Rhee<sup>*</sup></h3>
+											<p class="member-role">Ph.D. Student</p>
+											<a href="#" class="button" onclick="toggleDetails('details-janerhee', this); return false;">View Details</a>
+											<div class="member-details" id="details-janerhee">
+												<table class="detail-table">
+													<tr><th>ADMISSION</th><td>2024 September</td></tr>
+													<tr><th>JOINED</th><td>2021 July</td></tr>
+													<tr><th>RESEARCH<br>INTERESTS</th><td>Unified Virtual Memory</td></tr>
+													<tr><th>E-MAIL</th><td>jrhee1122 at gmail.com</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="Jane Rhee"></div>
+											</div>
+										</div>
+
+										<div class="member-card">
+											<img src="images/memPicture/JiyeongYi.jpeg" />
+											<h3>Jiyeong Yi</h3>
+											<p class="member-role">Ph.D. Student</p>
+											<a href="#" class="button" onclick="toggleDetails('details-jiyeongyi', this); return false;">View Details</a>
+											<div class="member-details" id="details-jiyeongyi">
+												<table class="detail-table">
+													<tr><th>ADMISSION</th><td>2026 March</td></tr>
+													<tr><th>JOINED</th><td>2024 January</td></tr>
+													<tr><th>RESEARCH<br>INTERESTS</th><td>DNN Accelerator</td></tr>
+													<tr><th>E-MAIL</th><td>dlwldud1151 at ewhain.net</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="Jiyeong Yi"></div>
+											</div>
+										</div>
+
+										<div class="member-card">
+											<img src="images/memPicture/SeonwooKim.png" />
+											<h3>Sunwoo Kim</h3>
+											<p class="member-role">M.S. Student</p>
+											<a href="#" class="button" onclick="toggleDetails('details-sunwookim', this); return false;">View Details</a>
+											<div class="member-details" id="details-sunwookim">
+												<table class="detail-table">
+													<tr><th>ADMISSION</th><td>2024 September</td></tr>
+													<tr><th>JOINED</th><td>2023 April</td></tr>
+													<tr><th>RESEARCH<br>INTERESTS</th><td>DNN Accelerator, CPU Microarchitecture</td></tr>
+													<tr><th>E-MAIL</th><td>sw.kim at ewha.ac.kr</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="Sunwoo Kim"></div>
+											</div>
+										</div>
+
+										<div class="member-card">
+											<img src="images/memPicture/SeJinPark.jpeg" />
+											<h3>SeJin Park</h3>
+											<p class="member-role">Undergraduate Student</p>
+											<a href="#" class="button" onclick="toggleDetails('details-sejinpark', this); return false;">View Details</a>
+											<div class="member-details" id="details-sejinpark">
+												<table class="detail-table">
+													<tr><th>JOINED</th><td>2025 May</td></tr>
+													<tr><th>RESEARCH<br>INTERESTS</th><td>Unified Virtual Memory</td></tr>
+													<tr><th>E-MAIL</th><td>stronger at ewhain.net</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="SeJin Park"></div>
+											</div>
+										</div>
+
+										<div class="member-card">
+											<img src="images/memPicture/MinkyoungLee.JPG" />
+											<h3>Minkyoung Lee</h3>
+											<p class="member-role">Undergraduate Student</p>
+											<a href="#" class="button" onclick="toggleDetails('details-minkyounglee', this); return false;">View Details</a>
+											<div class="member-details" id="details-minkyounglee">
+												<table class="detail-table">
+													<tr><th>JOINED</th><td>2026 January</td></tr>
+													<tr><th>RESEARCH<br>INTERESTS</th><td>-</td></tr>
+													<tr><th>E-MAIL</th><td>minkyoungemilylee at ewha.ac.kr</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="Minkyoung Lee"></div>
+											</div>
+										</div>
+
+										<div class="member-card">
+											<img src="images/memPicture/SiyeonKang.JPG" />
+											<h3>Siyeon Kang</h3>
+											<p class="member-role">Undergraduate Student</p>
+											<a href="#" class="button" onclick="toggleDetails('details-siyeonkang', this); return false;">View Details</a>
+											<div class="member-details" id="details-siyeonkang">
+												<table class="detail-table">
+													<tr><th>JOINED</th><td>2026 January</td></tr>
+													<tr><th>RESEARCH<br>INTERESTS</th><td>DNN Accelerator</td></tr>
+													<tr><th>E-MAIL</th><td>kstar1029 at ewhain.net</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="Siyeon Kang"></div>
+											</div>
+										</div>
+
+										<div class="member-card">
+											<img src="images/memPicture/YoungseoHwang.jpeg" />
+											<h3>Youngseo Hwang</h3>
+											<p class="member-role">Undergraduate Student</p>
+											<a href="#" class="button" onclick="toggleDetails('details-youngseohwang', this); return false;">View Details</a>
+											<div class="member-details" id="details-youngseohwang">
+												<table class="detail-table">
+													<tr><th>JOINED</th><td>2026 February</td></tr>
+													<tr><th>RESEARCH<br>INTERESTS</th><td>-</td></tr>
+													<tr><th>E-MAIL</th><td>oasbunoh at gmail.com</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="Youngseo Hwang"></div>
+											</div>
+										</div>
+
+										<div class="member-card">
+											<img src="images/memPicture/cameraShy.svg" />
+											<h3>Thu Trang Tran</h3>
+											<p class="member-role">Undergraduate Student</p>
+											<a href="#" class="button" onclick="toggleDetails('details-thutrangtran', this); return false;">View Details</a>
+											<div class="member-details" id="details-thutrangtran">
+												<table class="detail-table">
+													<tr><th>JOINED</th><td>2026 July</td></tr>
+													<tr><th>RESEARCH<br>INTERESTS</th><td>-</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="Thu Trang Tran"></div>
+											</div>
+										</div>
+
+									</div>
 									<hr>
 									<h2>Alumni</h2>
-									<ul class="big-image-list">
-										<li>
-											<h3><span style="font-weight:bold;color:black;">Jung, Eun Soo (MS)</span></h3>
-											<p>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-FIRST LANDING: </span>SanDisk</br>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-E-MAIL:</span> jsoo615 at ewha.ac.kr</br>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-THESIS TITLE:</span> Hierarchical Traversal Stack Design Using Shared Memory for GPU Ray Tracing</br>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-GRADUATED:</span> 2026. 02.</br>
-											</p>
-										</li>
-										<li>
-											<h3><span style="font-weight:bold;color:black;">Yi, Jiyeong (MS)</span></h3>
-											<p>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-Pursuing Ph.D at our Lab</span></br>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-E-MAIL:</span> dlwldud1151 at ewhain.net</br>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-THESIS TITLE:</span> Hybrid Systolic Arrays via Logical Partitioning for Acceleration of Complex-Valued Neural Networks</br>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-GRADUATED:</span> 2026. 02.</br>
-											</p>
-										</li>
-									</ul>
-									<hr>
-									<h2>Alumni (Undergraduate Interns)</h2>
-									<ul>
-										<li>
-											<h3><span style="font-weight:bold;color:black;">Choi, Ikyoung (2023. 07. - 2026. 02.)</span></h3>
-										</li>
-										<li>
-											<h3><span style="font-weight:bold;color:black;">Jeong, Ga In (2025. 01. - 2025. 08.)</span></h3>
-										</li>
-										<li>
-											<h3><span style="font-weight:bold;color:black;">Yum, SungHee (2025. 01. - 2025. 08.)</span></h3>
-										</li>
-										<li>
-											<h3><span style="font-weight:bold;color:black;">Hwang, Jae Eun (2023. 01. - 2025. 07.)</span></h3>
-										</li>
-										<li>
-											<h3><span style="font-weight:bold;color:black;">Lee, Minyoung (2021. 07. - 2022. 02.)</span></h3>
-											<!--<p>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-FIRST LANDING: </span>Bear Robotics (USA)</br>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-E-MAIL:</span> plokm526 at ewhain.net</br>
-											</p>-->
-										</li>
-										<li>
-											<h3><span style="font-weight:bold;color:black;">Kim, Myeong Ji (2021. 07. - 2022. 12.)</span></h3>
-											<!--<p>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-FIRST LANDING: </span>AI Security Lab at Ewha Womans University</br>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-E-MAIL:</span> kimmyeongji3 at gmail.com</br>
-											</p>-->
-										</li>
-										<li>
-											<h3><span style="font-weight:bold;color:black;">Park, Eun Seong (2022. 01. - 2023. 10.)</span></h3>
-											<!--<p>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-FIRST LANDING: </span> -
-</br>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-E-MAIL:</span> eunseong0607 at ewhain.net</br>
-											</p>-->
-										</li>
-										<li>
-											<h3><span style="font-weight:bold;color:black;">Jung, Yeonhee (2022. 01. - 2023. 12.)</span></h3>
-											<!--<p>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-FIRST LANDING: </span> - </br>
-												<span style="font-weight:bold;color:black;margin-left:40px;">-E-MAIL:</span> spig0126 at ewhain.net</br>
-											</p>-->
-										</li>
-									</ul>
+									<div class="alumni-grid">
+										<div class="alumni-card">
+											<h3>Eun Soo Jung (Master)</h3>
+											<a href="#" class="button" onclick="toggleDetails('details-alumni-eunsoojung', this); return false;">View Details</a>
+											<div class="member-details" id="details-alumni-eunsoojung">
+												<table class="detail-table">
+													<tr><th>FIRST LANDING</th><td>SanDisk</td></tr>
+													<tr><th>E-MAIL</th><td>jsoo615 at ewha.ac.kr</td></tr>
+													<tr><th>THESIS TITLE</th><td>Hierarchical Traversal Stack Design Using Shared Memory for GPU Ray Tracing</td></tr>
+													<tr><th>GRADUATED</th><td>2026 February</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="Eun Soo Jung"></div>
+											</div>
+										</div>
+										<div class="alumni-card">
+											<h3>Jiyeong Yi (Master)</h3>
+											<a href="#" class="button" onclick="toggleDetails('details-alumni-jiyeongyi', this); return false;">View Details</a>
+											<div class="member-details" id="details-alumni-jiyeongyi">
+												<table class="detail-table">
+													<tr><th>NOTE</th><td>Pursuing Ph.D at our Lab</td></tr>
+													<tr><th>E-MAIL</th><td>dlwldud1151 at ewhain.net</td></tr>
+													<tr><th>THESIS TITLE</th><td>Hybrid Systolic Arrays via Logical Partitioning for Acceleration of Complex-Valued Neural Networks</td></tr>
+													<tr><th>GRADUATED</th><td>2026 February</td></tr>
+												</table>
+												<div class="member-pub-list" data-member="Jiyeong Yi"></div>
+											</div>
+										</div>
+									</div>
+
+									<p class="intern-caption">Undergraduate Interns</p>
+									<table class="intern-table">
+										<tr><td>Ikyoung Choi</td><td>2023 July - 2026 February</td></tr>
+										<tr><td>Ga In Jeong</td><td>2025 January - 2025 August</td></tr>
+										<tr><td>SungHee Yum</td><td>2025 January - 2025 August</td></tr>
+										<tr><td>Jae Eun Hwang</td><td>2023 January - 2025 July</td></tr>
+										<tr><td>Minyoung Lee</td><td>2021 July - 2022 February</td></tr>
+										<tr><td>Myeong Ji Kim</td><td>2021 July - 2022 December</td></tr>
+										<tr><td>Eun Seong Park</td><td>2022 January - 2023 October</td></tr>
+										<tr><td>Yeonhee Jung</td><td>2022 January - 2023 December</td></tr>
+									</table>
 									<hr>
 								</section>
 
@@ -236,6 +386,8 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/recruit-status.js"></script>
+			<script src="assets/js/publications-data.js"></script>
 
 	</body>
 </html>
