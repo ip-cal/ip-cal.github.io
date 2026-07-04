@@ -7,6 +7,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
+	<script type="text/javascript">
+		function toggleFun(divName, btn) {
+			var x = document.getElementById(divName);
+			if (x.style.display === "none") {
+				x.style.display = "block";
+				btn.textContent = "Hide";
+				btn.classList.add("button-hide");
+			} else {
+				x.style.display = "none";
+				btn.textContent = "Show";
+				btn.classList.remove("button-hide");
+			}
+		}
+	</script>
 	<body>
 		<div id="page-wrapper">
 			<!-- Header -->
@@ -42,38 +56,104 @@
 
 								<section>
 									<h2>Ongoing Projects</h2>
-									<ol start="1">
-										<li class="margin">
-											<span class="title">Basic Research Laboratory for Energy-Efficient, General-Purpose Multi-Modal AI with Heterogeneous Computing Accelerators</br>(에너지 효율적 범용 멀티모달 AI를 위한 복합 연산 가속기 기초 연구실)</br></span>
-											<span class="confname">National Research Foundation of Korea, NRF (2025.06.01 ~ 2028.05.31)</span>
-										</li>
-										<li class="margin">
-											<span class="title">A Study on Massively Parallel Processing Architectures for Maximizing Computational Performance and Energy Efficiency of Complex-Valued Neural Network</br>(복소수 신경망의 연산 성능과 에너지 효율 극대화를 위한 초병렬 프로세싱 아키텍처 연구)</br></span>
-											<span class="confname">National Research Foundation of Korea, NRF (2025.03.01 ~ 2028.02.29)</span>
-										</li>
-										<li class="margin">
-											<span class="title">Development of 5G-A vRAN Research Platform</br>(5G-A vRAN 연구플랫폼 개발)</br></span>
-											<span class="confname">Institute for Information & Communication Technology Planning & Evaluation, IITP (2024.04.01 ~ 2028.12.31)</span>
-										</li>
-									</ol>
+									<div class="project-grid">
+										<div class="project-card">
+											<div class="project-summary">
+												<span class="project-tag">[NRF] xPU for Multi-Modal AI</span>
+												<span class="project-dates">(2025 Jun - 2028 May)</span>
+											</div>
+											<div id="proj1" class="project-details" style="display: none;">
+												<table class="detail-table">
+													<tr><th>English Name</th><td>Basic Research Laboratory for Energy-Efficient, General-Purpose Multi-Modal AI with Heterogeneous Computing Accelerators</td></tr>
+													<tr><th>Korean Name</th><td>에너지 효율적 범용 멀티모달 AI를 위한 복합 연산 가속기 기초 연구실</td></tr>
+													<tr><th>Funding Agency</th><td>National Research Foundation of Korea, NRF</td></tr>
+													<tr><th>Role</th><td>Principal Investigator</td></tr>
+												</table>
+											</div>
+											<a href="#" class="button" onclick="toggleFun('proj1', this); return false;">Show</a>
+										</div>
+										<div class="project-card">
+											<div class="project-summary">
+												<span class="project-tag">[NRF] Massively Parallel CVNN Architectures</span>
+												<span class="project-dates">(2025 Mar - 2028 Feb)</span>
+											</div>
+											<div id="proj2" class="project-details" style="display: none;">
+												<table class="detail-table">
+													<tr><th>English Name</th><td>A Study on Massively Parallel Processing Architectures for Maximizing Computational Performance and Energy Efficiency of Complex-Valued Neural Network</td></tr>
+													<tr><th>Korean Name</th><td>복소수 신경망의 연산 성능과 에너지 효율 극대화를 위한 초병렬 프로세싱 아키텍처 연구</td></tr>
+													<tr><th>Funding Agency</th><td>National Research Foundation of Korea, NRF</td></tr>
+													<tr><th>Role</th><td>Principal Investigator</td></tr>
+												</table>
+											</div>
+											<a href="#" class="button" onclick="toggleFun('proj2', this); return false;">Show</a>
+										</div>
+										<div class="project-card">
+											<div class="project-summary">
+												<span class="project-tag">[IITP] 5G-A vRAN Research Platform</span>
+												<span class="project-dates">(2024 Apr - 2028 Dec)</span>
+											</div>
+											<div id="proj3" class="project-details" style="display: none;">
+												<table class="detail-table">
+													<tr><th>English Name</th><td>Development of 5G-A vRAN Research Platform</td></tr>
+													<tr><th>Korean Name</th><td>5G-A vRAN 연구플랫폼 개발</td></tr>
+													<tr><th>Funding Agency</th><td>Institute for Information & Communication Technology Planning & Evaluation (IITP)</td></tr>
+													<tr><th>Role</th><td>Co-Investigator</td></tr>
+												</table>
+											</div>
+											<a href="#" class="button" onclick="toggleFun('proj3', this); return false;">Show</a>
+										</div>
+									</div>
 								</section>
 								<hr>
 								<section>
 									<h2>Finished Projects</h2>
-									<ol start="1">
-										<li class="margin">
-											<span class="title">Artificial Intelligence Innovation Hub</br>(인공지능 혁신 허브 연구 개발)</br></span>
-											<span class="confname">Institute for Information & Communication Technology Planning & Evaluation, IITP (2021.07.01 ~ 2025.12.31)</span>
-										</li>
-										<li class="margin">
-											<span class="title">Fine-grained Power Management Technique for Large-Scale Parallel Processors</br>(대규모 병렬 프로세서를 위한 미세 전력 관리 기법)</br></span>
-											<span class="confname">National Research Foundation of Korea, NRF (2021.09.01 ~ 2024.02.29)</span>
-										</li>
-										<li class="margin">
-											<span class="title">Developing General Purpose Processing Unit for Machine Learning Algorithms</br>(머신러닝 연산을 위한 범용 프로세싱 유닛 구조 연구)</br></span>
-											<span class="confname">Ewha Womans University (Ewha Start-up Fund) (2021.03.01 ~ 2023.02.28)</span>
-										</li>
-									</ol>
+									<div class="project-grid">
+										<div class="project-card">
+											<div class="project-summary">
+												<span class="project-tag">[IITP] AI Innovation Hub</span>
+												<span class="project-dates">(2021 Jul - 2025 Dec)</span>
+											</div>
+											<div id="proj4" class="project-details" style="display: none;">
+												<table class="detail-table">
+													<tr><th>English Name</th><td>Artificial Intelligence Innovation Hub</td></tr>
+													<tr><th>Korean Name</th><td>인공지능 혁신 허브 연구 개발</td></tr>
+													<tr><th>Funding Agency</th><td>Institute for Information & Communication Technology Planning & Evaluation (IITP)</td></tr>
+													<tr><th>Role</th><td>Co-Investigator</td></tr>
+												</table>
+											</div>
+											<a href="#" class="button" onclick="toggleFun('proj4', this); return false;">Show</a>
+										</div>
+										<div class="project-card">
+											<div class="project-summary">
+												<span class="project-tag">[NRF] Power Management for Parallel Processors</span>
+												<span class="project-dates">(2021 Sep - 2024 Feb)</span>
+											</div>
+											<div id="proj5" class="project-details" style="display: none;">
+												<table class="detail-table">
+													<tr><th>English Name</th><td>Fine-grained Power Management Technique for Large-Scale Parallel Processors</td></tr>
+													<tr><th>Korean Name</th><td>대규모 병렬 프로세서를 위한 미세 전력 관리 기법</td></tr>
+													<tr><th>Funding Agency</th><td>National Research Foundation of Korea, NRF</td></tr>
+													<tr><th>Role</th><td>Principal Investigator</td></tr>
+												</table>
+											</div>
+											<a href="#" class="button" onclick="toggleFun('proj5', this); return false;">Show</a>
+										</div>
+										<div class="project-card">
+											<div class="project-summary">
+												<span class="project-tag">[Ewha] Machine Learning Accelerator</span>
+												<span class="project-dates">(2021 Mar - 2023 Feb)</span>
+											</div>
+											<div id="proj6" class="project-details" style="display: none;">
+												<table class="detail-table">
+													<tr><th>English Name</th><td>Developing General Purpose Processing Unit for Machine Learning Algorithms</td></tr>
+													<tr><th>Korean Name</th><td>머신러닝 연산을 위한 범용 프로세싱 유닛 구조 연구</td></tr>
+													<tr><th>Funding Agency</th><td>Ewha Womans University (Ewha Start-up Fund)</td></tr>
+													<tr><th>Role</th><td>Principal Investigator</td></tr>
+												</table>
+											</div>
+											<a href="#" class="button" onclick="toggleFun('proj6', this); return false;">Show</a>
+										</div>
+									</div>
 								</section>
 							</div>
 						</div>
@@ -86,7 +166,7 @@
 						<div class="row">
 							<div class="col-12">
 								<div id="copyright">
-									&copy; <a href="https://ip-cal.ewha.ac.kr/mediawiki">IP-CAL.</a> All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+									&copy; IP-CAL. All rights reserved.
 								</div>
 
 							</div>
