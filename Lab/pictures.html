@@ -8,16 +8,16 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<script type="text/javascript">
-		function toggleFun(divName, btn) {
-			var x = document.getElementById(divName);
-			if (x.style.display === "none") {
-				x.style.display = "block";
-				btn.textContent = "Hide";
-				btn.classList.add("button-hide");
+		function toggleDetails(id, btn) {
+			var el = document.getElementById(id);
+			if (el.style.display === 'block') {
+				el.style.display = 'none';
+				btn.textContent = 'View Photos';
+				btn.classList.remove('button-hide');
 			} else {
-				x.style.display = "none";
-				btn.textContent = "Show";
-				btn.classList.remove("button-hide");
+				el.style.display = 'block';
+				btn.textContent = 'Hide';
+				btn.classList.add('button-hide');
 			}
 		}
 	</script>
@@ -54,148 +54,232 @@
 					<div class="container">
 						<div class="row main-row">
 							<div class="col-12">
-								<h2>[2026 Ewha] Graduation</h2>
-								<div class="col-12" id="202602Ewha" style="display: none;">
-									<img src="images/ipcalPictures/2602AtEwha/picture01.jpeg" height="350px" />
-									<img src="images/ipcalPictures/2602AtEwha/picture02.jpeg" height="350px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202602Ewha', this); return false;">Show</a>
-								<hr>
-								<h2>[2026 Jeju] MT!</h2>
-								<div class="col-12" id="202601Jeju" style="display: none;">
-									<img src="images/ipcalPictures/2601AtJeju/picture02.JPG" height="350px" />
-									<img src="images/ipcalPictures/2601AtJeju/picture04.JPG" height="350px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202601Jeju', this); return false;">Show</a>
-								<hr>
-								<h2>[2026 Yongpyong] KIISE Computer System Society Conference</h2>
-								<div class="col-12" id="202601Yongpyong" style="display: none;">
-									<img src="images/ipcalPictures/2601AtYongpyong/picture01.jpeg" height="350px" />
-									<!--<img src="images/ipcalPictures/2601AtYongpyong/picture02.jpeg" height="350px" />-->
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202601Yongpyong', this); return false;">Show</a>
-								<hr>
-								<h2>[2025 Gwanghwamun] Dinner</h2>
-								<div class="col-12" id="202511Gwanghwamun" style="display: none;">
-									<img src="images/ipcalPictures/2511AtGwanghwamun/picture01.jpeg" height="350px" />
-									<img src="images/ipcalPictures/2511AtGwanghwamun/picture02.jpeg" height="350px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202511Gwanghwamun', this); return false;">Show</a>
-								<hr>
-								<h2>[2025 Ewha] Designed by Sejin!</h2>
-								<div class="col-12" id="202511AtEwha" style="display: none;">
-									<img src="images/ipcalPictures/2511AtLab/picture01.jpeg" height="350px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202511AtEwha', this); return false;">Show</a>
-								<hr>
-								<h2>[2025 Seoul] MICRO</h2>
-								<div class="col-12" id="202510AtSeoul" style="display: none;">
-									<img src="images/ipcalPictures/2510Seoul/picture01.jpeg" height="350px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202510AtSeoul', this); return false;">Show</a>
-								<hr>
-								<h2>[2025 Irvine] IISWC</h2>
-								<div class="col-12" id="202510AtIrvine" style="display: none;">
-									<img src="images/ipcalPictures/2510Irvine/picture01.jpeg" height="350px" />
-									<img src="images/ipcalPictures/2510Irvine/picture02.jpeg" height="350px" />
-									<img src="images/ipcalPictures/2510Irvine/picture03.jpeg" height="350px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202510AtIrvine', this); return false;">Show</a>
-								<hr>
-								<h2>[2025 Ghent] ISPASS</h2>
-								<div class="col-12" id="202504AtGhent" style="display: none;">
-									<img src="images/ipcalPictures/2505AtGhent/picture01.jpg" height="350px" />
-									<img src="images/ipcalPictures/2505AtGhent/picture02.jpg" height="350px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202504AtGhent', this); return false;">Show</a>
-								<hr>
-								<h2>[2025 Ewha] AIX</h2>
-								<div class="col-12" id="202504AtEwha" style="display: none;">
-									<img src="images/ipcalPictures/2504AtEwha/picture01.jpg" height="350px" />
-									<img src="images/ipcalPictures/2504AtEwha/picture03.jpg" height="350px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202504AtEwha', this); return false;">Show</a>
-								<hr>
-								<h2>[2025 Vegas] HPCA</h2>
-								<div class="col-12" id="202503Vegas" style="display: none;">
-									<img src="images/ipcalPictures/2503AtLasVegas/picture01.jpeg" height="612px" />
-									<img src="images/ipcalPictures/2503AtLasVegas/picture03.jpeg" height="350px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202503Vegas', this); return false;">Show</a>
-								<hr>
-								<h2>[2024 Gwanghwamun] Dinner</h2>
-								<div class="col-12" id="202411Gwanghwamun" style="display: none;">
-									<img src="images/ipcalPictures/2411AtGwanghwamun/picture01.jpeg" height="612px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202411Gwanghwamun', this); return false;">Show</a>
-								<hr>
-								<h2>[2024 Jeongseon] Autumn Annual Conference of IEIE</h2>
-								<div class="col-12" id="202411Jeongseon" style="display: none;">
-									<img src="images/ipcalPictures/2411AtJeongseon/picture01.jpeg" height="612px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202411Jeongseon', this); return false;">Show</a>
-								<hr>
-								<h2>[2024 Cote] Lunch</h2>
-								<div class="col-12" id="202408Cote" style="display: none;">
-									<img src="images/ipcalPictures/2408AtRestaurant/picture01.jpeg" height="612px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202408Cote', this); return false;">Show</a>
-								<hr>
-								<h2>[2024 Konjiam] 5G vRAN Korea</h2>
-								<div class="col-12" id="202408Konjiam" style="display: none;">
-									<img src="images/ipcalPictures/2408AtKonjiam/picture03.jpeg" height="612px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202408Konjiam', this); return false;">Show</a>
-								<hr>
-								<h2>[2024 Yonsei] SigArch Korea</h2>
-								<div class="col-12" id="202407Mem" style="display: none;">
-									<img src="images/ipcalPictures/2407AtYonsei/picture01.jpeg" height="612px" />
-									<img src="images/ipcalPictures/2407AtYonsei/picture02.jpeg" height="612px" />
-									<img src="images/ipcalPictures/2407AtYonsei/picture03.jpeg" height="612px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202407Mem', this); return false;">Show</a>
-								<hr>
-								<h2>[2024 Sinchon] Dinner</h2>
-								<div class="col-12" id="202401Mem" style="display: none;">
-									<img src="images/ipcalPictures/2401Sinchon/picture04.jpeg" height="306px" />
-									<img src="images/ipcalPictures/2401Sinchon/picture02.jpeg" height="306px" />
-									<img src="images/ipcalPictures/2401Sinchon/picture03.jpeg" height="306px" />
-									<img src="images/ipcalPictures/2401Sinchon/picture06.jpeg" height="306px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202401Mem', this); return false;">Show</a>
-								<hr>
-								<h2>[2023 Gyeonggi] Memory-Centric Workshop</h2>
-								<div class="col-12" id="202311Mem" style="display: none;">
-									<img src="images/ipcalPictures/2311Mem/picture01.png" height="306px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202311Mem', this); return false;">Show</a>
-								<hr>
-								<h2>[2023 Ewha] Designed by Eunsoo!</h2>
-								<div class="col-12" id="202310Ipcal" style="display: none;">
-									<img src="images/ipcalPictures/2310AtLab/picture01.png" height="306px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202310Ipcal', this); return false;">Show</a>
-								<hr>
-								<h2>[2023 Ewha] At IP-CAL Lab.</h2>
-								<div class="col-12" id="202309Ipcal" style="display: none;">
-									<img src="images/ipcalPictures/2309AtLab/picture01.jpeg" height="306px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202309Ipcal', this); return false;">Show</a>
-								<hr>
-								<h2>[2023 Jeju] Summer Annual Conference</h2>
-								<div class="col-12" id="202306Jeju" style="display: none;">
-									<img src="images/ipcalPictures/2306Jeju/picture01.jpeg" height="306px" />
-									<img src="images/ipcalPictures/2306Jeju/picture02.jpeg" height="306px" />
-									<img src="images/ipcalPictures/2306Jeju/picture03.jpeg" height="306px" />
-									<img src="images/ipcalPictures/2306Jeju/picture04.jpeg" height="306px" />
-								</div>
-								<a href="#" class="button" onclick="toggleFun('202306Jeju', this); return false;">Show</a>
+								<section>
+									<h2>Photos</h2>
+									<div class="member-grid photo-grid">
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2602AtEwha/picture01.jpeg" />
+											<h3>[2026 Ewha]<br/>Graduation</h3>
+											<p class="member-role">2 photos</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202602Ewha', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202602Ewha">
+												<img class="photo-full" src="images/ipcalPictures/2602AtEwha/picture01.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2602AtEwha/picture02.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2601AtJeju/picture02.JPG" />
+											<h3>[2026 Jeju]<br/>MT!</h3>
+											<p class="member-role">2 photos</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202601Jeju', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202601Jeju">
+												<img class="photo-full" src="images/ipcalPictures/2601AtJeju/picture02.JPG" />
+												<img class="photo-full" src="images/ipcalPictures/2601AtJeju/picture04.JPG" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2601AtYongpyong/picture01.jpeg" />
+											<h3>[2026 Yongpyong]<br/>KIISE Computer System Society Conference</h3>
+											<p class="member-role">1 photo</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202601Yongpyong', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202601Yongpyong">
+												<img class="photo-full" src="images/ipcalPictures/2601AtYongpyong/picture01.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2511AtGwanghwamun/picture01.jpeg" />
+											<h3>[2025 Gwanghwamun]<br/>Dinner</h3>
+											<p class="member-role">2 photos</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202511Gwanghwamun', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202511Gwanghwamun">
+												<img class="photo-full" src="images/ipcalPictures/2511AtGwanghwamun/picture01.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2511AtGwanghwamun/picture02.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2511AtLab/picture01.jpeg" />
+											<h3>[2025 Ewha]<br/>Designed by Sejin!</h3>
+											<p class="member-role">1 photo</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202511AtEwha', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202511AtEwha">
+												<img class="photo-full" src="images/ipcalPictures/2511AtLab/picture01.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2510Seoul/picture01.jpeg" />
+											<h3>[2025 Seoul]<br/>MICRO</h3>
+											<p class="member-role">1 photo</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202510AtSeoul', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202510AtSeoul">
+												<img class="photo-full" src="images/ipcalPictures/2510Seoul/picture01.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2510Irvine/picture01.jpeg" />
+											<h3>[2025 Irvine]<br/>IISWC</h3>
+											<p class="member-role">3 photos</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202510AtIrvine', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202510AtIrvine">
+												<img class="photo-full" src="images/ipcalPictures/2510Irvine/picture01.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2510Irvine/picture02.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2510Irvine/picture03.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2505AtGhent/picture01.jpg" />
+											<h3>[2025 Ghent]<br/>ISPASS</h3>
+											<p class="member-role">2 photos</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202504AtGhent', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202504AtGhent">
+												<img class="photo-full" src="images/ipcalPictures/2505AtGhent/picture01.jpg" />
+												<img class="photo-full" src="images/ipcalPictures/2505AtGhent/picture02.jpg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2504AtEwha/picture01.JPG" />
+											<h3>[2025 Ewha]<br/>AIX</h3>
+											<p class="member-role">2 photos</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202504AtEwha', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202504AtEwha">
+												<img class="photo-full" src="images/ipcalPictures/2504AtEwha/picture01.JPG" />
+												<img class="photo-full" src="images/ipcalPictures/2504AtEwha/picture03.JPG" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2503AtLasVegas/picture01.jpeg" />
+											<h3>[2025 Vegas]<br/>HPCA</h3>
+											<p class="member-role">2 photos</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202503Vegas', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202503Vegas">
+												<img class="photo-full" src="images/ipcalPictures/2503AtLasVegas/picture01.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2503AtLasVegas/picture03.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2411AtGwanghwamun/picture01.jpeg" />
+											<h3>[2024 Gwanghwamun]<br/>Dinner</h3>
+											<p class="member-role">1 photo</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202411Gwanghwamun', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202411Gwanghwamun">
+												<img class="photo-full" src="images/ipcalPictures/2411AtGwanghwamun/picture01.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2411AtJeongseon/picture01.jpeg" />
+											<h3>[2024 Jeongseon]<br/>Autumn Annual Conference of IEIE</h3>
+											<p class="member-role">1 photo</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202411Jeongseon', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202411Jeongseon">
+												<img class="photo-full" src="images/ipcalPictures/2411AtJeongseon/picture01.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2408AtRestaurant/picture01.jpeg" />
+											<h3>[2024 Cote]<br/>Lunch</h3>
+											<p class="member-role">1 photo</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202408Cote', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202408Cote">
+												<img class="photo-full" src="images/ipcalPictures/2408AtRestaurant/picture01.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2408AtKonjiam/picture03.jpeg" />
+											<h3>[2024 Konjiam]<br/>5G vRAN Korea</h3>
+											<p class="member-role">1 photo</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202408Konjiam', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202408Konjiam">
+												<img class="photo-full" src="images/ipcalPictures/2408AtKonjiam/picture03.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2407AtYonsei/picture01.jpeg" />
+											<h3>[2024 Yonsei]<br/>SigArch Korea</h3>
+											<p class="member-role">3 photos</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202407Mem', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202407Mem">
+												<img class="photo-full" src="images/ipcalPictures/2407AtYonsei/picture01.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2407AtYonsei/picture02.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2407AtYonsei/picture03.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2401Sinchon/picture04.jpeg" />
+											<h3>[2024 Sinchon]<br/>Dinner</h3>
+											<p class="member-role">4 photos</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202401Mem', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202401Mem">
+												<img class="photo-full" src="images/ipcalPictures/2401Sinchon/picture04.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2401Sinchon/picture02.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2401Sinchon/picture03.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2401Sinchon/picture06.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2311Mem/picture01.png" />
+											<h3>[2023 Gyeonggi]<br/>Memory-Centric Workshop</h3>
+											<p class="member-role">1 photo</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202311Mem', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202311Mem">
+												<img class="photo-full" src="images/ipcalPictures/2311Mem/picture01.png" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2310AtLab/picture01.png" />
+											<h3>[2023 Ewha]<br/>Designed by Eunsoo!</h3>
+											<p class="member-role">1 photo</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202310Ipcal', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202310Ipcal">
+												<img class="photo-full" src="images/ipcalPictures/2310AtLab/picture01.png" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2309AtLab/picture01.jpeg" />
+											<h3>[2023 Ewha]<br/>At IP-CAL Lab.</h3>
+											<p class="member-role">1 photo</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202309Ipcal', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202309Ipcal">
+												<img class="photo-full" src="images/ipcalPictures/2309AtLab/picture01.jpeg" />
+											</div>
+										</div>
+
+										<div class="member-card photo-card">
+											<img class="photo-cover" src="images/ipcalPictures/2306Jeju/picture01.jpeg" />
+											<h3>[2023 Jeju]<br/>Summer Annual Conference</h3>
+											<p class="member-role">4 photos</p>
+											<a href="#" class="button" onclick="toggleDetails('details-202306Jeju', this); return false;">View Photos</a>
+											<div class="member-details" id="details-202306Jeju">
+												<img class="photo-full" src="images/ipcalPictures/2306Jeju/picture01.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2306Jeju/picture02.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2306Jeju/picture03.jpeg" />
+												<img class="photo-full" src="images/ipcalPictures/2306Jeju/picture04.jpeg" />
+											</div>
+										</div>
+
+									</div>
+								</section>
 							</div>
 						</div>
 					</div>
 				</div>
-
-
 
 			<!-- Footer -->
 				<div id="footer-wrapper">
