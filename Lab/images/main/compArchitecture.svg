@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+	<rect x="0" y="0" width="400" height="300" fill="#ffffff"/>
+
+	<!-- CPU chip -->
+	<g stroke="#00462a" stroke-width="3" fill="none">
+		<rect x="140" y="90" width="120" height="120" rx="6" fill="#eef2ea"/>
+		<rect x="165" y="115" width="70" height="70" rx="3" fill="#ffffff"/>
+
+		<!-- pins -->
+		<line x1="140" y1="110" x2="118" y2="110"/>
+		<line x1="140" y1="135" x2="118" y2="135"/>
+		<line x1="140" y1="165" x2="118" y2="165"/>
+		<line x1="140" y1="190" x2="118" y2="190"/>
+
+		<line x1="260" y1="110" x2="282" y2="110"/>
+		<line x1="260" y1="135" x2="282" y2="135"/>
+		<line x1="260" y1="165" x2="282" y2="165"/>
+		<line x1="260" y1="190" x2="282" y2="190"/>
+
+		<line x1="165" y1="90" x2="165" y2="68"/>
+		<line x1="190" y1="90" x2="190" y2="68"/>
+		<line x1="210" y1="90" x2="210" y2="68"/>
+		<line x1="235" y1="90" x2="235" y2="68"/>
+
+		<line x1="165" y1="210" x2="165" y2="232"/>
+		<line x1="190" y1="210" x2="190" y2="232"/>
+		<line x1="210" y1="210" x2="210" y2="232"/>
+		<line x1="235" y1="210" x2="235" y2="232"/>
+	</g>
+
+	<text x="200" y="256" text-anchor="middle" font-family="'Ubuntu Condensed', Arial, sans-serif" font-size="16" fill="#00462a" font-weight="bold">Computer Architecture</text>
+	<text x="200" y="278" text-anchor="middle" font-family="'Ubuntu Condensed', Arial, sans-serif" font-size="13" fill="#63635b">Illustration coming soon</text>
+</svg>

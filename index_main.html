@@ -11,6 +11,11 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="Lab/assets/css/main.css" />
+		<style>
+		#main {
+			padding-bottom: 1.5em;
+		}
+		</style>
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -47,195 +52,193 @@
 								<section>
 									<h2>Intelligence System and Parallel Computer Architecture Lab </h2>
 									<p><img src="Lab/images/main/ipcalLogo2.jpg" class="left" width="140" height="140"/>
-									Intelligence system and Parallel Computer Architecture (IP-CAL) Lab was founded in March 2021. Our lab is located in Ewha Womans University. Our research interests are Graphics Processing Units (GPU), machine learning accelerators, parallel programming, and computer architecture. Detailed research topics are described below. If you are interested in the topics, you are always welcome to visit our lab.
+									The Intelligence system and Parallel Computer Architecture (IP-CAL) Lab was founded in March 2021 at Ewha Womans University. Our research focuses on the architecture of modern parallel computing systems, including Graphics Processing Units (GPUs), machine learning accelerators, and general-purpose parallel processors, with the goal of improving the performance, efficiency, and programmability of next-generation hardware. We combine cycle-accurate simulation, real hardware profiling, and system software design to uncover architectural bottlenecks and to propose new hardware and software solutions. Detailed research topics are described below, and our recent papers, projects, and lab news are introduced throughout this website. If you are interested in our research, you are always welcome to visit our lab or get in touch with us.
 									</p>
 
 								</section>
 								<hr>
 
 								<h2>Research Areas</h2>
-								<div class="member-grid">
 
-									<div class="member-card research-card">
-										<img src="Lab/images/main/gpuArchitecture.png" />
-										<h3>Graphics Processing Unit (GPU) Micro-Architecture</h3>
-										<a href="#" class="button" onclick="toggleDetails('details-research-gpu', this); return false;">View Details</a>
-										<div class="research-details" id="details-research-gpu">
-											<p>GPUs were first developed to accelerate graphics applications. Games are one major application that relies on the performance of GPUs. When the game application is launched, GPUs start to create 60~120 images every second using a massive number of GPU processors. This massive number of processors recently has begun to be used for general purpose applications such as machine learning algorithms, simulations, and many other applications instead of graphics applications. This paradigm is known as General-Purpose Computing on Graphics Processing Unit (GPGPU).</p>
-											<p>Our goal is to maximize the performance of GPUs when general-purpose applications such as machine learning algorithms, simulations, and many more are executed on the GPU hardware. We first identify the bottleneck points on the GPU architecture and propose a new modified architecture that can remove the bottleneck points. To verify our ideas, C/C++/Python based cycle-accurate simulations are used.</p>
+								<div class="research-row">
+									<div class="research-tabs">
+										<a href="#" class="research-tab active" onclick="showResearch(this, 'row1-panels', 'gpu'); return false;">GPU Micro-Architecture</a>
+										<a href="#" class="research-tab" onclick="showResearch(this, 'row1-panels', 'rta'); return false;">Ray Tracing Accelerator</a>
+										<a href="#" class="research-tab" onclick="showResearch(this, 'row1-panels', 'uvm'); return false;">Unified Virtual Memory</a>
+									</div>
+									<div class="research-panel-wrap" id="row1-panels">
+										<div class="research-panel" data-panel="gpu" style="display:flex;">
+											<div class="research-media"><img src="Lab/images/main/gpuArchitecture.png" /></div>
+											<div class="research-body">
+												<h3>Graphics Processing Unit (GPU) Micro-Architecture</h3>
+												<p>GPUs were first developed to accelerate graphics applications. Games are one major application that relies on the performance of GPUs. When the game application is launched, GPUs start to create 60~120 images every second using a massive number of GPU processors. This massive number of processors recently has begun to be used for general purpose applications such as machine learning algorithms, simulations, and many other applications instead of graphics applications. This paradigm is known as General-Purpose Computing on Graphics Processing Unit (GPGPU).</p>
+												<p>Our goal is to maximize the performance of GPUs when general-purpose applications such as machine learning algorithms, simulations, and many more are executed on the GPU hardware. We first identify the bottleneck points on the GPU architecture and propose a new modified architecture that can remove the bottleneck points. To verify our ideas, C/C++/Python based cycle-accurate simulations are used.</p>
+											</div>
+										</div>
+										<div class="research-panel" data-panel="rta" style="display:none;">
+											<div class="research-media"><img src="Lab/images/main/rta.png" /></div>
+											<div class="research-body">
+												<h3>Ray Tracing Accelerator (RTA)</h3>
+												<p>Ray tracing is a rendering technique that creates photorealistic images by simulating the physics of light rays as they travel and interact with objects in a 3D scene. It is widely used in high-end applications such as movies and Computer-Aided Design (CAD) and has recently gained popularity in real-time applications like video games. To enable real-time ray tracing, modern Graphics Processing Units (GPUs) feature specialized Ray Tracing Accelerators (RTAs) that efficiently handle tasks such as traversal and intersection.</p>
+												<p>Our goal is to enhance GPU performance for ray tracing applications. We begin by analyzing the distinct characteristics of ray tracing workloads and identifying bottlenecks in GPU architecture, especially within RTAs. Based on the analysis, we propose an optimized architecture to improve ray tracing performance. To validate our approach, we use C/C++/CUDA based cycle-level simulators that support Vulkan, an industry-standard graphics API with ray tracing capabilities.</p>
+											</div>
+										</div>
+										<div class="research-panel" data-panel="uvm" style="display:none;">
+											<div class="research-media"><img src="Lab/images/main/uvm.svg" /></div>
+											<div class="research-body">
+												<h3>Unified Virtual Memory (UVM)</h3>
+												<p>Unified Virtual Memory (UVM) allows the CPU and GPU to share a single virtual address space, automatically migrating data on demand instead of requiring explicit memory copies. This simplifies programming for large-scale workloads whose memory footprint exceeds GPU capacity, such as large language model training and inference.</p>
+												<p>Details about our specific research goals in this area will be added soon.</p>
+											</div>
 										</div>
 									</div>
+								</div>
 
-									<div class="member-card research-card">
-										<img src="Lab/images/main/rta.png" />
-										<h3>Ray Tracing Accelerator (RTA)</h3>
-										<a href="#" class="button" onclick="toggleDetails('details-research-rta', this); return false;">View Details</a>
-										<div class="research-details" id="details-research-rta">
-											<p>Ray tracing is a rendering technique that creates photorealistic images by simulating the physics of light rays as they travel and interact with objects in a 3D scene. It is widely used in high-end applications such as movies and Computer-Aided Design (CAD) and has recently gained popularity in real-time applications like video games. To enable real-time ray tracing, modern Graphics Processing Units (GPUs) feature specialized Ray Tracing Accelerators (RTAs) that efficiently handle tasks such as traversal and intersection.</p>
-											<p>Our goal is to enhance GPU performance for ray tracing applications. We begin by analyzing the distinct characteristics of ray tracing workloads and identifying bottlenecks in GPU architecture, especially within RTAs. Based on the analysis, we propose an optimized architecture to improve ray tracing performance. To validate our approach, we use C/C++/CUDA based cycle-level simulators that support Vulkan, an industry-standard graphics API with ray tracing capabilities.</p>
+								<div class="research-row">
+									<div class="research-tabs">
+										<a href="#" class="research-tab active" onclick="showResearch(this, 'row2-panels', 'ml'); return false;">Machine Learning Accelerator</a>
+										<a href="#" class="research-tab" onclick="showResearch(this, 'row2-panels', 'parallel'); return false;">Parallel Programming</a>
+										<a href="#" class="research-tab" onclick="showResearch(this, 'row2-panels', 'arch'); return false;">Computer Architecture</a>
+									</div>
+									<div class="research-panel-wrap" id="row2-panels">
+										<div class="research-panel" data-panel="ml" style="display:flex;">
+											<div class="research-media"><img src="Lab/images/main/systolicArray.png" /></div>
+											<div class="research-body">
+												<h3>Machine Learning Accelerator</h3>
+												<p>Machine learning algorithms have been applied in various areas such as image recognition, voice speech recognition, translation, text classification, and more. These algorithms are traditionally operated on Central Processing Units (CPUs) and Graphics Processing Units (GPUs). Especially, GPUs are widely used for the execution of applications. However, CPUs and GPUs are not designed for machine learning algorithms, there have been several issues in terms of performance and power consumption. To resolve the problems, various machine learning accelerator designs have been proposed by researchers. One famous design is using a systolic array that has many small processing units which are only designed to perform Multiply-And-Accumulate (MAC) operations. These small processing units are connected only to their neighbor so that the data can be transferred from one processing unit to the other processing unit.</p>
+												<p>Our goal is to analyze the newly proposed machine learning accelerators. By doing this, we can find the performance bottleneck points or can detect the unnecessary processing execution cycles. Based on our analysis, we can propose advanced hardware accelerators for machine learning applications.</p>
+											</div>
+										</div>
+										<div class="research-panel" data-panel="parallel" style="display:none;">
+											<div class="research-media"><img src="Lab/images/main/vectorExecution.png" /></div>
+											<div class="research-body">
+												<h3>Parallel Programming</h3>
+												<p>Single Instruction Multiple Data (SIMD) and Single Instruction Multiple Threads (SIMT) are execution models used in parallel computing. In these models, multiple threads (data) are executed in lock-step. These models are widely used for supercomputers because of their efficiency.</p>
+												<p>Intel and AMD CPUs have vector processors (SIMD) that can be used by Advanced Vector Extension (AVX) instructions. In the case of NVIDIA GPUs, Compute Unified Device Architecture (CUDA) allows software developers to use massively parallel SIMT processors for general purpose applications. The developers must have a decent knowledge of the vector processing units in order to create efficient applications. Our goal is to provide proper knowledge to software developers so that the developers can create efficient programs.</p>
+											</div>
+										</div>
+										<div class="research-panel" data-panel="arch" style="display:none;">
+											<div class="research-media"><img src="Lab/images/main/compArchitecture.svg" /></div>
+											<div class="research-body">
+												<h3>Computer Architecture</h3>
+												<p>Computer Architecture is a set of rules which state how hardware is connected together in order to compute complicated applications. Researchers have proposed many different techniques such as branch predictions, speculative execution, out-of-order execution, memory pre-fetching, and more. We use C/C++/Python based cycle-accurate simulations to study the previously proposed techniques.</p>
+											</div>
 										</div>
 									</div>
-
-									<div class="member-card research-card">
-										<img src="Lab/images/main/systolicArray.png" />
-										<h3>Machine Learning Accelerator</h3>
-										<a href="#" class="button" onclick="toggleDetails('details-research-ml', this); return false;">View Details</a>
-										<div class="research-details" id="details-research-ml">
-											<p>Machine learning algorithms have been applied in various areas such as image recognition, voice speech recognition, translation, text classification, and more. These algorithms are traditionally operated on Central Processing Units (CPUs) and Graphics Processing Units (GPUs). Especially, GPUs are widely used for the execution of applications. However, CPUs and GPUs are not designed for machine learning algorithms, there have been several issues in terms of performance and power consumption. To resolve the problems, various machine learning accelerator designs have been proposed by researchers. One famous design is using a systolic array that has many small processing units which are only designed to perform Multiply-And-Accumulate (MAC) operations. These small processing units are connected only to their neighbor so that the data can be transferred from one processing unit to the other processing unit.</p>
-											<p>Our goal is to analyze the newly proposed machine learning accelerators. By doing this, we can find the performance bottleneck points or can detect the unnecessary processing execution cycles. Based on our analysis, we can propose advanced hardware accelerators for machine learning applications.</p>
-										</div>
-									</div>
-
-									<div class="member-card research-card">
-										<img src="Lab/images/main/vectorExecution.png" />
-										<h3>Parallel Programming</h3>
-										<a href="#" class="button" onclick="toggleDetails('details-research-parallel', this); return false;">View Details</a>
-										<div class="research-details" id="details-research-parallel">
-											<p>Single Instruction Multiple Data (SIMD) and Single Instruction Multiple Threads (SIMT) are execution models used in parallel computing. In these models, multiple threads (data) are executed in lock-step. These models are widely used for supercomputers because of their efficiency.</p>
-											<p>Intel and AMD CPUs have vector processors (SIMD) that can be used by Advanced Vector Extension (AVX) instructions. In the case of NVIDIA GPUs, Compute Unified Device Architecture (CUDA) allows software developers to use massively parallel SIMT processors for general purpose applications. The developers must have a decent knowledge of the vector processing units in order to create efficient applications. Our goal is to provide proper knowledge to software developers so that the developers can create efficient programs.</p>
-										</div>
-									</div>
-
-									<div class="member-card research-card">
-										<h3>Computer Architecture</h3>
-										<a href="#" class="button" onclick="toggleDetails('details-research-arch', this); return false;">View Details</a>
-										<div class="research-details" id="details-research-arch">
-											<p>Computer Architecture is a set of rules which state how hardware is connected together in order to compute complicated applications. Researchers have proposed many different techniques such as branch predictions, speculative execution, out-of-order execution, memory pre-fetching, and more. We use C/C++/Python based cycle-accurate simulations to study the previously proposed techniques.</p>
-										</div>
-									</div>
-
-									<div class="member-card research-card">
-										<h3>Unified Virtual Memory (UVM)</h3>
-										<a href="#" class="button" onclick="toggleDetails('details-research-uvm', this); return false;">View Details</a>
-										<div class="research-details" id="details-research-uvm">
-											<p>Unified Virtual Memory (UVM) allows the CPU and GPU to share a single virtual address space, automatically migrating data on demand instead of requiring explicit memory copies. This simplifies programming for large-scale workloads whose memory footprint exceeds GPU capacity, such as large language model training and inference.</p>
-											<p>Details about our specific research goals in this area will be added soon.</p>
-										</div>
-									</div>
-
 								</div>
 								<hr>
 
 								<section>
 									<h2>IP-CAL News!</h2>
-									<div class="member-grid" id="news-grid">
-									<div class="member-card news-card">
-										<h4>[2026 July] Welcome</h4>
-										<p>Thu Trang Tran has joined our group as an undergraduate intern.</p>
-									</div>
+									<div class="news-columns">
 
-									<div class="member-card news-card">
-										<h4>[2026 April] Congratulation</h4>
-										<p>The paper titled “Restructuring the Implicit GEMM Workflow for Complex-Valued Convolution” (Jaeeun, Eunbi, Jane) has been accepted to IEEE Access.</p>
-									</div>
+										<div class="news-column">
+											<h3>Papers &amp; Awards</h3>
+											<ul class="news-list">
+												<li>
+													<span class="news-date">[2026 April]</span>
+											<span class="news-desc">The paper titled “Restructuring the Implicit GEMM Workflow for Complex-Valued Convolution” (Jaeeun, Eunbi, Jane) has been accepted to IEEE Access.</span>
+												</li>
+												<li>
+													<span class="news-date">[2025 October]</span>
+											<span class="news-desc">Jane has been selected as the best performer in the AI Convergence Project.</span>
+												</li>
+												<li>
+													<span class="news-date">[2025 August]</span>
+											<span class="news-desc">The papers titled “Understanding Distributed Training of Large Language Models with Unified Virtual Memory” (Jane, Eunbi) and “HALO: Hybrid Systolic Arrays via Logical Partitioning for Acceleration of Complex-Valued Neural Networks” (Ji Yeong, Eunbi, SungHee, Jane) have both been accepted to IISWC 2025.</span>
+												</li>
+												<li>
+													<span class="news-date">[2025 April]</span>
+											<span class="news-desc">Jiyeong has been selected as the best performer in the AI Convergence Project.</span>
+												</li>
+												<li>
+													<span class="news-date">[2025 March]</span>
+											<span class="news-desc">The paper titled "Hierarchical Traversal Stack Design Using Shared Memory for GPU Ray Tracing" by Eunsoo and Eunbi has been accepted to ISPASS 2025.</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2025 February]</span>
+											<span class="news-desc">"Beyond VABlock: Improving Transformer Workloads through Aggressive Prefetching" by Jane and Ikyoung has been accepted in the Journal of Systems Architecture (JSA).</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2024 November]</span>
+											<span class="news-desc">The paper titled "Warped-Compaction: Maximizing GPU Register File Bandwidth Utilization via Operand Compaction" by Eunbi has been accepted to HPCA 2025.</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2024 February]</span>
+											<span class="news-desc">"Conflict-Aware Compiler for Hierarchical Register File on GPUs" by Eunbi and Eun Seong has been accepted in the Journal of Systems Architecture (JSA).</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2023 August]</span>
+											<span class="news-desc">Eunbi's first co-authored paper, "Triple-A," has been accepted in IEEE Embedded System Letters (ESL).</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2023 July]</span>
+											<span class="news-desc">Eun Seong and Eunbi are honored with the Paper Award (우수논문상) at the 2023 Summer Annual Conference of IEIE.</span>
+												</li>
+											</ul>
+											<a href="#" class="button news-toggle" data-column="papers" onclick="toggleNews(this); return false;">Show All</a>
+										</div>
 
-									<div class="member-card news-card">
-										<h4>[2026 February] Welcome</h4>
-										<p>Youngseo Hwang has joined our group as an undergraduate intern.</p>
-									</div>
+										<div class="news-column">
+											<h3>Welcome</h3>
+											<ul class="news-list">
+												<li>
+													<span class="news-date">[2026 July]</span>
+											<span class="news-desc">Thu Trang Tran has joined our group as an undergraduate intern.</span>
+												</li>
+												<li>
+													<span class="news-date">[2026 February]</span>
+											<span class="news-desc">Youngseo Hwang has joined our group as an undergraduate intern.</span>
+												</li>
+												<li>
+													<span class="news-date">[2026 January]</span>
+											<span class="news-desc">Minkyoung Lee and Siyeon Kang have joined our group as undergraduate interns.</span>
+												</li>
+												<li>
+													<span class="news-date">[2025 May]</span>
+											<span class="news-desc">SeJin Park has joined our group as undergraduate interns.</span>
+												</li>
+												<li>
+													<span class="news-date">[2025 January]</span>
+											<span class="news-desc">Ga In Jeong and SungHee Yum have joined our group as undergraduate interns.</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2024 September]</span>
+											<span class="news-desc">Jane Rhee, Eunbi Jeong, Seonwoo Kim have started their master's degree.</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2024 March]</span>
+											<span class="news-desc">Eun Soo Jung and Jiyeong Yi have started their master's degree.</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2024 January]</span>
+											<span class="news-desc">Jiyeong Yi has joined our group as undergraduate interns.</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2023 July]</span>
+											<span class="news-desc">Ikyoung Choi has joined our group as undergraduate interns.</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2023 April]</span>
+											<span class="news-desc">Seonwoo Kim has joined our group as undergraduate interns.</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2023 January]</span>
+											<span class="news-desc">Jae Eun Hwang and Eunbi Jeong have joined our group as undergraduate interns.</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2022 January]</span>
+											<span class="news-desc">Eun Soo Jung, Yeonhee Jung, and Eun Seong Park have joined our group as undergraduate interns.</span>
+												</li>
+												<li class="news-extra">
+													<span class="news-date">[2021 July]</span>
+											<span class="news-desc">Minyoung Lee, Jane Rhee, and Myeong Ji Kim have joined our group as undergraduate interns.</span>
+												</li>
+											</ul>
+											<a href="#" class="button news-toggle" data-column="welcome" onclick="toggleNews(this); return false;">Show All</a>
+										</div>
 
-									<div class="member-card news-card">
-										<h4>[2026 January] Welcome</h4>
-										<p>Minkyoung Lee and Siyeon Kang have joined our group as undergraduate interns.</p>
 									</div>
-
-									<div class="member-card news-card">
-										<h4>[2025 October] Congratulation</h4>
-										<p>Jane has been selected as the best performer in the AI Convergence Project.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2025 August] Congratulation</h4>
-										<p>The papers titled “Understanding Distributed Training of Large Language Models with Unified Virtual Memory” (Jane, Eunbi) and “HALO: Hybrid Systolic Arrays via Logical Partitioning for Acceleration of Complex-Valued Neural Networks” (Ji Yeong, Eunbi, SungHee, Jane) have both been accepted to IISWC 2025.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2025 May] Welcome</h4>
-										<p>SeJin Park has joined our group as undergraduate interns.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2025 April] Congratulation</h4>
-										<p>Jiyeong has been selected as the best performer in the AI Convergence Project.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2025 March] Congratulation</h4>
-										<p>The paper titled "Hierarchical Traversal Stack Design Using Shared Memory for GPU Ray Tracing" by Eunsoo and Eunbi has been accepted to ISPASS 2025.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2025 February] Congratulation</h4>
-										<p>"Beyond VABlock: Improving Transformer Workloads through Aggressive Prefetching" by Jane and Ikyoung has been accepted in the Journal of Systems Architecture (JSA).</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2025 January] Welcome</h4>
-										<p>Ga In Jeong and SungHee Yum have joined our group as undergraduate interns.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2024 November] Congratulation</h4>
-										<p>The paper titled "Warped-Compaction: Maximizing GPU Register File Bandwidth Utilization via Operand Compaction" by Eunbi has been accepted to HPCA 2025.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2024 September] Welcome</h4>
-										<p>Jane Rhee, Eunbi Jeong, Seonwoo Kim have started their master's degree.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2024 March] Welcome</h4>
-										<p>Eun Soo Jung and Jiyeong Yi have started their master's degree.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2024 February] Congratulation</h4>
-										<p>"Conflict-Aware Compiler for Hierarchical Register File on GPUs" by Eunbi and Eun Seong has been accepted in the Journal of Systems Architecture (JSA).</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2024 January] Welcome</h4>
-										<p>Jiyeong Yi has joined our group as undergraduate interns.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2023 August] Congratulation</h4>
-										<p>Eunbi's first co-authored paper, "Triple-A," has been accepted in IEEE Embedded System Letters (ESL).</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2023 July] Congratulation</h4>
-										<p>Eun Seong and Eunbi are honored with the Paper Award (우수논문상) at the 2023 Summer Annual Conference of IEIE.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2023 July] Welcome</h4>
-										<p>Ikyoung Choi has joined our group as undergraduate interns.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2023 April] Welcome</h4>
-										<p>Seonwoo Kim has joined our group as undergraduate interns.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2023 January] Welcome</h4>
-										<p>Jae Eun Hwang and Eunbi Jeong have joined our group as undergraduate interns.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2022 January] Welcome</h4>
-										<p>Eun Soo Jung, Yeonhee Jung, and Eun Seong Park have joined our group as undergraduate interns.</p>
-									</div>
-
-									<div class="member-card news-card news-extra">
-										<h4>[2021 July] Welcome</h4>
-										<p>Minyoung Lee, Jane Rhee, and Myeong Ji Kim have joined our group as undergraduate interns.</p>
-									</div>
-
-								</div>
-								<a href="#" id="news-toggle" onclick="toggleNews(); return false;" class="button" style="margin-top:0.5em;">Show All</a>
 								</section>
 							</div>
 						</div>
@@ -267,12 +270,11 @@
 			<script src="Lab/assets/js/recruit-status.js"></script>
 
 		<script>
-		function toggleNews() {
-			var extras = document.querySelectorAll('#news-grid .news-extra');
-			var btn = document.getElementById('news-toggle');
+		function toggleNews(btn) {
+			var extras = btn.closest('.news-column').querySelectorAll('.news-extra');
 			var showing = btn.textContent === 'Show Less';
-			extras.forEach(function(card) {
-				card.style.display = showing ? 'none' : 'block';
+			extras.forEach(function(item) {
+				item.style.display = showing ? 'none' : 'flex';
 			});
 			if (showing) {
 				btn.textContent = 'Show All';
@@ -283,17 +285,17 @@
 			}
 		}
 
-		function toggleDetails(id, btn) {
-			var el = document.getElementById(id);
-			if (el.style.display === 'block') {
-				el.style.display = 'none';
-				btn.textContent = 'View Details';
-				btn.classList.remove('button-hide');
-			} else {
-				el.style.display = 'block';
-				btn.textContent = 'Hide';
-				btn.classList.add('button-hide');
-			}
+		function showResearch(tabEl, wrapId, panelKey) {
+			var wrap = document.getElementById(wrapId);
+			var panels = wrap.querySelectorAll('.research-panel');
+			panels.forEach(function(panel) {
+				panel.style.display = (panel.getAttribute('data-panel') === panelKey) ? 'flex' : 'none';
+			});
+			var tabs = tabEl.parentElement.querySelectorAll('.research-tab');
+			tabs.forEach(function(tab) {
+				tab.classList.remove('active');
+			});
+			tabEl.classList.add('active');
 		}
 		</script>
 

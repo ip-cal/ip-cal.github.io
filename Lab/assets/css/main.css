@@ -60,7 +60,7 @@ td{
 
 li.margin{
 				margin-bottom:10px;
-				color:#5a6b5f;
+				color:#445047;
 }
 
 sup {
@@ -81,7 +81,7 @@ span.title{
 }
 span.confname{
 				font-style:italic;
-				color:#5a6b5f;
+				color:#445047;
 }
 
 ul {
@@ -142,7 +142,7 @@ input, select, textarea {
 		font-family: sans-serif;
 		background-color: #e3e9dc;
 		font-family: 'Ubuntu Condensed', sans-serif;
-		color: #878e83;
+		color: #5c6259;
 		letter-spacing: -1px;
 	}
 
@@ -1580,7 +1580,7 @@ input, select, textarea {
 			}
 
 			.member-card .member-role {
-				color: #8a8a7e;
+				color: #63635b;
 				font-size: 0.92em;
 				margin: 0 0 12px 0;
 			}
@@ -1646,7 +1646,7 @@ input, select, textarea {
 		}
 
 			.member-pub-caption {
-				color: #8a8a7e;
+				color: #63635b;
 				font-size: 0.85em;
 				text-transform: uppercase;
 				letter-spacing: 0.5px;
@@ -1679,12 +1679,12 @@ input, select, textarea {
 				.member-pub-venue {
 					display: block;
 					font-style: italic;
-					color: #5a6b5f;
+					color: #445047;
 					font-size: 0.92em;
 				}
 
 			.member-pub-empty {
-				color: #8a8a7e;
+				color: #63635b;
 				font-size: 0.9em;
 				font-style: italic;
 			}
@@ -1721,94 +1721,185 @@ input, select, textarea {
 			}
 		}
 
-		.research-card {
-			width: calc(33.333% - 16px);
+		.research-row {
+			margin-bottom: 24px;
 		}
 
-			.research-card img {
-				aspect-ratio: 4 / 3;
-				object-fit: contain;
-				background: #fff;
+			.research-row:last-child {
+				margin-bottom: 0;
 			}
 
-			.research-card h3 {
+		.research-tabs {
+			display: flex;
+			gap: 10px;
+			margin-bottom: 14px;
+		}
+
+			.research-tab {
+				flex: 1;
+				text-align: center;
+				padding: 12px 14px;
+				background: #f7f7f2;
+				border: 1px solid #e0e0d8;
+				border-radius: 6px;
+				text-decoration: none;
+				color: #00462a;
+				font-weight: bold;
+				font-size: 0.95em;
+			}
+
+			.research-tab:hover {
+				background: #eceee6;
+			}
+
+			.research-tab.active {
+				background: #00462a;
+				color: #fff;
+				border-color: #00462a;
+			}
+
+		.research-panel-wrap {
+			background: #f7f7f2;
+			border: 1px solid #e0e0d8;
+			border-radius: 8px;
+			padding: 16px;
+			min-height: 280px;
+			box-sizing: border-box;
+			display: flex;
+		}
+
+			.research-panel {
+				display: flex;
+				gap: 24px;
+				align-items: flex-start;
+				flex: 1;
+			}
+
+			.research-panel .research-media {
+				flex: 0 0 280px;
+				width: 280px;
+				align-self: center;
+			}
+
+				.research-panel .research-media img {
+					width: 100%;
+					height: 220px;
+					object-fit: contain;
+					background: #fff;
+					border: 1px solid #e0e0d8;
+					border-radius: 6px;
+					display: block;
+				}
+
+			.research-panel .research-body {
+				flex: 1;
+				min-width: 0;
+			}
+
+			.research-panel h3 {
+				margin-top: 0;
 				font-size: 1.1em;
 				color: #00462a;
 			}
 
-		.research-details {
-			display: none;
-			text-align: left;
-			margin-top: 12px;
-			font-size: 0.92em;
-			line-height: 1.6em;
-			border-top: 1px solid #ddd;
-			padding-top: 10px;
-		}
-
-			.research-details p {
+			.research-panel p {
 				margin-bottom: 0.8em;
+				font-size: 0.95em;
+				line-height: 1.7em;
 			}
 
-			.research-details p:last-child {
+			.research-panel p:last-child {
 				margin-bottom: 0;
 			}
 
-		@media screen and (max-width: 980px) {
-			.research-card {
-				width: calc(50% - 12px);
-			}
-		}
-
 		@media screen and (max-width: 736px) {
-			.research-card {
+			.research-tabs {
+				flex-direction: column;
+			}
+
+			.research-panel-wrap {
+				min-height: 0;
+			}
+
+			.research-panel {
+				flex-direction: column;
+			}
+
+			.research-panel .research-media {
+				flex-basis: auto;
 				width: 100%;
 			}
+
+				.research-panel .research-media img {
+					height: auto;
+					max-height: 220px;
+				}
 		}
 
-		.news-card {
-			width: calc(20% - 20px);
-			text-align: left;
+		.news-columns {
+			display: flex;
+			gap: 40px;
 		}
 
-			.news-card h4 {
-				margin: 0 0 6px 0;
-				font-size: 1em;
+			.news-column {
+				flex: 1;
+				min-width: 0;
+			}
+
+			.news-column h3 {
+				font-size: 1.15em;
+				color: #00462a;
+				margin: 0 0 0.5em 0;
+				padding-bottom: 0.5em;
+				border-bottom: 1px solid #ddd;
+			}
+
+		.news-list li {
+			display: flex;
+			gap: 12px;
+			padding: 0.25em 0;
+			border-top: 1px solid #ddd;
+			line-height: 1.5em;
+		}
+
+			.news-list li:first-child {
+				border-top: none;
+				padding-top: 0;
+			}
+
+			.news-list li p {
+				margin: 0;
+			}
+
+		.news-list {
+			margin-bottom: 0;
+		}
+
+			.news-list .news-date {
+				flex: 0 0 108px;
+				width: 108px;
+				text-align: center;
+				font-weight: bold;
 				color: #00462a;
 			}
 
-			.news-card p {
-				margin: 0;
-				font-size: 0.9em;
-				line-height: 1.5em;
-				color: #5a6b5f;
+			.news-list .news-desc {
+				flex: 1;
+				min-width: 0;
 			}
 
-			.news-card.news-extra {
+			.news-list li.news-extra {
 				display: none;
 			}
 
-		@media screen and (max-width: 1280px) {
-			.news-card {
-				width: calc(25% - 18px);
-			}
-		}
-
-		@media screen and (max-width: 980px) {
-			.news-card {
-				width: calc(33.333% - 16px);
-			}
+		.button.news-toggle {
+			margin-top: 0.6em;
 		}
 
 		@media screen and (max-width: 736px) {
-			.news-card {
-				width: calc(50% - 12px);
-			}
-		}
-
-		@media screen and (max-width: 480px) {
-			.news-card {
-				width: 100%;
+			.news-columns {
+				flex-direction: column;
+				gap: 0;
 			}
 		}
 
@@ -1841,7 +1932,7 @@ input, select, textarea {
 				}
 
 		.intern-caption {
-			color: #8a8a7e;
+			color: #63635b;
 			font-size: 0.85em;
 			margin: 0 0 8px 0;
 			text-transform: uppercase;
@@ -2126,14 +2217,14 @@ input, select, textarea {
 
 	#copyright {
 		text-align: center;
-		color: #A6A88F;
+		color: #7d7e6b;
 		border-top: solid 1px #ced0b7;
 		padding: 1em 0 0 0;
 		margin: 0em 0 0 0;
 	}
 
 		#copyright a {
-			color: #A6A88F;
+			color: #7d7e6b;
 		}
 
 /* Large */
@@ -2499,14 +2590,14 @@ input, select, textarea {
 
 			#copyright {
 				text-align: center;
-				color: #A6A88F;
+				color: #7d7e6b;
 				padding: 5px 0 0 0;
 				font-size: 0.8em;
 				line-height: 1.5em;
 			}
 
 				#copyright a {
-					color: #A6A88F;
+					color: #7d7e6b;
 				}
 
 	}
