@@ -12,31 +12,77 @@
 	var LIMIT = 10;
 	var SECTIONS = ['#conf-list', '#journal-list', '#patent-list'];
 	var expandState = {};
+	var searchQuery = '';
+
+	function initSearchIndex() {
+		SECTIONS.forEach(function(listSel) {
+			$(listSel).children('li.margin').each(function() {
+				$(this).data('orig-html', $(this).html());
+				$(this).data('orig-text', $(this).text().toLowerCase());
+			});
+		});
+	}
+
+	function highlightMatches(el, query) {
+		var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+		var textNodes = [];
+		while (walker.nextNode()) { textNodes.push(walker.currentNode); }
+		textNodes.forEach(function(node) {
+			var text = node.nodeValue;
+			var lowerText = text.toLowerCase();
+			var idx = lowerText.indexOf(query);
+			if (idx === -1) return;
+			var frag = document.createDocumentFragment();
+			var lastIndex = 0;
+			while (idx !== -1) {
+				frag.appendChild(document.createTextNode(text.slice(lastIndex, idx)));
+				var mark = document.createElement('mark');
+				mark.className = 'search-hl';
+				mark.textContent = text.slice(idx, idx + query.length);
+				frag.appendChild(mark);
+				lastIndex = idx + query.length;
+				idx = lowerText.indexOf(query, lastIndex);
+			}
+			frag.appendChild(document.createTextNode(text.slice(lastIndex)));
+			node.parentNode.replaceChild(frag, node);
+		});
+	}
+
 	function updateDisplay() {
 		$('#filter-all-btn').toggleClass('toggle-btn-inactive', isSelectiveMode);
 		$('#filter-selected-btn').toggleClass('toggle-btn-inactive', !isSelectiveMode);
+
+		var searching = searchQuery.length > 0;
+		var totalVisible = 0;
 
 		SECTIONS.forEach(function(listSel) {
 			var list = $(listSel);
 			var items = list.children('li.margin');
 			var eligibleCount = 0;
 			items.each(function() {
-				if (!isSelectiveMode || $(this).hasClass('selective')) eligibleCount++;
+				var isEligible = !isSelectiveMode || $(this).hasClass('selective');
+				var matchesSearch = !searching || $(this).data('orig-text').indexOf(searchQuery) !== -1;
+				if (isEligible && matchesSearch) eligibleCount++;
 			});
-			var expanded = !!expandState[listSel];
+			var expanded = searching || !!expandState[listSel];
 			var visibleCount = 0;
 			items.each(function() {
-				var isEligible = !isSelectiveMode || $(this).hasClass('selective');
-				if (!isEligible) { $(this).hide(); return; }
+				var $item = $(this);
+				var isEligible = !isSelectiveMode || $item.hasClass('selective');
+				var matchesSearch = !searching || $item.data('orig-text').indexOf(searchQuery) !== -1;
+				$item.html($item.data('orig-html'));
+				if (!isEligible || !matchesSearch) { $item.hide(); return; }
+				if (searching) { highlightMatches(this, searchQuery); }
 				visibleCount++;
-				if (!expanded && visibleCount > LIMIT) { $(this).hide(); }
-				else { $(this).show(); }
+				if (!expanded && visibleCount > LIMIT) { $item.hide(); }
+				else { $item.show(); }
 			});
 			var hasVisible = list.children('li:visible').length > 0;
+			totalVisible += list.children('li:visible').length;
 			var expandBtn = $(list.data('expand-btn'));
 			list.prevAll('h2').first().toggle(hasVisible);
 
-			if (hasVisible && eligibleCount > LIMIT) {
+			if (!searching && hasVisible && eligibleCount > LIMIT) {
 				expandBtn.css('display', 'inline-block');
 				if (expanded) { expandBtn.text('Show Less').addClass('button-hide'); }
 				else { expandBtn.text('Show All').removeClass('button-hide'); }
@@ -44,6 +90,8 @@
 				expandBtn.hide();
 			}
 		});
+
+		$('#pub-search-empty').toggle(searching && totalVisible === 0);
 
 		if (isSelectiveMode) { renumberShown(); }
 		else { $('#allDiv li').removeAttr('value'); }
@@ -67,6 +115,10 @@
 	}
 	function toggleExpand(listSel) {
 		expandState[listSel] = !expandState[listSel];
+		updateDisplay();
+	}
+	function setSearchQuery(value) {
+		searchQuery = value.trim().toLowerCase();
 		updateDisplay();
 	}
 	</script>
@@ -102,6 +154,10 @@
 					<div class="container">
 						<div class="row main-row">
 							<div class="col-12" id="allDiv">
+								<div class="pub-search-wrap">
+									<input type="text" id="pub-search" placeholder="Search by title, author, or venue..." oninput="setSearchQuery(this.value)" />
+								</div>
+								<p id="pub-search-empty" style="display:none;">No papers match your search.</p>
 								<div class="toggle-group" id="filter-toggle">
 									<a href="#" id="filter-all-btn" class="button" onclick="setFilterMode(false); return false;">All</a><a href="#" id="filter-selected-btn" class="button" onclick="setFilterMode(true); return false;">Selected</a>
 								</div>
@@ -483,6 +539,7 @@ Best Paper Nominee) [<a href="https://ieeexplore.ieee.org/document/11096382" tar
 			<script src="assets/js/main.js"></script>
 			<script src="assets/js/recruit-status.js"></script>
 			<script>
+			initSearchIndex();
 			updateDisplay();
 			</script>
 

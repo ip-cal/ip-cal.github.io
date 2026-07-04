@@ -2032,6 +2032,41 @@ input, select, textarea {
 			opacity: 0.85;
 		}
 
+		/* Publication search */
+		.pub-search-wrap {
+			margin-bottom: 16px;
+		}
+
+			#pub-search {
+				width: 100%;
+				max-width: 420px;
+				padding: 10px 14px;
+				font-size: 1em;
+				font-family: inherit;
+				color: #5c6259;
+				background: #fff;
+				border: 1px solid #ccc;
+				border-radius: 8px;
+				box-sizing: border-box;
+			}
+
+			#pub-search:focus {
+				outline: none;
+				border-color: #00462a;
+			}
+
+		#pub-search-empty {
+			color: #63635b;
+			font-style: italic;
+		}
+
+		mark.search-hl {
+			background: #ffe066;
+			color: inherit;
+			padding: 0 1px;
+			border-radius: 2px;
+		}
+
 		.button:hover {
 
 			background-image: -moz-linear-gradient(top, #1b9fbe, #118eb1);
