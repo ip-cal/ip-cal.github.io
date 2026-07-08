@@ -1,6 +1,18 @@
 // Auto-generated from publication.html. Regenerate this file whenever papers are added/edited/removed there.
 var PUBLICATION_ENTRIES = [
 	{
+		"title": "Make Every Batch Count: Fault Entry Merging for Efficient Batching in Unified Virtual Memory",
+		"venue": "The 59th IEEE/ACM International Symposium on Microarchitecture (MICRO 2026), Athens, Greece, Oct. 31 - Nov. 4, 2026",
+		"authorsText": "Jane Rhee, SeJin Park, Gunjae Koo, Yunho Oh, and Myung Kuk Yoon",
+		"sortKey": 202610
+	},
+	{
+		"title": "Complex Tensor Core: Software-Hardware Co-Design for Accelerating Complex-Valued Neural Networks on GPUs",
+		"venue": "The 59th IEEE/ACM International Symposium on Microarchitecture (MICRO 2026), Athens, Greece, Oct. 31 - Nov. 4, 2026",
+		"authorsText": "Eunbi Jeong, Jennifer N. Choi, Ji Yeong Yi, Jane Rhee, Gunjae Koo, Yunho Oh*, and Myung Kuk Yoon*",
+		"sortKey": 202610
+	},
+	{
 		"title": "Accelerating Vision Transformer Inference via Non-GEMM Kernel Fusion on Edge GPUs",
 		"venue": "2026 Summer Annual Conference of IEIE, Jeju, Korea, June 23 - 26, 2026",
 		"authorsText": "Sejin Park, Yoonhyung Park, Sunhwa Kang, and Myung Kuk Yoon",
