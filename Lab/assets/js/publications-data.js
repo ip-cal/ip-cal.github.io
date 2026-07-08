@@ -3,7 +3,7 @@ var PUBLICATION_ENTRIES = [
 	{
 		"title": "Make Every Batch Count: Fault Entry Merging for Efficient Batching in Unified Virtual Memory",
 		"venue": "The 59th IEEE/ACM International Symposium on Microarchitecture (MICRO 2026), Athens, Greece, Oct. 31 - Nov. 4, 2026",
-		"authorsText": "Jane Rhee, SeJin Park, Gunjae Koo, Yunho Oh, and Myung Kuk Yoon",
+		"authorsText": "Jane Rhee†, SeJin Park†, Gunjae Koo, Yunho Oh, and Myung Kuk Yoon",
 		"sortKey": 202610
 	},
 	{
