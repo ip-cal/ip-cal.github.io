@@ -77,6 +77,19 @@
 		padding-bottom: 0.25em;
 	}
 
+	/* Sub-heading inside a section (e.g. AI Use Policy's "Use of Generative
+	   AI in Assignments"). Deliberately smaller and un-bordered so it reads
+	   as one tier below h2, not a near-duplicate of it. */
+	.syllabus-page section h3 {
+		font-size: 0.95em;
+		color: #445047;
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		margin-top: 1.2em;
+		margin-bottom: 0.4em;
+	}
+
 	.syllabus-page section hr {
 		display: none;
 	}
@@ -122,14 +135,48 @@
 
 	.syllabus-page table.course-info td {
 		vertical-align: middle;
+		text-align: center;
 	}
 
 	.syllabus-page table.course-info td.center {
 		text-align: center;
 	}
 
+	/* Intro sentence right before a list (e.g. "...introduced to:") sits
+	   too far from the list below it otherwise, since paragraphs carry
+	   the site-wide 1.25em bottom margin meant for body text spacing. */
+	.syllabus-page section p:has(+ ol),
+	.syllabus-page section p:has(+ ul) {
+		margin-bottom: 0.3em;
+	}
+
+	/* Lists get their own consistent bottom margin, replacing the ad-hoc
+	   <br> spacers previously used between a list and whatever follows it.
+	   A slightly deeper indent than the site default reads more clearly as
+	   "nested under the sentence above" than flush with the margin. */
+	.syllabus-page section ol {
+		margin-bottom: 0.8em;
+		margin-left: 1.6em;
+	}
+
+	.syllabus-page section li {
+		margin-bottom: 0.3em;
+	}
+
 	.syllabus-page ul.big-image-list li img {
 		border: 1px solid #e1e4da;
+	}
+
+	/* Required Materials' book title is a title, not a section sub-head:
+	   keep it out of the generic h3 sub-head styling above. */
+	.syllabus-page ul.big-image-list h3 {
+		font-size: 1.05em;
+		color: #283121;
+		font-weight: bold;
+		text-transform: none;
+		letter-spacing: normal;
+		margin-top: 0;
+		margin-bottom: 0.3em;
 	}
 
 	/* Course contents table: Week, Date and Etc. shrink to their content;

@@ -11,7 +11,6 @@ var SYLLABUS_COMMON = {
 			'<li><strong>Originality & Identical Submissions:</strong> While you may use AI as a resource, the final submission must be your own individual work. Please be advised that if multiple students submit identical or near-identical code—even if generated independently by an AI and not shared between peers—it will be treated as a violation of academic integrity.</li>' +
 			'<li><strong>Consequences:</strong> Any instance of identical work will result in an automatic grade of F. The student bears full responsibility for the risks and consequences of using AI tools.</li>' +
 		'</ol>' +
-		'<br>' +
 		'<h3>Strict Prohibition During Exams</h3>' +
 		'<p>The use of AI is strictly prohibited during all examinations:</p>' +
 		'<ol>' +
