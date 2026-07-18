@@ -1924,6 +1924,9 @@ input, select, textarea {
 
 		.button.news-toggle {
 			margin-top: 0.6em;
+			padding: 6px 16px;
+			font-size: 0.88em;
+			min-width: 110px;
 		}
 
 		@media screen and (max-width: 736px) {
@@ -2037,11 +2040,18 @@ input, select, textarea {
 		text-align:center;
 	}
 
-		/* Fixed widths so a button doesn't resize when its label toggles (e.g. Show/Hide, Show All/Show Less) */
+		/* Same small size as the other card toggles (.member-card .button,
+		   .project-card .button, .class-card .button) — these were left at
+		   the large base .button size by mistake. Fixed width so a button
+		   doesn't resize when its label toggles (e.g. Show All/Show Less). */
+		#filter-all-btn,
+		#filter-selected-btn,
 		#expand-conf-btn,
 		#expand-journal-btn,
 		#expand-patent-btn {
-			min-width: 150px;
+			padding: 6px 16px;
+			font-size: 0.88em;
+			min-width: 110px;
 		}
 
 		/* All / Selected mode toggle */
