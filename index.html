@@ -6,6 +6,15 @@
 		<meta http-equiv="Pragma" content="no-cache">
 		<meta http-equiv="Expires" content="0">
 
+		<!-- 2. github.io로 들어온 경우에만 실제 서버로 이동. 이 파일을 그대로
+		     ip-cal.ewha.ac.kr에 올려도 hostname이 다르므로 리다이렉트되지 않고
+		     아래 실제 페이지 내용이 그대로 보임 (index_main.html과 별도 유지 불필요). -->
+		<script>
+		if (location.hostname.indexOf('github.io') !== -1) {
+			location.replace('https://ip-cal.ewha.ac.kr/');
+		}
+		</script>
+
 		<link href="Lab/images/main/ipcalLogo2.jpg" rel="shortcut icon" type="image/x-icon">
 		<title>IP-CAL</title>
 		<meta charset="utf-8" />

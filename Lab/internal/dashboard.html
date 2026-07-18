@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>IP-CAL: Lab Info</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="robots" content="noindex, nofollow" />
+		<link rel="stylesheet" href="../assets/css/internal.css" />
+	</head>
+	<body class="internal-page">
+
+		<div id="dashboard">
+			<div class="container">
+				<div class="dash-header">
+					<h1>IP-CAL Lab Info</h1>
+					<button type="button" id="logout-btn" class="logout-btn">로그아웃</button>
+				</div>
+
+				<div class="warning-banner">
+					⚠️ 이 페이지는 정적 사이트이고 이 저장소는 public입니다. 여기 입력하는 값은 이 브라우저의 localStorage에만 저장되며 서버로 전송되거나 git에 커밋되지 않습니다 — 즉 다른 기기/브라우저와는 공유되지 않습니다. 절대로 이 페이지의 소스 코드(HTML/JS)에 직접 실제 비밀번호나 IP를 적어 넣지 마세요.
+				</div>
+
+				<section id="routers-section">
+					<h2>공유기 정보</h2>
+					<div id="router-list"></div>
+					<button type="button" id="add-router" class="add-device-btn">+ 공유기 추가</button>
+				</section>
+
+				<section id="servers-section">
+					<h2>서버 정보</h2>
+					<div id="server-list"></div>
+					<button type="button" id="add-server" class="add-device-btn">+ 서버 추가</button>
+				</section>
+
+				<section id="ack-section">
+					<h2>과제 사사 문구</h2>
+					<div class="card">
+						<div id="ack-view"></div>
+						<textarea id="ack-edit-area" hidden></textarea>
+						<div class="ack-actions">
+							<button type="button" id="ack-edit-btn">수정</button>
+							<button type="button" id="ack-save-btn" hidden>저장</button>
+							<button type="button" id="ack-cancel-btn" hidden>취소</button>
+							<button type="button" id="ack-copy-btn">복사</button>
+							<span id="ack-copied" hidden>복사되었습니다 ✓</span>
+						</div>
+					</div>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="../assets/js/internal.js"></script>
+	</body>
+</html>

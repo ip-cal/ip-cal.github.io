@@ -5,7 +5,7 @@ var SYLLABUS_COMMON = {
 	aiUsePolicy:
 		'<h2>AI Use Principles and Guidelines</h2>' +
 		'<h3>Use of Generative AI in Assignments</h3>' +
-		'<p>Students are <span style="color:blue">ENCOURAGED</span> to utilize Generative AI tools (e.g., ChatGPT, Claude, GitHub Copilot) to assist in their learning process and coursework. However, the following conditions apply:</p>' +
+		'<p>Students are ENCOURAGED to utilize Generative AI tools (e.g., ChatGPT, Claude, GitHub Copilot) to assist in their learning process and coursework. However, the following conditions apply:</p>' +
 		'<ol>' +
 			'<li><strong>Verification of Accuracy:</strong> AI-generated content is not always correct. It is your responsibility to critically evaluate and verify the technical accuracy of any AI-provided output.</li>' +
 			'<li><strong>Originality & Identical Submissions:</strong> While you may use AI as a resource, the final submission must be your own individual work. Please be advised that if multiple students submit identical or near-identical code—even if generated independently by an AI and not shared between peers—it will be treated as a violation of academic integrity.</li>' +

@@ -14,3 +14,7 @@ ehthumbs.db
 *.swp
 *.swo
 *~
+
+# Lab dashboard password hash — never commit this, deploy it manually
+# to the real server instead. See Lab/assets/js/internal.js for details.
+Lab/internal/auth.info

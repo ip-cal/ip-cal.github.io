@@ -122,6 +122,14 @@
 		text-align: center;
 	}
 
+	/* Small caption line right above the Evaluation System table:
+	   a touch heavier than body text, not a full heading. */
+	.syllabus-page p.eval-note {
+		font-weight: bold;
+		color: #00462a;
+		margin-bottom: 0.5em;
+	}
+
 	/* Course info table: label + value rows, some rows split into two pairs */
 	.syllabus-page table.course-info {
 		table-layout: fixed;
@@ -150,21 +158,75 @@
 		margin-bottom: 0.3em;
 	}
 
+	/* Same line-height everywhere in the body copy — p was inheriting the
+	   site-wide 1.8em (feels loose), ol/li was inheriting the browser
+	   default (~1.2, feels tight next to it). Split the difference. */
+	.syllabus-page section p,
+	.syllabus-page section li {
+		line-height: 1.5;
+	}
+
 	/* Lists get their own consistent bottom margin, replacing the ad-hoc
 	   <br> spacers previously used between a list and whatever follows it.
 	   A slightly deeper indent than the site default reads more clearly as
 	   "nested under the sentence above" than flush with the margin. */
-	.syllabus-page section ol {
+	/* Numbered via a counter + ::before instead of native list-style-type:
+	   the latter's marker box doesn't reliably render once a list is
+	   nested inside an overflow:hidden float-container (as in the
+	   Course Description photo layout), so this is the robust option. */
+	.syllabus-page section ol,
+	.syllabus-page section ul:not(.big-image-list) {
 		margin-bottom: 0.8em;
 		margin-left: 1.6em;
+		list-style: none;
+		padding-left: 0;
+		counter-reset: syllabus-list;
 	}
 
-	.syllabus-page section li {
+	.syllabus-page section ol > li,
+	.syllabus-page section ul:not(.big-image-list) > li {
+		position: relative;
+		padding-left: 1.4em;
 		margin-bottom: 0.3em;
+		counter-increment: syllabus-list;
+	}
+
+	.syllabus-page section ol > li::before,
+	.syllabus-page section ul:not(.big-image-list) > li::before {
+		content: counter(syllabus-list) ".";
+		position: absolute;
+		left: 0;
+		color: #445047;
+		font-weight: bold;
 	}
 
 	.syllabus-page ul.big-image-list li img {
 		border: 1px solid #e1e4da;
+	}
+
+	/* Course Description's "Other Important Information" list: a smaller
+	   photo so the notice list clears below it instead of wrapping beside it. */
+	.syllabus-page ul.big-image-list li img.small {
+		width: 130px;
+	}
+
+	/* Always start on its own line below a floated photo, regardless of
+	   how much paragraph text precedes it. */
+	.syllabus-page .important-info-heading {
+		clear: left;
+	}
+
+	/* Restore the plain section sub-head look for "Other Important
+	   Information" even though it lives inside .big-image-list, which
+	   otherwise styles h3 as a book title (see rule below). */
+	.syllabus-page ul.big-image-list h3.important-info-heading {
+		font-size: 0.95em;
+		color: #445047;
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		margin-top: 1.2em;
+		margin-bottom: 0.4em;
 	}
 
 	/* Required Materials' book title is a title, not a section sub-head:

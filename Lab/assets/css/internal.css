@@ -1,0 +1,407 @@
+/*
+	IP-CAL internal lab dashboard.
+	Same "paper on neutral backdrop" language as syllabus.css, but laid out
+	as an editable dashboard instead of a printable document.
+*/
+
+	body.internal-page {
+		background-color: #dde1e4;
+		min-height: 100vh;
+		font-family: 'EHWA', 'Ubuntu Condensed', sans-serif;
+		color: #3a3f3a;
+		margin: 0;
+	}
+
+	/* ---- Gate ---- */
+	#gate {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 20px;
+	}
+
+	.gate-box {
+		background: #fff;
+		border-radius: 8px;
+		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+		padding: 2.5em 2.5em 2em;
+		max-width: 360px;
+		width: 100%;
+		text-align: center;
+	}
+
+	.gate-box h1 {
+		font-size: 1.3em;
+		color: #00462a;
+		margin: 0 0 0.3em;
+	}
+
+	.gate-box p {
+		font-size: 0.9em;
+		color: #666;
+		margin: 0 0 1.2em;
+	}
+
+	.gate-box input {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0.6em 0.8em;
+		font-size: 1em;
+		border: 1px solid #ccc;
+		border-radius: 6px;
+	}
+
+	.gate-password-wrap {
+		display: flex;
+		align-items: center;
+		gap: 0.4em;
+		margin-bottom: 0.8em;
+	}
+
+	.gate-password-wrap input {
+		margin-bottom: 0;
+	}
+
+	/* Overrides the generic ".gate-box button" rule below (full-width green
+	   button meant for "Enter") so the eye toggle stays a small icon. */
+	.gate-password-wrap .icon-btn {
+		flex: 0 0 auto;
+		width: auto;
+		padding: 0.3em 0.5em;
+		font-size: 1.1em;
+		background: transparent;
+		color: inherit;
+		border: 1px solid #ccc;
+		border-radius: 6px;
+	}
+
+	.gate-box button {
+		width: 100%;
+		padding: 0.6em;
+		font-size: 1em;
+		border: none;
+		border-radius: 6px;
+		background: #00462a;
+		color: #fff;
+		cursor: pointer;
+	}
+
+	.gate-box button:hover {
+		background: #00692f;
+	}
+
+	.gate-error {
+		color: #c0392b;
+		font-size: 0.85em;
+		margin-top: 0.8em !important;
+	}
+
+	/* ---- Dashboard shell ---- */
+	#dashboard .container {
+		max-width: 820px;
+		margin: 0 auto;
+		padding: 2.5em 20px 4em;
+	}
+
+	.dash-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 0.3em;
+	}
+
+	.dash-header h1 {
+		color: #00462a;
+		font-size: 1.8em;
+		margin: 0;
+	}
+
+	.logout-btn {
+		border: 1px solid #a9b0a5;
+		background: #fff;
+		color: #445047;
+		border-radius: 6px;
+		padding: 0.4em 0.9em;
+		font-size: 0.85em;
+		cursor: pointer;
+	}
+
+	.logout-btn:hover {
+		background: #eef1e9;
+	}
+
+	.warning-banner {
+		background: #fff6e0;
+		border: 1px solid #ffc52f;
+		border-radius: 6px;
+		padding: 0.8em 1em;
+		font-size: 0.85em;
+		line-height: 1.5;
+		color: #6b5300;
+		margin-bottom: 2em;
+	}
+
+	.internal-page section {
+		margin-bottom: 2.5em;
+	}
+
+	.internal-page section > h2 {
+		font-size: 1.2em;
+		color: #283121;
+		border-bottom: 2px solid #00462a;
+		padding-bottom: 0.25em;
+		margin-bottom: 1em;
+	}
+
+	.card {
+		background: #fff;
+		border: 1px solid #e1e4da;
+		border-radius: 8px;
+		padding: 1.2em 1.4em;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+		margin-bottom: 1em;
+	}
+
+	/* ---- Field rows (label + editable value) ---- */
+	.field-row {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		padding: 0.5em 0;
+		border-bottom: 1px solid #f0f1ec;
+		font-size: 0.92em;
+	}
+
+	.field-row:last-child {
+		border-bottom: none;
+	}
+
+	.field-label {
+		flex: 0 0 130px;
+		font-weight: bold;
+		color: #445047;
+	}
+
+	.field-value-wrap {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		min-width: 0;
+	}
+
+	.field-value {
+		flex: 1;
+		word-break: break-word;
+	}
+
+	.field-value.secret {
+		font-family: monospace;
+		letter-spacing: 1px;
+	}
+
+	.field-input {
+		flex: 1;
+		padding: 0.3em 0.5em;
+		font-size: 1em;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+
+	.icon-btn {
+		border: none;
+		background: transparent;
+		cursor: pointer;
+		font-size: 0.95em;
+		padding: 0.1em 0.3em;
+		opacity: 0.7;
+	}
+
+	.icon-btn:hover {
+		opacity: 1;
+	}
+
+	.open-btn {
+		display: inline-block;
+		margin-top: 0.8em;
+		font-size: 0.9em;
+		color: #00462a;
+		font-weight: bold;
+		text-decoration: none;
+	}
+
+	.open-btn:hover {
+		text-decoration: underline;
+	}
+
+	/* ---- Device lists (routers / servers): collapsed row, click to expand ---- */
+	.device-item {
+		margin-bottom: 0.6em;
+	}
+
+	.device-row {
+		display: flex;
+		align-items: center;
+		gap: 0.7em;
+		background: #fff;
+		border: 1px solid #e1e4da;
+		border-radius: 8px;
+		padding: 0.7em 1em;
+		cursor: pointer;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	}
+
+	.device-row:hover {
+		border-color: #a9b0a5;
+	}
+
+	.device-arrow {
+		flex: 0 0 auto;
+		color: #a9b0a5;
+		font-size: 0.85em;
+		width: 0.8em;
+	}
+
+	.device-name {
+		flex: 1;
+		font-weight: bold;
+		color: #283121;
+	}
+
+	.status-badge {
+		flex: 0 0 auto;
+		border: none;
+		border-radius: 20px;
+		padding: 0.3em 0.8em;
+		font-size: 0.78em;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	.status-online {
+		background: #e3f6e8;
+		color: #1f7a3d;
+	}
+
+	.status-offline {
+		background: #e5f0fb;
+		color: #1a5fa8;
+	}
+
+	.device-details {
+		margin-top: 0.5em;
+		margin-bottom: 0;
+	}
+
+	.add-device-btn {
+		border: 1px dashed #00462a;
+		background: transparent;
+		border-radius: 6px;
+		padding: 0.5em 1em;
+		font-size: 0.9em;
+		color: #00462a;
+		cursor: pointer;
+	}
+
+	.add-device-btn:hover {
+		background: #eef1e9;
+	}
+
+	.remove-btn {
+		border: 1px solid #d9534f;
+		color: #d9534f;
+		background: transparent;
+		border-radius: 4px;
+		padding: 0.2em 0.6em;
+		font-size: 0.8em;
+		cursor: pointer;
+	}
+
+	.remove-btn:hover {
+		background: #d9534f;
+		color: #fff;
+	}
+
+	.ssd-list .field-row {
+		border-bottom: none;
+		padding: 0.2em 0;
+	}
+
+	.ssd-list .field-label {
+		display: none;
+	}
+
+	.add-btn {
+		margin-top: 0.4em;
+		border: 1px dashed #a9b0a5;
+		background: transparent;
+		border-radius: 4px;
+		padding: 0.3em 0.7em;
+		font-size: 0.82em;
+		color: #445047;
+		cursor: pointer;
+	}
+
+	.add-btn:hover {
+		background: #eef1e9;
+	}
+
+	/* ---- Acknowledgement ---- */
+	#ack-view {
+		white-space: pre-wrap;
+		line-height: 1.6;
+		font-size: 0.92em;
+	}
+
+	#ack-edit-area {
+		width: 100%;
+		box-sizing: border-box;
+		min-height: 100px;
+		font-family: inherit;
+		font-size: 0.92em;
+		padding: 0.6em;
+		border: 1px solid #ccc;
+		border-radius: 6px;
+	}
+
+	.ack-actions {
+		margin-top: 0.8em;
+		display: flex;
+		align-items: center;
+		gap: 0.6em;
+	}
+
+	.ack-actions button {
+		border: 1px solid #00462a;
+		background: #fff;
+		color: #00462a;
+		border-radius: 4px;
+		padding: 0.35em 0.8em;
+		font-size: 0.85em;
+		cursor: pointer;
+	}
+
+	.ack-actions button:hover {
+		background: #00462a;
+		color: #fff;
+	}
+
+	#ack-copied {
+		font-size: 0.82em;
+		color: #2c8c4d;
+	}
+
+	@media screen and (max-width: 600px) {
+
+		.field-row {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.3em;
+		}
+
+		.field-label {
+			flex-basis: auto;
+		}
+
+	}
