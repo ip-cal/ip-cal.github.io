@@ -1,11 +1,31 @@
 <!DOCTYPE HTML>
 <html>
+	<!--
+		BASE SYLLABUS TEMPLATE — do not link this page from anywhere.
+
+		How to use:
+		1. Copy this file into the semester folder, e.g. Lab/class/2027_spring/courseName.html
+		   (paths below use "../assets/..." because this file lives directly under
+		   Lab/class/ — once copied one level deeper into a semester folder, change
+		   every "../assets/" to "../../assets/", same as the other syllabus pages).
+		2. Fill in every [BRACKETED] placeholder.
+		3. Course Contents: extend/trim the example weeks to match the real
+		   16-week (or however many) calendar. Keep the row/rowspan pattern shown
+		   below — Week th gets rowspan for however many rows that week has, a
+		   holiday/exam row breaks a Topics rowspan (start a new one after it),
+		   and highlighted cells use style="background-color:#ffc52f;".
+		4. Everything styled via Lab/assets/css/syllabus.css and the two
+		   data-syllabus-common blocks (AI Use Policy + Course Policies/
+		   Special Accommodations/Extra Information) is pulled in automatically
+		   from Lab/assets/js/syllabus-common.js — edit that file once if the
+		   shared text itself needs to change, not each individual syllabus.
+	-->
 	<head>
-		<title>IP-CAL: [2026-Fall] Embedded Systems and Labs</title>
+		<title>IP-CAL: [YYYY-Semester] [Course Name]</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../../assets/css/main.css" />
-		<link rel="stylesheet" href="../../assets/css/syllabus.css" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<link rel="stylesheet" href="../assets/css/syllabus.css" />
 	</head>
 	<body class="syllabus-page">
 		<button type="button" class="print-button" onclick="window.print()">🖨 Print</button>
@@ -16,7 +36,7 @@
 						<div class="row">
 							<div class="col-12">
 								<header id="header">
-									<h1><a id="logo">[Syllabus] Embedded Systems and Labs (2026-Fall)</a></h1>
+									<h1><a id="logo">[Syllabus] [Course Name] ([YYYY-Semester])</a></h1>
 								</header>
 							</div>
 						</div>
@@ -30,7 +50,7 @@
 							<div class="col-12">
 
 								<section>
-									<h2 class="doc-title"> [2026 Fall] Embedded Systems and Labs </h2>
+									<h2 class="doc-title"> [YYYY Semester] [Course Name] </h2>
 									<hr>
 									<h2>Course Information</h2>
 									<table class="course course-info">
@@ -42,7 +62,7 @@
 										</colgroup>
 										<tr>
 											<th>Course</th>
-											<td colspan="3">Embedded Systems and Labs</td>
+											<td colspan="3">[Course Name]</td>
 										</tr>
 										<tr>
 											<th>Department</th>
@@ -52,7 +72,7 @@
 											<th>Office Hours</th>
 											<td class="center">TBA</td>
 											<th>Course/Class No.</th>
-											<td class="center">37271-02</td>
+											<td class="center">[XXXXX-XX]</td>
 										</tr>
 										<tr>
 											<th>Hours</th>
@@ -76,48 +96,45 @@
 										</tr>
 										<tr>
 											<th>Value of Competence</th>
-											<td colspan="3">Pursuit of Knowledge(70), Creative Convergence(30)</td>
+											<td colspan="3">[e.g. Pursuit of Knowledge(80), Creative Convergence(20)]</td>
 										</tr>
 										<tr>
 											<th>Keyword</th>
-											<td colspan="3">Computer System, System Software, Real-Time System</td>
+											<td colspan="3">[Keyword 1, Keyword 2, Keyword 3]</td>
 										</tr>
 										<tr>
 											<th>Class Time</th>
-											<td colspan="3">(Wed.) 12:30 ~ 15:15</td>
+											<td colspan="3">([Day.]) [HH:MM] ~ [HH:MM]</td>
 										</tr>
-										<tr class="ta-row">
-											<th>Teaching Assistant</th>
-											<td>Siyeon Kang</td>
-											<th>TA E-Mail</th>
-											<td>kstar1029 at ewhain.net</td>
+										<!-- If the course meets on 2 days a week, use a rowspan="2" Class Time
+										     row like this instead (see computerArchitecture.html for a live example):
+										<tr>
+											<th rowspan="2">Class Time</th>
+											<td colspan="3">(Wed.) 15:30 ~ 16:45</td>
 										</tr>
 										<tr>
+											<td colspan="3">(Fri.) 12:30 ~ 13:45</td>
+										</tr>
+										-->
+										<!-- One row per TA. Delete entirely if the course has no TA yet. -->
+										<tr class="ta-row">
 											<th>Teaching Assistant</th>
-											<td>SeJin Park</td>
+											<td>[TA Name]</td>
 											<th>TA E-Mail</th>
-											<td>stronger at ewhain.net</td>
+											<td>[ta.email at domain]</td>
 										</tr>
 									</table>
 									<hr>
 									<h2>Course Description</h2>
-									<ul class="big-image-list">
-										<li>
-											<img src="embedded_board.jpg" class="left small" width="18%"/>
-											<p>This course explores the fundamentals and advanced techniques of embedded systems using the Jetson Nano platform. It is designed to provide students with a strong foundation in embedded systems while delving into advanced C programming and the CUDA language for leveraging the power of NVIDIA GPUs.</p>
-											<h3 class="important-info-heading">Other Important Information</h3>
-											<ul>
-												<li>Some lecture materials may contain Korean; however, the primary language for this course is English. Most materials and exams will be predominantly provided in English.</li>
-												<li>Students must bring their own personal laptop (Windows, Mac, or Linux) with the required software installed to participate in the labs. Please note that there is no contingency plan for students who are unable to complete labs because they do not have a laptop.</li>
-											</ul>
-										</li>
-									</ul>
+									<p>
+										[1-2 paragraph description of the course.]
+									</p>
 									<hr>
 									<h2>Prerequisites</h2>
 									<p>Students should meet the following requirements:</p>
 									<ol>
-										<li>Basic knowledge of the C/C++ programming language is required.</li>
-										<li>Strongly recommended only for students who have completed the Digital Logic Design and Computer Architecture course to take this class.</li>
+										<li>[Prerequisite 1]</li>
+										<li>[Prerequisite 2]</li>
 									</ol>
 									<hr>
 									<h2>Course Format</h2>
@@ -130,9 +147,9 @@
 										<th>Other</th>
 									</tr>
 									<tr>
-										<td>50%</td>
 										<td>0%</td>
-										<td>50%</td>
+										<td>0%</td>
+										<td>0%</td>
 										<td>0%</td>
 										<td>0%</td>
 									</tr>
@@ -141,10 +158,8 @@
 									<h2>Course Objectives</h2>
 									<p>In this class, students will be introduced to:</p>
 									<ol>
-										<li>Embedded Systems</li>
-										<li>Linux</li>
-										<li>CUDA Programming</li>
-										<li>Neural Network</li>
+										<li>[Objective 1]</li>
+										<li>[Objective 2]</li>
 										<li>And more topics if time permits</li>
 									</ol>
 									<hr>
@@ -165,8 +180,8 @@
 										</tr>
 										<tr>
 											<td>0%</td>
-											<td>40%</td>
-											<td>60%</td>
+											<td>0%</td>
+											<td>0%</td>
 											<td>0%</td>
 											<td>0%</td>
 											<td>0%</td>
@@ -184,16 +199,16 @@
 									<ol>
 										<li>If your total score is above 20% but does not exceed 30%, you will receive a “D” regardless of the percentage above.</li>
 										<li>If your total score does not exceed 20%, you will receive an “F” regardless of the percentage above.</li>
-										<li>You may be absent up to three times. If you exceed three absences, you will receive an “F” for the course. No excuses for absences will be accepted under any circumstances. Please note that the first class (the first week) will not be counted toward your absence total.</li>
+										<li>You may be absent up to [N] times. If you exceed [N] absences, you will receive an “F” for the course. No excuses for absences will be accepted under any circumstances. Please note that the first [class/classes] (the first week) will not be counted toward your absence total.</li>
 										<li>If you are late twice, you are considered absent once.</li>
 										<li>Complete your assignments and exams independently. Any instances of plagiarism, whether from fellow students or online sources, will result in an automatic 'F' in this course, regardless of your current standing.</li>
 									</ol>
 									<hr>
-										<h2>Required Materials</h2>
-										<p>The lecture material will be made available on Cyberampus.</p>	
+									<h2>Required Materials</h2>
+									<p>[Textbook info, or "The lecture material will be made available on Cyberampus." / "NONE"]</p>
 									<hr>
-										<h2>Supplementary Materials</h2>
-										<p>NONE</p>
+									<h2>Supplementary Materials</h2>
+									<p>NONE</p>
 									<hr>
 									<h2>Optional Additional Readings</h2>
 									<p>NONE</p>
@@ -206,104 +221,58 @@
 											<th>Topics & Materials</th>
 											<th>Etc.</th>
 										</tr>
+										<!-- Example: a single-session week -->
 										<tr>
 											<th>#01</th>
-											<td>Sep. 2<br>(Wed.)</td>
-											<td>Lecture #01: Introduction to the Course</td>
+											<td>[Mon.] [D]<br>([Day.])</td>
+											<td>[Topic #01: ...]</td>
+											<td></td>
+										</tr>
+										<!-- Example: a two-session week, both sessions same topic (rowspan="2") -->
+										<tr>
+											<th rowspan="2">#02</th>
+											<td>[Mon.] [D]<br>([Day.])</td>
+											<td rowspan="2">[Topic #02: ...]</td>
 											<td></td>
 										</tr>
 										<tr>
-											<th>#02</th>
-											<td>Sep. 9<br>(Wed.)</td>
-											<td>Lecture #02: Linux OS & Linux Commands</td>
+											<td>[Mon.] [D]<br>([Day.])</td>
+											<td></td>
+										</tr>
+										<!-- Example: a holiday breaking a week (own row, highlighted) -->
+										<tr>
+											<th rowspan="2">#03</th>
+											<td>[Mon.] [D]<br>([Day.])</td>
+											<td>[Topic #03: ...]</td>
 											<td></td>
 										</tr>
 										<tr>
-											<th>#03</th>
-											<td>Sep. 16<br>(Wed.)</td>
-											<td>Lecture #03: Computer Architecture & Development Environment</td>
+											<td>[Mon.] [D]<br>([Day.])</td>
+											<td style="background-color:#ffc52f;">NO CLASS ([Holiday Name])</td>
+											<td></td>
+										</tr>
+										<!-- Example: an exam row with a time/location note in Etc. -->
+										<tr>
+											<th rowspan="2">#04</th>
+											<td>[Mon.] [D]<br>([Day.])</td>
+											<td>[Topic #04: ...]</td>
 											<td></td>
 										</tr>
 										<tr>
-											<th>#04</th>
-											<td>Sep. 23<br>(Wed.)</td>
-											<td>Lecture #04: Neural Network & Image Classification</td>
-											<td></td>
+											<td>[Mon.] [D]<br>([Day.])</td>
+											<td style="background-color:#ffc52f;">Midterm Exam</td>
+											<td>[HH:MM]AM ~ [HH:MM]AM<br>([Location])</td>
 										</tr>
+										<!-- ... continue through the last week ... -->
+										<!-- Example: final week pattern (review, non-mandatory) -->
 										<tr>
-											<th>#05</th>
-											<td>Sep. 30<br>(Wed.)</td>
-											<td>Lecture #05: Graphics Processing Units & Vector Addition</td>
-											<td></td>
-										</tr>
-										<tr>
-											<th>#06</th>
-											<td>Oct. 7<br>(Wed.)</td>
-											<td>Lecture #06: Image Blur (CPU)</td>
-											<td style="background-color:#ffc52f;">1st Quiz</td>
-										</tr>
-										<tr>
-											<th>#07</th>
-											<td>Oct. 14<br>(Wed.)</td>
-											<td>Lecture #07: Image Blur (GPU)</td>
-											<td></td>
-										</tr>
-										<tr>
-											<th>#08</th>
-											<td>Oct. 21<br>(Wed.)</td>
-											<td>Lecture #08: Convolution (CPU)</td>
-											<td style="background-color:#ffc52f;">2nd Quiz</td>
-										</tr>
-										<tr>
-											<th>#09</th>
-											<td>Oct. 28<br>(Wed.)</td>
-											<td>Lecture #09: Convolution (GPU)</td>
-											<td></td>
-										</tr>
-										<tr>
-											<th>#10</th>
-											<td>Nov. 4<br>(Wed.)</td>
+											<th rowspan="2">#16</th>
+											<td>[Mon.] [D]<br>([Day.])</td>
 											<td style="background-color:#ffc52f;">NO CLASS</td>
 											<td></td>
 										</tr>
 										<tr>
-											<th>#11</th>
-											<td>Nov. 11<br>(Wed.)</td>
-											<td>Lecture #10: Fully Connected MNIST (CPU)</td>
-											<td style="background-color:#ffc52f;">3rd Quiz</td>
-										</tr>
-										<tr>
-											<th>#12</th>
-											<td>Nov. 18<br>(Wed.)</td>
-											<td>Lecture #11: Fully Connected MNIST (GPU)</td>
-											<td></td>
-										</tr>
-										<tr>
-											<th>#13</th>
-											<td>Nov. 25<br>(Wed.)</td>
-											<td>Lecture #12: General Matrix Multiply (GEMM)</td>
-											<td style="background-color:#ffc52f;">4th Quiz</td>
-										</tr>
-										<tr>
-											<th>#14</th>
-											<td>Dec. 2<br>(Wed.)</td>
-											<td>Lecture #13: Convolutional Neural Network (CNN)</td>
-											<td></td>
-										</tr>
-										<tr>
-											<th rowspan="2">#15</th>
-											<td>Dec. 9<br>(Wed.)</td>
-											<td>Lecture #14: Summary</td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Dec. 12<br>(Sat.)</td>
-											<td style="background-color:#ffc52f;">Lecture #15: Final Exam</td>
-											<td>11:00AM ~ 12:30PM<br>(TBD)</td>
-										</tr>
-										<tr>
-											<th>#16</th>
-											<td>Dec. 16<br>(Wed.)</td>
+											<td>[Mon.] [D]<br>([Day.])</td>
 											<td style="background-color:#ffc52f;">Final Exam Review (Nonmandatory)</td>
 											<td></td>
 										</tr>
@@ -322,11 +291,11 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="../../assets/js/jquery.min.js"></script>
-			<script src="../../assets/js/browser.min.js"></script>
-			<script src="../../assets/js/breakpoints.min.js"></script>
-			<script src="../../assets/js/util.js"></script>
-			<script src="../../assets/js/main.js"></script>
-			<script src="../../assets/js/syllabus-common.js"></script>
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+			<script src="../assets/js/syllabus-common.js"></script>
 	</body>
 </html>

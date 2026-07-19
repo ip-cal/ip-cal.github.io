@@ -238,6 +238,23 @@ input, select, textarea {
 			text-decoration: none;
 		}
 
+	/* Icon-only reference link (publication "📄" entries, class.html "📋"
+	   syllabus links) — no text, no box, just the icon with a tooltip. */
+	a.link-icon {
+		display: inline-block;
+		margin-left: 6px;
+		font-size: 1em;
+		text-decoration: none;
+		filter: grayscale(45%);
+		transition: transform 0.12s ease, filter 0.12s ease;
+		vertical-align: middle;
+	}
+
+		a.link-icon:hover {
+			filter: grayscale(0%);
+			transform: scale(1.15);
+		}
+
 	* > p:last-child {
 		margin-bottom: 0 !important;
 	}

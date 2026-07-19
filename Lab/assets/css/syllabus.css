@@ -81,13 +81,15 @@
 	   AI in Assignments"). Deliberately smaller and un-bordered so it reads
 	   as one tier below h2, not a near-duplicate of it. */
 	.syllabus-page section h3 {
-		font-size: 0.95em;
-		color: #445047;
+		font-size: 1.05em;
+		color: #00462a;
 		font-weight: bold;
 		text-transform: uppercase;
 		letter-spacing: 0.03em;
-		margin-top: 1.2em;
-		margin-bottom: 0.4em;
+		margin-top: 1.4em;
+		margin-bottom: 0.5em;
+		padding-left: 0.5em;
+		border-left: 3px solid #00462a;
 	}
 
 	.syllabus-page section hr {
@@ -122,14 +124,6 @@
 		text-align: center;
 	}
 
-	/* Small caption line right above the Evaluation System table:
-	   a touch heavier than body text, not a full heading. */
-	.syllabus-page p.eval-note {
-		font-weight: bold;
-		color: #00462a;
-		margin-bottom: 0.5em;
-	}
-
 	/* Course info table: label + value rows, some rows split into two pairs */
 	.syllabus-page table.course-info {
 		table-layout: fixed;
@@ -148,6 +142,13 @@
 
 	.syllabus-page table.course-info td.center {
 		text-align: center;
+	}
+
+	/* Double rule above the TA row(s) so they read as a separate block
+	   from the rest of Course Information, not just another field. */
+	.syllabus-page table.course-info tr.ta-row th,
+	.syllabus-page table.course-info tr.ta-row td {
+		border-top: 4px double #00462a;
 	}
 
 	/* Intro sentence right before a list (e.g. "...introduced to:") sits
@@ -258,14 +259,14 @@
 		text-align: center;
 	}
 
-	/* Vertically center every cell (Topics & Etc. stay left-aligned horizontally) */
+	/* Vertically center every cell */
 	.syllabus-page table.course-contents th,
 	.syllabus-page table.course-contents td {
 		vertical-align: middle;
 	}
 
-	/* Highlighted cells (holidays, exams, reviews) read better centered */
-	.syllabus-page table.course-contents td[style*="ffc52f"] {
+	/* Topics & Materials (CH #.. / Lecture #..) horizontally centered too */
+	.syllabus-page table.course-contents td {
 		text-align: center;
 	}
 
