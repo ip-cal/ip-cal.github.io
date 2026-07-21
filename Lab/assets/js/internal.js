@@ -1,67 +1,39 @@
 // IP-CAL lab dashboard.
 //
-// IMPORTANT — read before putting real data in here:
-// This is a static site whose HTML/CSS/JS are committed to a PUBLIC GitHub
-// repo. The password hash itself lives in Lab/internal/auth.info, a file
-// that is git-ignored (see .gitignore) and never committed — so it's
-// blank/missing on the public GitHub Pages deployment, and the gate simply
-// won't open there. It only works on hosts where you've manually placed a
-// real Lab/internal/auth.info file outside of git (e.g. copied it directly
-// onto your own server). Even so, this is still a client-side check, not
-// real server-side auth — anyone who can reach a working copy of auth.info
-// (e.g. by requesting the file directly) can read the hash. Don't treat this
-// as a substitute for keeping genuinely sensitive values (router admin
-// password, etc.) out of any field you're not comfortable being seen.
-//
-// To keep this safe:
-//   - NEVER hardcode real secrets (router admin password, SSH ports, IPs,
-//     etc.) into this file or into serverInfo.html / dashboard.html.
-//     Anything typed here in source form is permanently public, even after
-//     you delete it later (git history keeps it).
-//   - Real values should only ever be entered through the "Edit" buttons on
-//     the dashboard. Those are stored in this browser's localStorage only —
-//     they are never sent anywhere and never committed to git. That also
-//     means they only exist on the device/browser where they were entered;
-//     they will not show up for other lab members or on other machines.
-//   - To change the password, compute a new SHA-256 hex hash yourself (e.g.
-//     `echo -n 'newPassword' | shasum -a 256`) and replace the contents of
-//     Lab/internal/auth.info on your server with just that hash.
+// Auth is real server-side auth against the webServerCheck backend
+// (separate project, reverse-proxied in at /service/serverCheck — see
+// API_BASE below), session cookie based. No secrets or password logic
+// live in this file — it only calls the API and reacts to its responses.
 
 (function () {
 
-	// ---- Password gate -----------------------------------------------
-	var GATE_INFO_URL = 'auth.info';
-	var GATE_SESSION_KEY = 'ipcal_log_unlocked';
+	// ---- API auth client -----------------------------------------------
+	var API_BASE = '/service/serverCheck';
 	var DASHBOARD_PAGE = 'dashboard.html';
 	var GATE_PAGE = 'serverInfo.html';
+	var CHANGE_PASSWORD_PAGE = 'change-password.html';
 
-	function sha256Hex(text) {
-		var data = new TextEncoder().encode(text);
-		return crypto.subtle.digest('SHA-256', data).then(function (buf) {
-			return Array.prototype.map.call(new Uint8Array(buf), function (b) {
-				return b.toString(16).padStart(2, '0');
-			}).join('');
+	function apiFetch(path, opts) {
+		opts = opts || {};
+		return fetch(API_BASE + path, {
+			method: opts.method || 'GET',
+			headers: opts.body ? { 'Content-Type': 'application/json' } : undefined,
+			body: opts.body ? JSON.stringify(opts.body) : undefined,
+			credentials: 'same-origin'
+		}).then(function (res) {
+			return res.json().catch(function () { return {}; }).then(function (data) {
+				return { ok: res.ok, status: res.status, data: data };
+			});
 		});
 	}
 
-	function loadGateHash() {
-		return fetch(GATE_INFO_URL, { cache: 'no-store' })
-			.then(function (res) {
-				if (!res.ok) {
-					console.warn('internal.js: auth.info fetch returned', res.status, '— tried', res.url);
-					return '';
-				}
-				return res.text();
-			})
-			.then(function (text) { return text.trim(); })
-			.catch(function (err) {
-				console.warn('internal.js: auth.info fetch failed —', err);
-				return '';
-			});
+	function fetchMe() {
+		return apiFetch('/auth/me').then(function (r) { return r.ok ? r.data.user : null; });
 	}
 
-	// ---- Gate page (serverInfo.html): checks the password, then redirects ---
+	// ---- Gate page (serverInfo.html): real login against the API ---------
 	function initGatePage() {
+		var emailInput = document.getElementById('gate-email');
 		var input = document.getElementById('gate-password');
 		var button = document.getElementById('gate-submit');
 		var error = document.getElementById('gate-error');
@@ -72,51 +44,53 @@
 			input.focus();
 		});
 
-		loadGateHash().then(function (expectedHash) {
-			if (!expectedHash) {
-				error.textContent = '이 서버에는 auth.info 설정 파일이 없어서 로그인할 수 없습니다.';
-				error.hidden = false;
-				input.disabled = true;
-				button.disabled = true;
-				return;
+		// Already logged in? skip straight to the dashboard (also handles the
+		// must-change-password redirect consistently with guardDashboardPage).
+		fetchMe().then(function (user) {
+			if (user) {
+				location.href = user.mustChangePassword ? CHANGE_PASSWORD_PAGE : DASHBOARD_PAGE;
 			}
+		});
 
-			if (sessionStorage.getItem(GATE_SESSION_KEY) === expectedHash) {
-				location.href = DASHBOARD_PAGE;
-				return;
-			}
-
-			function tryUnlock() {
-				sha256Hex(input.value).then(function (hex) {
-					if (hex === expectedHash) {
-						sessionStorage.setItem(GATE_SESSION_KEY, expectedHash);
-						location.href = DASHBOARD_PAGE;
+		function tryLogin() {
+			error.hidden = true;
+			apiFetch('/auth/login', { method: 'POST', body: { email: emailInput.value, password: input.value } })
+				.then(function (r) {
+					if (r.ok) {
+						location.href = r.data.user.mustChangePassword ? CHANGE_PASSWORD_PAGE : DASHBOARD_PAGE;
+					} else if (r.status === 429) {
+						error.textContent = '로그인 시도가 너무 많습니다. 잠시 후 다시 시도해주세요.';
+						error.hidden = false;
 					} else {
-						error.textContent = '비밀번호가 올바르지 않습니다.';
+						error.textContent = '이메일 또는 비밀번호가 올바르지 않습니다.';
 						error.hidden = false;
 						input.value = '';
 						input.focus();
 					}
 				});
-			}
+		}
 
-			button.addEventListener('click', tryUnlock);
-			input.addEventListener('keydown', function (e) {
-				if (e.key === 'Enter') tryUnlock();
+		button.addEventListener('click', tryLogin);
+		[emailInput, input].forEach(function (el) {
+			el.addEventListener('keydown', function (e) {
+				if (e.key === 'Enter') tryLogin();
 			});
-			input.focus();
 		});
+		emailInput.focus();
 	}
 
 	// ---- Dashboard page (dashboard.html): verify session, else bounce back --
 	function guardDashboardPage() {
-		return loadGateHash().then(function (expectedHash) {
-			var stored = sessionStorage.getItem(GATE_SESSION_KEY);
-			if (!expectedHash || stored !== expectedHash) {
+		return fetchMe().then(function (user) {
+			if (!user) {
 				location.href = GATE_PAGE;
-				return false;
+				return null;
 			}
-			return true;
+			if (user.mustChangePassword) {
+				location.href = CHANGE_PASSWORD_PAGE;
+				return null;
+			}
+			return user;
 		});
 	}
 
@@ -124,9 +98,274 @@
 		var btn = document.getElementById('logout-btn');
 		if (!btn) return;
 		btn.addEventListener('click', function () {
-			sessionStorage.removeItem(GATE_SESSION_KEY);
-			location.href = GATE_PAGE;
+			apiFetch('/auth/logout', { method: 'POST' }).then(function () {
+				location.href = GATE_PAGE;
+			});
 		});
+	}
+
+	// Lighter guard than guardDashboardPage(): requires a session, but does
+	// NOT bounce to change-password.html when mustChangePassword is true —
+	// used by change-password.html itself, which must stay reachable.
+	function requireLoggedIn() {
+		return fetchMe().then(function (user) {
+			if (!user) {
+				location.href = GATE_PAGE;
+				return null;
+			}
+			return user;
+		});
+	}
+
+	// ---- change-password.html --------------------------------------------
+	function initChangePasswordPage() {
+		requireLoggedIn().then(function (user) {
+			if (!user) return;
+			var form = document.getElementById('change-password-form');
+			var current = document.getElementById('current-password');
+			var next = document.getElementById('new-password');
+			var confirm = document.getElementById('confirm-password');
+			var error = document.getElementById('change-password-error');
+			var success = document.getElementById('change-password-success');
+			var notice = document.getElementById('must-change-notice');
+			if (notice) notice.hidden = !user.mustChangePassword;
+
+			form.addEventListener('submit', function (e) {
+				e.preventDefault();
+				error.hidden = true;
+				success.hidden = true;
+				if (next.value !== confirm.value) {
+					error.textContent = '새 비밀번호가 일치하지 않습니다.';
+					error.hidden = false;
+					return;
+				}
+				apiFetch('/auth/change-password', {
+					method: 'POST',
+					body: { currentPassword: current.value, newPassword: next.value }
+				}).then(function (r) {
+					if (r.ok) {
+						success.hidden = false;
+						setTimeout(function () { location.href = DASHBOARD_PAGE; }, 1200);
+					} else {
+						var messages = {
+							CURRENT_PASSWORD_INCORRECT: '현재 비밀번호가 올바르지 않습니다.',
+							PASSWORD_TOO_WEAK: '새 비밀번호는 최소 10자 이상이어야 합니다.',
+							PASSWORD_MUST_DIFFER: '새 비밀번호는 현재 비밀번호와 달라야 합니다.'
+						};
+						error.textContent = messages[r.data.error] || '비밀번호 변경에 실패했습니다.';
+						error.hidden = false;
+					}
+				});
+			});
+		});
+	}
+
+	// ---- forgot-password.html ---------------------------------------------
+	function initForgotPasswordPage() {
+		var form = document.getElementById('forgot-password-form');
+		var email = document.getElementById('forgot-email');
+		var success = document.getElementById('forgot-password-success');
+		form.addEventListener('submit', function (e) {
+			e.preventDefault();
+			apiFetch('/auth/request-password-reset', { method: 'POST', body: { email: email.value } }).then(function () {
+				form.hidden = true;
+				success.hidden = false;
+			});
+		});
+	}
+
+	// ---- reset-password.html ------------------------------------------------
+	function initResetPasswordPage() {
+		var token = new URLSearchParams(location.search).get('token') || '';
+		var form = document.getElementById('reset-password-form');
+		var next = document.getElementById('reset-new-password');
+		var confirm = document.getElementById('reset-confirm-password');
+		var error = document.getElementById('reset-password-error');
+		var success = document.getElementById('reset-password-success');
+
+		if (!token) {
+			error.textContent = '재설정 링크가 올바르지 않습니다. 이메일의 링크를 다시 확인해주세요.';
+			error.hidden = false;
+			form.hidden = true;
+			return;
+		}
+
+		form.addEventListener('submit', function (e) {
+			e.preventDefault();
+			error.hidden = true;
+			if (next.value !== confirm.value) {
+				error.textContent = '비밀번호가 일치하지 않습니다.';
+				error.hidden = false;
+				return;
+			}
+			apiFetch('/auth/reset-password', { method: 'POST', body: { token: token, newPassword: next.value } })
+				.then(function (r) {
+					if (r.ok) {
+						form.hidden = true;
+						success.hidden = false;
+					} else {
+						var messages = {
+							INVALID_OR_EXPIRED_TOKEN: '링크가 만료되었거나 유효하지 않습니다. 다시 요청해주세요.',
+							PASSWORD_TOO_WEAK: '비밀번호는 최소 10자 이상이어야 합니다.'
+						};
+						error.textContent = messages[r.data.error] || '비밀번호 재설정에 실패했습니다.';
+						error.hidden = false;
+					}
+				});
+		});
+	}
+
+	// ---- admin-users.html (admin only — server also enforces this) --------
+	function initAdminUsersPage() {
+		guardDashboardPage().then(function (user) {
+			if (!user) return;
+			if (user.role !== 'admin') {
+				location.href = DASHBOARD_PAGE;
+				return;
+			}
+
+			var list = document.getElementById('admin-user-list');
+			var form = document.getElementById('create-user-form');
+			var nameInput = document.getElementById('new-user-name');
+			var emailInput = document.getElementById('new-user-email');
+			var roleInput = document.getElementById('new-user-role');
+			var error = document.getElementById('create-user-error');
+			var reveal = document.getElementById('temp-password-reveal');
+
+			function loadUsers() {
+				apiFetch('/admin/users').then(function (r) {
+					if (!r.ok) return;
+					list.innerHTML = '';
+					r.data.users.forEach(function (u) {
+						var row = el('div', { class: 'user-row' });
+						row.appendChild(el('span', { class: 'user-email', text: u.email }));
+						row.appendChild(el('span', { class: 'user-name', text: u.name }));
+						row.appendChild(el('span', { class: 'user-role role-' + u.role, text: u.role }));
+						if (u.mustChangePassword) {
+							row.appendChild(el('span', { class: 'user-pending', text: '비밀번호 미변경' }));
+						}
+						list.appendChild(row);
+					});
+				});
+			}
+
+			form.addEventListener('submit', function (e) {
+				e.preventDefault();
+				error.hidden = true;
+				reveal.hidden = true;
+				apiFetch('/admin/users', {
+					method: 'POST',
+					body: { name: nameInput.value, email: emailInput.value, role: roleInput.value }
+				}).then(function (r) {
+					if (r.ok) {
+						reveal.textContent = r.data.user.email + ' 임시 비밀번호: ' + r.data.tempPassword + ' (다시 표시되지 않습니다 — 지금 복사해서 전달하세요)';
+						reveal.hidden = false;
+						form.reset();
+						loadUsers();
+					} else {
+						var messages = {
+							EMAIL_ALREADY_EXISTS: '이미 존재하는 이메일입니다.',
+							INVALID_BODY: '입력값을 확인해주세요.'
+						};
+						error.textContent = messages[r.data.error] || '계정 생성에 실패했습니다.';
+						error.hidden = false;
+					}
+				});
+			});
+
+			loadUsers();
+		});
+	}
+
+	// ---- Live server status (from SSH-collected /status.json) -------------
+	// Public JSON published by a Mac-side collector script. Contains only
+	// name + usage numbers, never hostnames/IPs/usernames — see
+	// /Volumes/web/monitor-status/status.json on the host. Matched to a
+	// dashboard server entry by exact `name` match.
+	var LIVE_STATUS_URL = '/status.json';
+	var LIVE_POLL_MS = 30000;
+	var liveStatus = {};
+
+	function formatAgo(ts) {
+		if (!ts) return '';
+		var diff = Math.max(0, Math.floor(Date.now() / 1000) - ts);
+		if (diff < 60) return diff + '초 전';
+		if (diff < 3600) return Math.floor(diff / 60) + '분 전';
+		return Math.floor(diff / 3600) + '시간 전';
+	}
+
+	function fetchLiveStatus() {
+		fetch(LIVE_STATUS_URL, { cache: 'no-store' })
+			.then(function (res) { return res.ok ? res.json() : null; })
+			.then(function (data) {
+				if (!data || !data.servers) return;
+				var next = {};
+				data.servers.forEach(function (s) { next[s.name] = s; });
+				liveStatus = next;
+				renderServers();
+			})
+			.catch(function () { /* keep last known liveStatus */ });
+	}
+
+	function initLiveStatusPolling() {
+		fetchLiveStatus();
+		setInterval(fetchLiveStatus, LIVE_POLL_MS);
+	}
+
+	function liveBadge(live) {
+		var isAlive = !!live.alive;
+		var badge = el('span', {
+			class: 'status-badge live-badge ' + (isAlive ? 'status-online' : 'status-offline'),
+			title: '실시간 모니터링 (자동 갱신, 클릭으로 수동 변경 불가)'
+		});
+		badge.textContent = (isAlive ? '● Live' : '● Down') + ' · ' + formatAgo(live.checked_at);
+		return badge;
+	}
+
+	function usageRow(label, percent, note) {
+		var row = el('div', { class: 'usage-row' });
+		row.appendChild(el('div', { class: 'usage-label', text: label }));
+		var barWrap = el('div', { class: 'usage-bar' });
+		var pct = (typeof percent === 'number' && !isNaN(percent)) ? Math.max(0, Math.min(100, percent)) : null;
+		var fill = el('div', { class: 'usage-bar-fill' + (pct !== null && pct >= 85 ? ' usage-high' : '') });
+		fill.style.width = (pct !== null ? pct : 0) + '%';
+		barWrap.appendChild(fill);
+		row.appendChild(barWrap);
+		row.appendChild(el('div', { class: 'usage-value', text: (pct !== null ? pct + '%' : '—') + (note ? ' · ' + note : '') }));
+		return row;
+	}
+
+	function buildLiveStatsPanel(container, live) {
+		var panel = el('div', { class: 'live-panel' });
+		panel.appendChild(el('div', {
+			class: 'live-panel-title',
+			text: '실시간 상태 — ' + (live.alive ? '정상 응답' : '응답 없음') + ' (' + formatAgo(live.checked_at) + ' 갱신)'
+		}));
+		if (!live.alive) {
+			container.appendChild(panel);
+			return;
+		}
+		if (live.cpu) {
+			var extra = [];
+			if (live.cpu.load_avg) extra.push('load ' + live.cpu.load_avg.join('/'));
+			if (live.cpu.cores) extra.push(live.cpu.cores + ' cores');
+			panel.appendChild(usageRow('CPU', live.cpu.percent, extra.join(' · ')));
+		}
+		if (live.mem && live.mem.total_mb) {
+			var memPct = Math.round((live.mem.used_mb / live.mem.total_mb) * 100);
+			panel.appendChild(usageRow('메모리', memPct, live.mem.used_mb + ' / ' + live.mem.total_mb + ' MB'));
+		}
+		(live.disk || []).forEach(function (d) {
+			panel.appendChild(usageRow('디스크 ' + d.mount, d.use_percent, d.used + ' / ' + d.size));
+		});
+		(live.gpu || []).forEach(function (g) {
+			panel.appendChild(usageRow(
+				'GPU ' + g.index,
+				g.util_percent,
+				Math.round(g.mem_used_mb) + ' / ' + Math.round(g.mem_total_mb) + ' MB · ' + g.temp_c + '°C'
+			));
+		});
+		container.appendChild(panel);
 	}
 
 	// ---- Data model -----------------------------------------------------
@@ -287,11 +526,16 @@
 			var name = el('span', { class: 'device-name', text: d.name || opts.defaultName(idx) });
 			row.appendChild(arrow);
 			row.appendChild(name);
-			row.appendChild(statusBadge(
-				function () { return d.status; },
-				function (v) { d.status = v; },
-				null
-			));
+			var live = opts.liveLookup ? opts.liveLookup(d) : null;
+			if (live) {
+				row.appendChild(liveBadge(live));
+			} else {
+				row.appendChild(statusBadge(
+					function () { return d.status; },
+					function (v) { d.status = v; },
+					null
+				));
+			}
 			row.addEventListener('click', function () {
 				d._expanded = !d._expanded;
 				renderDeviceList(listEl, devices, opts);
@@ -354,7 +598,10 @@
 	function renderServers() {
 		renderDeviceList(document.getElementById('server-list'), state.servers, {
 			defaultName: function (idx) { return 'server-' + (idx + 1); },
+			liveLookup: function (d) { return liveStatus[d.name]; },
 			buildFields: function (container, s, idx, rerender) {
+				var live = liveStatus[s.name];
+				if (live) buildLiveStatsPanel(container, live);
 				function field(label, key, opts) {
 					container.appendChild(fieldRow(label, function () { return s[key]; }, function (v) { s[key] = v; }, rerender, opts));
 				}
@@ -469,14 +716,25 @@
 		if (document.getElementById('gate')) {
 			initGatePage();
 		} else if (document.getElementById('dashboard')) {
-			guardDashboardPage().then(function (ok) {
-				if (!ok) return;
+			guardDashboardPage().then(function (user) {
+				if (!user) return;
+				var adminLink = document.getElementById('admin-users-link');
+				if (adminLink) adminLink.hidden = (user.role !== 'admin');
 				initLogout();
 				initAddRouter();
 				initAddServer();
 				initAck();
 				renderAll();
+				initLiveStatusPolling();
 			});
+		} else if (document.getElementById('change-password-page')) {
+			initChangePasswordPage();
+		} else if (document.getElementById('forgot-password-page')) {
+			initForgotPasswordPage();
+		} else if (document.getElementById('reset-password-page')) {
+			initResetPasswordPage();
+		} else if (document.getElementById('admin-users-page')) {
+			initAdminUsersPage();
 		}
 	});
 

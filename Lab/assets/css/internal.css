@@ -13,7 +13,10 @@
 	}
 
 	/* ---- Gate ---- */
-	#gate {
+	#gate,
+	#change-password-page,
+	#forgot-password-page,
+	#reset-password-page {
 		min-height: 100vh;
 		display: flex;
 		align-items: center;
@@ -347,6 +350,69 @@
 		background: #eef1e9;
 	}
 
+	/* ---- Live server status (from /status.json) ---- */
+	.live-badge {
+		cursor: default;
+	}
+
+	.live-panel {
+		background: #f6f8f4;
+		border: 1px solid #e1e4da;
+		border-radius: 8px;
+		padding: 0.8em 1em;
+		margin-bottom: 0.8em;
+	}
+
+	.live-panel-title {
+		font-weight: bold;
+		font-size: 0.85em;
+		color: #445047;
+		margin-bottom: 0.6em;
+	}
+
+	.usage-row {
+		display: flex;
+		align-items: center;
+		gap: 0.7em;
+		margin-bottom: 0.4em;
+		font-size: 0.85em;
+	}
+
+	.usage-row:last-child {
+		margin-bottom: 0;
+	}
+
+	.usage-label {
+		flex: 0 0 6.5em;
+		color: #3a3f3a;
+	}
+
+	.usage-bar {
+		flex: 1 1 auto;
+		background: #e1e4da;
+		border-radius: 6px;
+		height: 0.6em;
+		overflow: hidden;
+	}
+
+	.usage-bar-fill {
+		height: 100%;
+		background: #1f7a3d;
+		border-radius: 6px;
+	}
+
+	.usage-bar-fill.usage-high {
+		background: #d9534f;
+	}
+
+	.usage-value {
+		flex: 0 0 auto;
+		min-width: 9em;
+		text-align: right;
+		color: #445047;
+		font-size: 0.92em;
+	}
+
 	/* ---- Acknowledgement ---- */
 	#ack-view {
 		white-space: pre-wrap;
@@ -404,4 +470,135 @@
 			flex-basis: auto;
 		}
 
+	}
+
+	/* ---- Auth forms (login/change-password/forgot/reset), extends .gate-box ---- */
+	.gate-box input,
+	.gate-box select {
+		margin-bottom: 0.8em;
+	}
+
+	.gate-password-wrap input {
+		margin-bottom: 0;
+	}
+
+	.gate-success {
+		color: #1f7a3d;
+		font-size: 0.85em;
+		margin-top: 0.8em !important;
+	}
+
+	.gate-notice {
+		background: #fff6e0;
+		color: #7a5c00;
+		font-size: 0.85em;
+		border-radius: 6px;
+		padding: 0.6em 0.8em;
+		margin-bottom: 1em !important;
+	}
+
+	.gate-forgot {
+		font-size: 0.82em;
+		margin: 1em 0 0 !important;
+	}
+
+	.gate-forgot a {
+		color: #00462a;
+	}
+
+	.dash-header-link {
+		font-size: 0.85em;
+		color: #00462a;
+		margin-right: 0.8em;
+	}
+
+	/* ---- Admin: user management ---- */
+	.user-list {
+		margin-bottom: 1em;
+	}
+
+	.user-row {
+		display: flex;
+		align-items: center;
+		gap: 0.8em;
+		background: #fff;
+		border: 1px solid #e1e4da;
+		border-radius: 8px;
+		padding: 0.6em 1em;
+		margin-bottom: 0.5em;
+		font-size: 0.9em;
+	}
+
+	.user-email {
+		flex: 1 1 auto;
+		font-weight: bold;
+		color: #283121;
+	}
+
+	.user-name {
+		color: #666;
+	}
+
+	.user-role {
+		border-radius: 20px;
+		padding: 0.2em 0.7em;
+		font-size: 0.78em;
+		font-weight: bold;
+		background: #e3f6e8;
+		color: #1f7a3d;
+	}
+
+	.user-role.role-admin {
+		background: #fde3e3;
+		color: #a12525;
+	}
+
+	.user-role.role-graduate {
+		background: #e5f0fb;
+		color: #1a5fa8;
+	}
+
+	.user-pending {
+		font-size: 0.78em;
+		color: #a12525;
+	}
+
+	#create-user-form {
+		display: flex;
+		flex-direction: column;
+		gap: 0.6em;
+		max-width: 360px;
+	}
+
+	#create-user-form input,
+	#create-user-form select {
+		box-sizing: border-box;
+		padding: 0.6em 0.8em;
+		font-size: 1em;
+		border: 1px solid #ccc;
+		border-radius: 6px;
+	}
+
+	#create-user-form button {
+		padding: 0.6em;
+		font-size: 1em;
+		border: none;
+		border-radius: 6px;
+		background: #00462a;
+		color: #fff;
+		cursor: pointer;
+	}
+
+	#create-user-form button:hover {
+		background: #00692f;
+	}
+
+	.temp-password-reveal {
+		background: #fff6e0;
+		color: #7a5c00;
+		font-size: 0.85em;
+		border-radius: 6px;
+		padding: 0.7em 0.9em;
+		margin-top: 0.8em;
+		word-break: break-all;
 	}
