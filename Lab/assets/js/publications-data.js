@@ -13,6 +13,18 @@ var PUBLICATION_ENTRIES = [
 		"sortKey": 202610
 	},
 	{
+		"title": "Understanding and Exploiting Cache Asymmetry in Chiplet Processors via Profile-Predict-Guard Allocation",
+		"venue": "IEEE International Symposium on Workload Characterization (IISWC 2026), Boulder, USA, Sep. 27 - 29, 2026",
+		"authorsText": "Sunwoo Kim, Eunbi Jeong, and Myung Kuk Yoon",
+		"sortKey": 202609
+	},
+	{
+		"title": "Characterizing Performance Bottleneck of Distributed Shared Memory in Modern GPUs",
+		"venue": "IEEE International Symposium on Workload Characterization (IISWC 2026), Boulder, USA, Sep. 27 - 29, 2026",
+		"authorsText": "Jong Hyun Jeong, Myung Kuk Yoon, Yunho Oh, Hyeran Jeon, and Gunjae Koo",
+		"sortKey": 202609
+	},
+	{
 		"title": "Accelerating Vision Transformer Inference via Non-GEMM Kernel Fusion on Edge GPUs",
 		"venue": "2026 Summer Annual Conference of IEIE, Jeju, Korea, June 23 - 26, 2026",
 		"authorsText": "Sejin Park, Yoonhyung Park, Sunhwa Kang, and Myung Kuk Yoon",
