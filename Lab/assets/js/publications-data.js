@@ -1,6 +1,12 @@
 // Auto-generated from publication.html. Regenerate this file whenever papers are added/edited/removed there.
 var PUBLICATION_ENTRIES = [
 	{
+		"title": "Futurism: Accelerating K-Means Clustering on Embedded Systems via Vector Engines",
+		"venue": "IEEE Embedded Systems Letters (ESL) (Accepted)",
+		"authorsText": "Jaehyeok Ryu, Dowoong Kong, Yiseok Lee, Minseong Gil, Gunjae Koo, Myung Kuk Yoon, and Yunho Oh",
+		"sortKey": 202609
+	},
+	{
 		"title": "Make Every Batch Count: Fault Entry Merging for Efficient Batching in Unified Virtual Memory",
 		"venue": "The 59th IEEE/ACM International Symposium on Microarchitecture (MICRO 2026), Athens, Greece, Oct. 31 - Nov. 4, 2026",
 		"authorsText": "Jane Rhee†, SeJin Park†, Gunjae Koo, Yunho Oh, and Myung Kuk Yoon",
