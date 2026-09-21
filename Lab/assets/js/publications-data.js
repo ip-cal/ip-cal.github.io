@@ -3,7 +3,7 @@ var PUBLICATION_ENTRIES = [
 	{
 		"title": "Futurism: Accelerating K-Means Clustering on Embedded Systems via Vector Engines",
 		"venue": "IEEE Embedded Systems Letters (ESL) (Accepted)",
-		"authorsText": "Jaehyeok Ryu, Dowoong Kong, Yiseok Lee, Minseong Gil, Gunjae Koo, Myung Kuk Yoon, and Yunho Oh",
+		"authorsText": "Jaehyeok Ryu, Dowoong Kong, Yiseok Lee, Minseong Gil, Gunjae Koo, Myung Kuk Yoon*, and Yunho Oh*",
 		"sortKey": 202609
 	},
 	{
