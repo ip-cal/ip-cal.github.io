@@ -1,6 +1,6 @@
 // Recruiting status banner, shared across every page.
 // To update the banner everywhere, change ONLY the number below.
-var RECRUIT_STATUS = 4;
+var RECRUIT_STATUS = 1;
 
 var RECRUIT_MESSAGES = {
 	1: "We are not recruiting any new students at this time.",
